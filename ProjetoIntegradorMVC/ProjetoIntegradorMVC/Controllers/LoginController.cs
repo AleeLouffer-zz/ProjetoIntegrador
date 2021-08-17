@@ -8,16 +8,25 @@ namespace ProjetoIntegradorMVC.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Login()
+        public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Conta(string email, string senha)
+        public IActionResult Login(string email, string senha)
         {
-            //Validação Login
-            return RedirectToRoute("Home/Home");
+            if (ValidarLogin(email, senha))
+            {
+                return RedirectToRoute("Home/Index");
+            }
+            return View();
+        }
+        private bool ValidarLogin(string email, string senha)
+        {
+            string usuario = null; //contexto.DbSet;
+            if (usuario == null) return false;
+            return true;
         }
     }
 }
