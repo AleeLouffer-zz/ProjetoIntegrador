@@ -2,30 +2,36 @@
     ViewData["Title"] = "Home";
 }
 <header>
-
 </header>
 <body>
+    <link rel="stylesheet" href="~/css/Home.css">
     <div id="container">
-        <h2>Login</h2>
-        <form asp-action="Conta" method="post" id="register-form">
-            <div class="full-box">
-                <label for="emailUsuario" class="labelNome"></label>
-                <input type="email" id="nomeProduto" placeholder="Email" />
+
+        <div class="Informações">
+            <img src="#" alt="" />
+            <h3>Barbearia da Jena</h3>
+            <p>Telefone</p>
+            <p>Endereço</p>
+
+        </div>
+        <div class="FuncionariosCadastrados">
+            <h4> Funcionários Cadastrados </h4>
+        </div>
+        <div class="shadow-box">
+            <div class="radius-shadow-box">  <p>Cleide</p> </div>
+            <div class="radius-shadow-box">  <p>Ravona</p> </div>
+            <div class="radius-shadow-box">  <p>Peggy</p> </div>
             </div>
-            <div class="full-box">
-                <label for="senhaUsuario"></label>
-                <input type="password" id="senhaUsuario"placeholder="Senha" />
-            </div>
-            <div>
-                <input type="checkbox" name="manterlogado" id="manterlogado" value=""/>
-                <label for="manterlogado">Manter-me Logado</label>
-            </div>
-            <div class="full-box">
-                <input type="submit" id="Entrar" value="Entrar" />
-            </div>
-            <div class="Cadastro">
-                <a asp-action="Cadastro">Cadastre-se</a>
-            </div>
-        </form>
+
+        <div class="ServicosCadastrados">
+            <h4> Serviços Cadastrados </h4>
+        </div>
+        
+        <div class="shadow-box">
+            <div class="radius-shadow-box"> <p>Corte de Cabelo</p> </div>
+            <div class="radius-shadow-box"> <p>Manicure</p> </div>
+        </div>
+
     </div>
+ 
 </body>
