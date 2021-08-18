@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.Operacoes;
+﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+using ProjetoIntegradorMVC.Models.Operacoes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,5 +38,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 
         public List<Servico> HistoricoServicos { get; set; }
         public List<PrestadorDeServico> Favoritos { get; set; }
+
+        
     }
 }

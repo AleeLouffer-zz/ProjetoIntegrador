@@ -29,11 +29,12 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
 
         [Display(Name = "ServicoId")]
         [Column("ServicoId")]
-
         public int ServicoId { get; set; }
+
         public DateTime InformacoesServico { get; set; }
         public Cliente Cliente { get; set; }
         public PrestadorDeServico Prestador { get; set; }
         public Servico Servico { get; set; }
+
     }
 }
