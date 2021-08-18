@@ -12,6 +12,7 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
     {
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
+            Database.EnsureCreated();
         }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<PrestadorDeServico> PrestadoresDeServicos { get;set;}

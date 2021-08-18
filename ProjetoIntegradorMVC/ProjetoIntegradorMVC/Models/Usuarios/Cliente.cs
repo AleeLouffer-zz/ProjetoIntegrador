@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     [Table("Cliente")]
-    public class Cliente : IUsuario
+    public class Cliente : ModeloBase, IUsuario
     {
         [Display(Name = "Id")]
         [Column("Id")]
@@ -30,11 +30,11 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 
         [Display(Name = "HistoricoServicosId")]
         [Column("HistoricoServicosId")]
-        public List<int> HistoricoServicosId { get; set; }
+        public int HistoricoServicosId { get; set; }
 
         [Display(Name = "FavoritosId")]
         [Column("FavoritosId")]
-        public List<int> FavoritosId { get; set; }
+        public int FavoritosId { get; set; }
 
         public List<Servico> HistoricoServicos { get; set; }
         public List<PrestadorDeServico> Favoritos { get; set; }

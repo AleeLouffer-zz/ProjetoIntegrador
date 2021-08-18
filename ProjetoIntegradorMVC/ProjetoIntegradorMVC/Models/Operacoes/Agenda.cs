@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Agenda")]
-    public class Agenda
+    public class Agenda : ModeloBase
     {
         [Display(Name = "Id")]
         [Column("Id")]

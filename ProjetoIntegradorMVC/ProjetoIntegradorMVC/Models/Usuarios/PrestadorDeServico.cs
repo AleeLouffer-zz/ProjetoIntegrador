@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoIntegradorMVC.Models.Operacoes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     [Table("PrestadorDeServico")]
-    public class PrestadorDeServico : IUsuario
+    public class PrestadorDeServico : ModeloBase , IUsuario
     {
         [Display(Name = "Id")]
         [Column("Id")]
