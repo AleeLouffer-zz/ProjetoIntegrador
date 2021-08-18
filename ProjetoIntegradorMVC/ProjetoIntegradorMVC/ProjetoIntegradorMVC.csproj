@@ -4,4 +4,18 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Login\NewFile.txt" />
+    <None Remove="Views\Usuario\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Contexto\" />
+    <Folder Include="Views\Usuario\" />
+  </ItemGroup>
+
 </Project>

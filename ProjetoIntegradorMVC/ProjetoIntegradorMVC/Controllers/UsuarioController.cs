@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Controllers
 {
-    public class HomeController : Controller
+    public class UsuarioController : Controller
     {
-        public IActionResult Home()
-        {
-            return View();
-        }
     }
 }
