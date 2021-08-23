@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
-    [Table("Servico")]
-    public class Servico : ModeloBase
+    [Table("Agendamentos")]
+    public class Agendamentos : ModeloBase
     {
         public int Id { get; set; }
-        public string Descricao { get; set; }
-        public decimal Preco { get; set; }
+        public DateTime Data { get; set; }
+        public Cliente Cliente { get; set; }
+        public Servico Servico { get; set; }
     }
 }
