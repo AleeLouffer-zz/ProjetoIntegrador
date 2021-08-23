@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoIntegradorMVC.Migrations.Historico
 {
-    public partial class Inicial : Migration
+    public partial class addFavoritos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,19 +26,19 @@ namespace ProjetoIntegradorMVC.Migrations.Historico
                 name: "Favoritos",
                 columns: table => new
                 {
-                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienteId1 = table.Column<int>(type: "int", nullable: false)
+                    ClienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favoritos", x => x.ClienteId);
+                    table.PrimaryKey("PK_Favoritos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favoritos_Cliente_ClienteId1",
-                        column: x => x.ClienteId1,
+                        name: "FK_Favoritos_Cliente_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,16 +50,16 @@ namespace ProjetoIntegradorMVC.Migrations.Historico
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Localizacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FavoritosClienteId = table.Column<int>(type: "int", nullable: true)
+                    FavoritosId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PrestadorDeServico", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PrestadorDeServico_Favoritos_FavoritosClienteId",
-                        column: x => x.FavoritosClienteId,
+                        name: "FK_PrestadorDeServico_Favoritos_FavoritosId",
+                        column: x => x.FavoritosId,
                         principalTable: "Favoritos",
-                        principalColumn: "ClienteId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -134,14 +134,14 @@ namespace ProjetoIntegradorMVC.Migrations.Historico
                 column: "ServicoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favoritos_ClienteId1",
+                name: "IX_Favoritos_ClienteId",
                 table: "Favoritos",
-                column: "ClienteId1");
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrestadorDeServico_FavoritosClienteId",
+                name: "IX_PrestadorDeServico_FavoritosId",
                 table: "PrestadorDeServico",
-                column: "FavoritosClienteId");
+                column: "FavoritosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Servico_PrestadorDeServicoId",

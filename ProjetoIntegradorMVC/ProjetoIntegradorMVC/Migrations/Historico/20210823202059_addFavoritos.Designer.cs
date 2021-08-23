@@ -10,7 +10,7 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations.Historico
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210823201914_addFavoritos")]
+    [Migration("20210823202059_addFavoritos")]
     partial class addFavoritos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
