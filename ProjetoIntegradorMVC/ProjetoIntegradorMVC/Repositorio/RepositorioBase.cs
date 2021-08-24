@@ -37,7 +37,7 @@ namespace ProjetoIntegradorMVC.Models.Repositorio
 
         public void Excluir(params object[] variavel)
         {
-            var objeto = SelecionarPk(variavel);
+            var objeto = SelecionarPorId(variavel);
             Excluir(objeto);
         }
 
@@ -53,7 +53,7 @@ namespace ProjetoIntegradorMVC.Models.Repositorio
             _contexto.SaveChanges();
         }
 
-        public T SelecionarPk(params object[] variavel)
+        public T SelecionarPorId(params object[] variavel)
         {
             return _contexto.Set<T>().Find(variavel);
         }
