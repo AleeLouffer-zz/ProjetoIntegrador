@@ -17,6 +17,11 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ProjetoIntegrador;Trusted_Connection=true;");
+        }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<PrestadorDeServico> PrestadoresDeServicos { get;set;}
         public DbSet<Agendamentos> Agendamentos { get; set; }
