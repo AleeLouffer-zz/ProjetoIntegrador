@@ -4,9 +4,46 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProjetoIntegradorMVC</title>
-    <link rel="stylesheet" href="/css/Login.css"/>
+    <link rel="stylesheet" href="/css/Login.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Reset.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Home.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Layout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <header>
+        <img src="" alt="Logo senac">
+        <nav>
+            <a href="">Criar conta</a>
+            <a href="">Entrar</a>
+        </nav>
+    </header>
+    <div class="menu1">
+        <ul>
+            <li>
+                <button> Tela Inicial </button>
+            </li>
+            <li>
+                <button> Finanças </button>
+            </li>
+            <li>
+                <button> Agenda </button>
+            </li>
+            <li>
+                <button> Avaliações </button>
+            </li>
+        </ul>
+    </div>
+    <div class="menu2">
+        <ul>
+            <li>
+                <button href="">Próximos horários</button>
+            </li>
+        </ul>
+    </div>
 
     @RenderBody()
 
