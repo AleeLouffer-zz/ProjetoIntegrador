@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     [Table("Cliente")]
-    public class Cliente : ModeloBase, IUsuario
+    public class Cliente : IUsuario
     {
         public int Id { get; set; }
         public string Email { get; set; }

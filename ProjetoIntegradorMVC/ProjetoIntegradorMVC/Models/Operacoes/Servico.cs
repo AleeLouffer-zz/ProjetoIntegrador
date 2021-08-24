@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Servico")]
-    public class Servico : ModeloBase
+    public class Servico
     {
         public int Id { get; set; }
         public string Descricao { get; set; }

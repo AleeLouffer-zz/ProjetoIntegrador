@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Agendamentos")]
-    public class Agendamentos : ModeloBase
+    public class Agendamentos
     {
         public int Id { get; set; }
         public DateTime Data { get; set; }
