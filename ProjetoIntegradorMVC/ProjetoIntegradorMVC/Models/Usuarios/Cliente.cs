@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
-    [Table("Cliente")]
     public class Cliente : IUsuario
     {
         public int Id { get; set; }
