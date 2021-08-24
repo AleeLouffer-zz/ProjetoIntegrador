@@ -10,6 +10,9 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
 {
     public class Contexto : DbContext
     {
+        public Contexto() 
+        {
+        }
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
             Database.EnsureCreated();

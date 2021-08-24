@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjetoIntegradorMVC.Models.DAL;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,6 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult Index()
         {
-            List<int> ids = new() { 1, 2 };
-            var ids2 = new GenericDao<Cliente>().BuscarPorId(ids);
             return View();
         }
 
