@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Usuario\**" />
+    <Content Remove="Views\Usuario\**" />
+    <EmbeddedResource Remove="Views\Usuario\**" />
+    <None Remove="Views\Usuario\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Login\NewFile.txt" />
-    <None Remove="Views\Usuario\NewFile.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Contexto\" />
-    <Folder Include="Views\Usuario\" />
+    <Folder Include="Views\Historico\" />
   </ItemGroup>
 
 </Project>

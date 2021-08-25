@@ -12,5 +12,9 @@ namespace ProjetoIntegradorMVC.Controllers
         {
             return View();
         }
+        public IActionResult Historico()
+        {
+            return View();
+        }
     }
 }
