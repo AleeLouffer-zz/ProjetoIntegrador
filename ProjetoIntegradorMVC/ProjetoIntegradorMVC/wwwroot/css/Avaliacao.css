@@ -1,0 +1,93 @@
+﻿.corpo {
+    width: 60vw;
+    margin: 200px auto;
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 2px 2px 40px gray;
+}
+
+.container-servico {
+    background: #ECECEE;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 95%;
+}
+
+    .container-servico h2 {
+        font-size: 40px;
+        margin: 0 auto;
+        padding-left: 10px;
+        padding-bottom: 5px;
+    }
+
+.media-ava {
+    font-size: 20px;
+    padding-right: 5px;
+    margin: 0;
+    width: 40px;
+}
+
+.txt-ava {
+    font-size: 12px;
+    padding-right: 5px;
+    margin: 0;
+    width: 35px;
+}
+
+.side {
+    display: flex;
+}
+
+.container-comentario {
+    display: flex;
+    align-items: center;
+    width: 93%;
+    margin: 0 auto;
+}
+
+.container-txt-comentario {
+    box-shadow: 0px 3px 6px grey;
+    width: 70%;
+}
+
+.container-avaliacao-prestador {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    margin-bottom: 0.01rem;
+    width: 70%;
+}
+
+
+.img-estabelecimento {
+    width: 30%;
+    position: absolute;
+    margin: 50px;
+    top: 0;
+    right: 0;
+}
+
+.img-cliente {
+    width: 30%;
+}
+
+h1 {
+    text-align: center;
+}
+
+#star-cliente {
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.txt-comentario {
+    margin-left: 5px;
+}
+
+.txt-nome-cliente {
+    margin-left: 20px;
+    margin-bottom: 2px;
+}

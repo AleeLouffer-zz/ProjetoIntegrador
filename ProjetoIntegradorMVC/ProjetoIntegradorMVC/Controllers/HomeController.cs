@@ -12,5 +12,9 @@ namespace ProjetoIntegradorMVC.Controllers
         {
             return View();
         }
+        public IActionResult Avaliacao()
+        {
+            return View();
+        }
     }
 }
