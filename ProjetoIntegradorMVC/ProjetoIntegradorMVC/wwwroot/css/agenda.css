@@ -40,24 +40,25 @@
     justify-content: space-between;
 }
 
-.ul-dias li button {
+.ul-dias button {
     background: whitesmoke;
-    padding: 5vw;
+    width: 200px;
+    height: 200px;
     border-radius: 20px;
     text-align: center;
     border: 0;
     cursor: pointer;
 }
 
-.ul-dias li button:hover {
+.ul-dias button:hover {
     background: lightgray;
 }
 
-.ul-dias li h1 {
+.ul-dias h1 {
     font-size: 40px;
 }
 
-.ul-dias li h2 {
+.ul-dias h2 {
     font-size: 35px;
 }
 
