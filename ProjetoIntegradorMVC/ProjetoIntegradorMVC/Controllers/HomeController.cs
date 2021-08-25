@@ -12,5 +12,10 @@ namespace ProjetoIntegradorMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult Agenda()
+        {
+            return View();
+        }
     }
 }
