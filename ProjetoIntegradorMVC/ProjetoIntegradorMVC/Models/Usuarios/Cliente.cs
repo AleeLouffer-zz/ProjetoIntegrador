@@ -11,9 +11,17 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     public class Cliente : IUsuario
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public string Localizacao { get; set; }
+        public int Id { get; private set; }
+        public string Email { get; private set; }
+        public string Senha { get; private set; }
+        public string Localizacao { get; private set; }
+
+        public Cliente(string email, string senha, string localizacao)
+        {
+            Email = email;
+            Senha = senha;
+            Localizacao = localizacao;
+        }
+
     }
 }

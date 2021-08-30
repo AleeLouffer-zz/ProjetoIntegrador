@@ -7,9 +7,9 @@ namespace ProjetoIntegradorMVC.Models
 {
     public interface IUsuario
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public string Localizacao { get; set; }
+        public int Id { get; }
+        public string Email { get; }
+        public string Senha { get; }
+        public string Localizacao { get; }
     }
 }

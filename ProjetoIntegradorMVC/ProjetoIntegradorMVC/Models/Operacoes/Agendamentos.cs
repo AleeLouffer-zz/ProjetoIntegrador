@@ -11,9 +11,16 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
     [Table("Agendamentos")]
     public class Agendamentos
     {
-        public int Id { get; set; }
-        public DateTime Data { get; set; }
-        public Cliente Cliente { get; set; }
-        public Servico Servico { get; set; }
+        public int Id { get; private set; }
+        public DateTime Data { get; private set; }
+        public Cliente Cliente { get; private set; }
+        public Servico Servico { get; private set; }
+
+        public Agendamentos(DateTime data, Cliente cliente, Servico servico)
+        {
+            Data = data;
+            Cliente = cliente;
+            Servico = servico;
+        }
     }
 }
