@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models
 {
-    public interface IUsuario
+    public class Usuario
     {
         public int Id { get; set; }
         public string Email { get; set; }
