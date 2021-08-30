@@ -1,0 +1,52 @@
+﻿.body-login, .body-registro{
+    background: whitesmoke;
+}
+
+.login-conteiner, .registro-conteiner {
+    width: 50%;
+    margin: 120px auto;
+}
+
+.titulo-login, .titulo-registro{
+    text-align: center;
+}
+
+.row{
+    width: 30%;
+    margin: 0 auto;
+    background: white;
+    padding: 10% 10%;
+    border-radius: 4px;
+    box-shadow: 2px 2px 20px gray;
+}
+
+form{
+    text-align: center;
+}
+
+.form-group{
+    margin: 16px;
+}
+
+.form-control{
+    padding: 16px;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: solid 1px black;
+}
+
+.botao-entrar{
+    margin-top: 32px;
+    padding: 16px 24px;
+    border: 0;
+    cursor: pointer;
+    background: blue;
+    color: white;
+    transition: 0.4s;
+    border-radius: 4px;
+}
+
+.botao-entrar:hover{
+    background: lightblue;
+}
