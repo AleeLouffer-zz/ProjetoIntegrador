@@ -1,0 +1,16 @@
+﻿@model ProjetoIntegradorMVC.DTO.DTOServicos
+
+@{
+    ViewData["Title"] = "Servico";
+}
+
+<h1>Servico</h1>
+@{
+    foreach (var funcionario in Model.Funcionario)
+    {
+        <h1>@funcionario.Nome</h1>
+    }
+}
+
+<h1>@Model.Servico.Descricao</h1>
+<h1>@Model.Servico.Preco</h1>

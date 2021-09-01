@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjetoIntegradorMVC.Models.ContextoDb;
+using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +26,15 @@ namespace ProjetoIntegradorMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<Contexto>();
+            services.AddTransient<IRepositorio_Funcionario, Repositorio_Funcionario>();
+            services.AddTransient<IRepositorio_Servico, Repositorio_Servico>();
+            services.AddTransient<IRepositorio_FuncionariosComServicos, Repositorio_FuncionariosComServicos>();
+            services.AddTransient<InicializadorDB>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +59,8 @@ namespace ProjetoIntegradorMVC
                     name: "default",
                     pattern: "{controller=Login}/{action=Login}/{id?}");
             });
+
+            //serviceProvider.GetService<InicializadorDB>().IniciarDB();
         }
     }
 }
