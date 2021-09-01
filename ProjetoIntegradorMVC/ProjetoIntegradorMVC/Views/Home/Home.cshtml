@@ -1,1 +1,122 @@
+  <div class="corpo">
+        <div class="infos">
+            <div class="infos-img">
+                <img src="" alt="imagem do prestador">
+            </div>
+            <div class="infos-txt">
+                <h1>Barbearia da Jena</h1>
+                <p>322482734982</p>
+                <p>Av Afonso Pena, 1331, Centro</p>
+            </div>
+            <div class="botao">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
 
+        <div class="func-cadastrados">
+            <h1>Funcionários cadastrados</h1>
+            <div class="caixa-func-cadastrados">
+                <button>Cleide</button>
+                <button>Ravona</button>
+                <button>Peggy</button>
+                <button class="mais">+</button>
+                <form action="">
+                    <div class="funcionario-informacoes">
+                        <div class="col-1">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                </svg>
+                            </div>
+                            <img src="" alt="foto-serviço">
+                        </div>
+
+                        <div class="col-2">
+                            <input type="text" placeholder="Nome Completo">
+                            <input type="email" placeholder="E-mail">
+                        </div>
+
+                        <div class="col-3">
+                            <input type="tel" placeholder="Telefone">
+                            <input type="text" placeholder="Endereço">
+                        </div>
+
+                        <div class="col-4">
+                            <div class="opcoes">
+                                <select name="tela" id="tela">
+                                    <option value="tela_1">Agendamento</option>
+                                    <option value="tela_2">Finanças</option>
+                                    <option value="tela_3">Gerenciamento de Perfil</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn-adicionar"> + Adicionar Serviços </button>
+                                <button type="submit" class="btn-confirmar"> Confirmar </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="serv-cadastrados">
+            <h1>Serviços cadastrados</h1>
+            <div class="caixa-serv-cadastrados">
+                <button>Corte de cabelo</button>
+                <button>Manicure</button>
+                <button class="mais">+</button>
+
+                <form action="">
+                    <div class="adiciona-servico">
+                        <div class="col-1">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                </svg>
+                            </div>
+                            <img src="" alt="foto-serviço">
+
+                        </div>
+
+                        <div class="col-2">
+                            <input type="text" placeholder="Nome do Serviço">
+                            <input name="" id="" cols="30" rows="5" placeholder="Descrição:">
+                        </div>
+
+                        <div class="col-3">
+                            <input type="text" placeholder="Valor">
+                            <div>
+                                <button class="btn-adicionar"> + Adicionar Horários </button>
+                                <button class="btn-adicionar"> + Adicionar Dias da Semana </button>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <input type="text" placeholder="Tempo Estimado">
+                            <button type="submit" class="btn-confirmar"> Confirmar </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="fotos">
+            <h1>Fotos</h1>
+            <div class="imgs-fotos">
+                <img src="" alt="Foto">
+                <img src="" alt="Foto">
+                <img src="" alt="Foto">
+                <button class="mais">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
