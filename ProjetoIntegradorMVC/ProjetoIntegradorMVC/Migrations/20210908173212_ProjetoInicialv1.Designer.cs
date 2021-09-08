@@ -9,8 +9,8 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210903152444_Inicial")]
-    partial class Inicial
+    [Migration("20210908173212_ProjetoInicialv1")]
+    partial class ProjetoInicialv1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

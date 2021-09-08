@@ -2,7 +2,7 @@
 
 namespace ProjetoIntegradorMVC.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class ProjetoInicialv1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

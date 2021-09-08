@@ -66,18 +66,18 @@ namespace ProjetoIntegradorMVC
         private static List<Servico> SetServicos(List<Funcionario> funcionarios)
         {
             return new List<Servico>() {
-                new Servico("Corte Simples Cabelo", 15m),
-                new Servico("Manicure", 999m),
-                new Servico("Barba Grande", 200m)
+                new Servico("Corte Simples Cabelo", "15"),
+                new Servico("Manicure","999"),
+                new Servico("Barba Grande", "200")
             };
         }
 
         private static List<Funcionario> SetFuncionarios()
         {
             return new List<Funcionario>() {
-                new Funcionario("Cleide"),
-                new Funcionario("Ravona"),
-                new Funcionario("Peggy")
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311"),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312"),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313")
             };
         }
     }

@@ -15,14 +15,17 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
 
-        private Servico()
+        private Servico(){ }
+        public Servico(string descricao, string preco)
         {
-
-        }
-        public Servico(string descricao, decimal preco)
-        {
+            ValidarInformacoes(descricao, preco);
             Descricao = descricao;
-            Preco = preco;
+            Preco = decimal.Parse(preco);
+        }
+        public void ValidarInformacoes(string descricao, string preco)
+        {
+            if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("O serviço deve ter uma descrição");
+            if (string.IsNullOrWhiteSpace(preco)) throw new Exception("O serviço deve ter um preço");
         }
     }
 }

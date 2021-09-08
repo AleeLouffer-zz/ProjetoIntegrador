@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models
 {
-    public class Usuario
+    public abstract class Usuario
     {
         public int Id { get; set; }
-        public string Email { get; }
-        public string Senha { get; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
     }
 }
