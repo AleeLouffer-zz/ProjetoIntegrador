@@ -9,5 +9,6 @@ namespace ProjetoIntegradorMVC.Repositorio
     {
         void SaveFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos);
         public List<int> ListarFuncionariosID(int idServico);
+        void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
     }
 }

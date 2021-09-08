@@ -31,7 +31,7 @@ namespace ProjetoIntegradorMVC.Repositorio
         public void SaveFuncioarios(List<Funcionario> funcionarios)
         {
             foreach (var funcionario in funcionarios) {
-                _contexto.Set<Funcionario>().Remove(funcionario);
+                _contexto.Set<Funcionario>().Add(funcionario);
             }
             _contexto.SaveChanges();
         }

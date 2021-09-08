@@ -31,13 +31,36 @@ namespace ProjetoIntegradorMVC
         {
             _contexto.Database.Migrate();
             List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos(funcionarios);
-            FuncionariosComServicos funcComServicos =  new FuncionariosComServicos(funcionarios, servicos);
+            List<Servico> servicos = SetServicos(funcionarios);           
 
-            _repositorioFuncComServicos.SaveFuncionariosComServicos(funcComServicos);
             _repositorioFuncionario.SaveFuncioarios(funcionarios);
             _repositorioServico.SaveServicos(servicos);
 
+            List<FuncionariosComServicos> funcComServicos = SetFuncionariosComServicos(funcionarios, servicos);
+            SaveFuncionariosComServicos(funcComServicos);
+        }
+
+        private void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcComServicos)
+        {
+            foreach (var funcComServico in funcComServicos)
+            {
+                _repositorioFuncComServicos.SaveFuncionariosComServicos(funcComServico);
+            }
+        }
+
+        private static List<FuncionariosComServicos> SetFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
+        {
+            var funcComServicos = new List<FuncionariosComServicos>();
+            
+            for (int i = 0; i < 3; i++)
+            {
+                foreach (var servico in servicos)
+                {
+                    funcComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
+                }
+            }
+            
+            return funcComServicos;
         }
 
         private static List<Servico> SetServicos(List<Funcionario> funcionarios)

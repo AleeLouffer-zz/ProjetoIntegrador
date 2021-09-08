@@ -29,11 +29,11 @@ namespace ProjetoIntegradorMVC.Controllers
         public IActionResult Servico(int id)
         {
             var servicoDTO = _repositorioServico.GetServico(id);
-            var idsFuncionario = _repositorioFuncComServicos.ListarFuncionariosID(id);
-            var funcionarios = _repositorioFuncionario.GetFuncionario(idsFuncionario);
+             var idsFuncionario = _repositorioFuncComServicos.ListarFuncionariosID(id);
+             var funcionarios = _repositorioFuncionario.GetFuncionario(idsFuncionario);
 
-            var DTO = new DTOServicos(servicoDTO, funcionarios);
-            return View(DTO);
+             var DTO = new DTOServicos(servicoDTO, funcionarios);
+             return View(DTO);
         }
     }
 }

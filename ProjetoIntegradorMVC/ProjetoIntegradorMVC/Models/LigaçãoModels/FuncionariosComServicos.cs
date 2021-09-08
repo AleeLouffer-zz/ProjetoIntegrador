@@ -9,17 +9,19 @@ namespace ProjetoIntegradorMVC.Models.LigaçãoModels
 {
     public class FuncionariosComServicos
     {
-        private FuncionariosComServicos() { }
-        public FuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
+        public Funcionario Funcionario { get; private set; }
+        public int FuncionarioId { get; private set; }
+        public Servico Servico { get; private set; }
+        public int ServicoId { get; private set; }
+        public int Id { get; private set; }
+
+        public FuncionariosComServicos(Funcionario funcionario, Servico servico)
         {
-            Funcionarios = funcionarios;
-            Servicos = servicos;
+            this.Funcionario = funcionario;
+            this.Servico = servico;
         }
 
-        public int Id { get; private set; }
-        public int IdServico { get; private set; }
-        public int IdFuncionario { get; private set; }
-        public List<Funcionario> Funcionarios { get; private set; } = new();
-        public List<Servico> Servicos { get; private set; } = new();
+        private FuncionariosComServicos() { }   
+       
     }
 }

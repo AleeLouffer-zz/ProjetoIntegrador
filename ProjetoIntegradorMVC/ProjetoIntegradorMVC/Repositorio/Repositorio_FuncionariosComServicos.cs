@@ -26,14 +26,25 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto.SaveChanges();
         }
 
+        public void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
+        {
+
+            foreach (var funcionarioComServico in funcionariosComServicos)
+            {
+                _contexto.Set<FuncionariosComServicos>().Add(funcionarioComServico);
+            }
+
+            _contexto.SaveChanges();
+        }
+
         public List<int> ListarFuncionariosID(int idServico)
         {
-            var servicos = _contexto.Set<FuncionariosComServicos>().Where(s => s.IdServico == idServico).ToList();           
-            
+            var servicos = _contexto.Set<FuncionariosComServicos>().Where(s => s.ServicoId == idServico).ToList();
+
             var idFuncionarios = new List<int>();
             foreach (var servico in servicos)
             {
-                idFuncionarios.Add(servico.IdFuncionario);
+                idFuncionarios.Add(servico.FuncionarioId);
             }
 
             return idFuncionarios;

@@ -30,7 +30,7 @@ namespace ProjetoIntegradorMVC.Repositorio
         {
             foreach (var servico in servicos)
             {
-                _contexto.Set<Servico>().Remove(servico);
+                _contexto.Set<Servico>().Add(servico);
             }
             _contexto.SaveChanges();
         }
