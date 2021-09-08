@@ -1,8 +1,10 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,13 +28,30 @@ namespace ProjetoIntegradorMVC.Repositorio
             return _contexto.Set<Servico>().Where(s => s.Id == id).SingleOrDefault();
         }
 
-        public void SaveServicos(List<Servico> servicos)
+        public void AddServicos(List<Servico> servicos)
         {
             foreach (var servico in servicos)
             {
-                _contexto.Set<Servico>().Add(servico);
+                if (!VerificarServicoExistente(servico))
+                {
+                    _contexto.Set<Servico>().Add(servico);
+                }
+                
+                throw new DuplicateNameException("O serviço já existe");
             }
             _contexto.SaveChanges();
+        }
+
+        public bool VerificarServicoExistente (Servico servico)
+        {
+            var servicosDoBanco = _contexto.Set<Servico>().ToList();
+            
+            foreach (var servicoDoBanco in servicosDoBanco)
+            {
+                if   (servico.Nome == servicoDoBanco.Nome &&
+                   servico.Preco == servicoDoBanco.Preco) return true;
+             }
+            return false;
         }
     }
 }

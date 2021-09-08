@@ -12,10 +12,12 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
     {
         public int Id { get; set; }
         public string Nome { get; private set;  }
+        public string CPF { get; private set; }
         private Funcionario() { }
-        public Funcionario (string nome)
+        public Funcionario (string nome, string cpf)
         {
             Nome = nome;
+            CPF = cpf;
         }
     }
 } 

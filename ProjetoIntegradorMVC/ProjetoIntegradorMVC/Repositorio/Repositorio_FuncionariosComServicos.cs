@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
@@ -11,12 +12,11 @@ namespace ProjetoIntegradorMVC.Repositorio
 {
     public class Repositorio_FuncionariosComServicos : IRepositorio_FuncionariosComServicos
     {
-        private readonly Contexto _contexto;
+        private readonly DbContext _contexto;
 
-        public Repositorio_FuncionariosComServicos(Contexto contexto)
+        public Repositorio_FuncionariosComServicos(DbContext contexto)
         {
             _contexto = contexto;
-
         }
 
         public void SaveFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos)

@@ -5,8 +5,10 @@ namespace ProjetoIntegradorMVC.Repositorio
 {
     public interface IRepositorio_Funcionario
     {
-        List<Funcionario> GetFuncionario(List<int> id);
+        List<Funcionario> GetFuncionarios(List<int> id);
 
-        void SaveFuncioarios(List<Funcionario> funcionarios);
+        void AddFuncionarios(List<Funcionario> funcionarios);
+
+        public bool VerificarFuncionariosExistentes(Funcionario funcionario);
     }
 }

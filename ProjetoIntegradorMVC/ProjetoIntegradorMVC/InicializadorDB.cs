@@ -33,8 +33,8 @@ namespace ProjetoIntegradorMVC
             List<Funcionario> funcionarios = SetFuncionarios();
             List<Servico> servicos = SetServicos(funcionarios);           
 
-            _repositorioFuncionario.SaveFuncioarios(funcionarios);
-            _repositorioServico.SaveServicos(servicos);
+            _repositorioFuncionario.AddFuncionarios(funcionarios);
+            _repositorioServico.AddServicos(servicos);
 
             List<FuncionariosComServicos> funcComServicos = SetFuncionariosComServicos(funcionarios, servicos);
             SaveFuncionariosComServicos(funcComServicos);
@@ -66,18 +66,18 @@ namespace ProjetoIntegradorMVC
         private static List<Servico> SetServicos(List<Funcionario> funcionarios)
         {
             return new List<Servico>() {
-                new Servico("Corte Simples Cabelo", 15m),
-                new Servico("Manicure", 999m),
-                new Servico("Barba Grande", 200m)
+                new Servico("Corte Simples Cabelo", "Corte Simples", 15m),
+                new Servico("Manicure", "Manicure", 999m),
+                new Servico("Barba Grande", "Barba Grande", 200m)
             };
         }
 
         private static List<Funcionario> SetFuncionarios()
         {
             return new List<Funcionario>() {
-                new Funcionario("Cleide"),
-                new Funcionario("Ravona"),
-                new Funcionario("Peggy")
+                new Funcionario("Cleide", "111.111.111-11"),
+                new Funcionario("Ravona", "222.222.222-22"),
+                new Funcionario("Peggy", "333.333.333.-33")
             };
         }
     }

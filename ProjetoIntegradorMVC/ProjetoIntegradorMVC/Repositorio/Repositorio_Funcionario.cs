@@ -1,7 +1,9 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +18,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto = contexto;
         }
 
-        public List<Funcionario> GetFuncionario(List<int> Ids)
+        public List<Funcionario> GetFuncionarios(List<int> Ids)
         {
             var funcionarios = new List<Funcionario>();
 
@@ -28,12 +30,28 @@ namespace ProjetoIntegradorMVC.Repositorio
             return funcionarios;
         }
 
-        public void SaveFuncioarios(List<Funcionario> funcionarios)
+        public void AddFuncionarios(List<Funcionario> funcionarios)
         {
-            foreach (var funcionario in funcionarios) {
-                _contexto.Set<Funcionario>().Add(funcionario);
+            foreach (var funcionario in funcionarios) 
+            {
+                if (!VerificarFuncionariosExistentes(funcionario))
+                {
+                    _contexto.Set<Funcionario>().Add(funcionario);
+                }
+                throw new DuplicateNameException("O funcionário já existe");
             }
             _contexto.SaveChanges();
+        }
+
+        public bool VerificarFuncionariosExistentes(Funcionario funcionario)
+        {
+            var funcionariosDoBanco = _contexto.Set<Funcionario>().ToList();
+
+            foreach (var funcionarioDoBanco in funcionariosDoBanco)
+            {
+                if (funcionarioDoBanco.CPF == funcionario.CPF) return true;
+            }
+            return false;
         }
     }
 }

@@ -12,15 +12,15 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
     public class Servico
     {
         public int Id { get; private set; }
+        public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
 
-        private Servico()
-        {
+        private Servico() { }
 
-        }
-        public Servico(string descricao, decimal preco)
+        public Servico(string nome, string descricao, decimal preco)
         {
+            Nome = nome;
             Descricao = descricao;
             Preco = preco;
         }
