@@ -13,6 +13,13 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         private Funcionario() { }
+
+        public Funcionario (string nome, string cpf)
+        {
+            Nome = nome;
+            CPF = cpf;
+        }
+
         public Funcionario (string nome, string email, string senha, string cpf)
         {
             ValidarInformacoes(nome, email, senha, cpf);
@@ -27,7 +34,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (string.IsNullOrWhiteSpace(email)) throw new Exception("O funcionário deve ter um email");
             if (string.IsNullOrWhiteSpace(senha)) throw new Exception("O funcionário deve ter uma senha");
             if (string.IsNullOrWhiteSpace(cpf)) throw new Exception("O funcionário deve ter um cpf");
-
         }
     }
 } 

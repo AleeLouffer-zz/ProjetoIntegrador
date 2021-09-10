@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +27,8 @@ namespace ProjetoIntegradorMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<Contexto>();
+            services.AddDbContext<Contexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddTransient<IRepositorio_Funcionario, Repositorio_Funcionario>();
             services.AddTransient<IRepositorio_Servico, Repositorio_Servico>();
             services.AddTransient<IRepositorio_FuncionariosComServicos, Repositorio_FuncionariosComServicos>();

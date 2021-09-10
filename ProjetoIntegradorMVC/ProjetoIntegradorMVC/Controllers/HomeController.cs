@@ -30,7 +30,7 @@ namespace ProjetoIntegradorMVC.Controllers
         {
             var servicoDTO = _repositorioServico.GetServico(id);
              var idsFuncionario = _repositorioFuncComServicos.ListarFuncionariosID(id);
-             var funcionarios = _repositorioFuncionario.GetFuncionario(idsFuncionario);
+             var funcionarios = _repositorioFuncionario.GetFuncionarios(idsFuncionario);
 
              var DTO = new DTOServicos(servicoDTO, funcionarios);
              return View(DTO);
