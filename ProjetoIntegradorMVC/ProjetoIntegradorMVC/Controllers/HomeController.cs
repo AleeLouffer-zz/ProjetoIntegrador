@@ -28,8 +28,8 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult Servico(int id)
         {
-            var servicoDTO = _repositorioServico.GetServico(id);
-             var idsFuncionario = _repositorioFuncComServicos.ListarFuncionariosID(id);
+             var servicoDTO = _repositorioServico.GetServico(id);
+             var idsFuncionario = _repositorioFuncComServicos.ListarIdsFuncionariosPelaIDServico(id);
              var funcionarios = _repositorioFuncionario.GetFuncionarios(idsFuncionario);
 
              var DTO = new DTOServicos(servicoDTO, funcionarios);

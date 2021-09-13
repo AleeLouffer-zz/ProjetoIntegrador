@@ -31,39 +31,16 @@ namespace ProjetoIntegradorMVC
         {
             _contexto.Database.Migrate();
             List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos(funcionarios);           
+            List<Servico> servicos = SetServicos();           
 
             _repositorioFuncionario.AddFuncionarios(funcionarios);
             _repositorioServico.AddServicos(servicos);
 
-            List<FuncionariosComServicos> funcComServicos = SetFuncionariosComServicos(funcionarios, servicos);
-            SaveFuncionariosComServicos(funcComServicos);
+            List<FuncionariosComServicos> funcComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
+            _repositorioFuncComServicos.AddFuncionariosComServicos(funcComServicos);
         }
 
-        private void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcComServicos)
-        {
-            foreach (var funcComServico in funcComServicos)
-            {
-                _repositorioFuncComServicos.SaveFuncionariosComServicos(funcComServico);
-            }
-        }
-
-        private static List<FuncionariosComServicos> SetFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
-        {
-            var funcComServicos = new List<FuncionariosComServicos>();
-            
-            for (int i = 0; i < 3; i++)
-            {
-                foreach (var servico in servicos)
-                {
-                    funcComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
-                }
-            }
-            
-            return funcComServicos;
-        }
-
-        private static List<Servico> SetServicos(List<Funcionario> funcionarios)
+        private static List<Servico> SetServicos()
         {
             return new List<Servico>() {
                 new Servico("Corte de Cabelo", "Corte Simples Cabelo", "15"),

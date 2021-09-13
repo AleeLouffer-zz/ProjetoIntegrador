@@ -13,13 +13,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         private Funcionario() { }
-
-        public Funcionario (string nome, string cpf)
-        {
-            Nome = nome;
-            CPF = cpf;
-        }
-
         public Funcionario (string nome, string email, string senha, string cpf)
         {
             ValidarInformacoes(nome, email, senha, cpf);

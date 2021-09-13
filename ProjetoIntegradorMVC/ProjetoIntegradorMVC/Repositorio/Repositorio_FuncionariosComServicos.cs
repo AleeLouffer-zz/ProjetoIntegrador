@@ -16,28 +16,27 @@ namespace ProjetoIntegradorMVC.Repositorio
         public Repositorio_FuncionariosComServicos(Contexto contexto)
         {
             _contexto = contexto;
-
         }
 
-        public void SaveFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos)
+        public void AddFuncionarioComServico(FuncionariosComServicos funcionariosComServicos)
         {
             _contexto.Set<FuncionariosComServicos>().Add(funcionariosComServicos);
             
             _contexto.SaveChanges();
         }
 
-        public void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
+        public void AddFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
         {
 
             foreach (var funcionarioComServico in funcionariosComServicos)
             {
-                _contexto.Set<FuncionariosComServicos>().Add(funcionarioComServico);
+                AddFuncionarioComServico(funcionarioComServico);
             }
 
             _contexto.SaveChanges();
         }
 
-        public List<int> ListarFuncionariosID(int idServico)
+        public List<int> ListarIdsFuncionariosPelaIDServico(int idServico)
         {
             var servicos = _contexto.Set<FuncionariosComServicos>().Where(s => s.ServicoId == idServico).ToList();
 
@@ -48,6 +47,23 @@ namespace ProjetoIntegradorMVC.Repositorio
             }
 
             return idFuncionarios;
+        }
+
+        public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
+        {
+            var funcComServicos = new List<FuncionariosComServicos>();
+
+            var qtdFuncionarios = funcionarios.Count;
+
+            for (int i = 0; i < qtdFuncionarios; i++)
+            {
+                foreach (var servico in servicos)
+                {
+                    funcComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
+                }
+            }
+
+            return funcComServicos;
         }
     }
 }

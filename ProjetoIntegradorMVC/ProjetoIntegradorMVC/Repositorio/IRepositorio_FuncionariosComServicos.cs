@@ -7,8 +7,9 @@ namespace ProjetoIntegradorMVC.Repositorio
 {
     public interface IRepositorio_FuncionariosComServicos
     {
-        void SaveFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos);
-        public List<int> ListarFuncionariosID(int idServico);
-        void SaveFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
+        void AddFuncionarioComServico(FuncionariosComServicos funcionariosComServicos);
+        void AddFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
+        public List<int> ListarIdsFuncionariosPelaIDServico(int idServico);
+        public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos);
     }
 }

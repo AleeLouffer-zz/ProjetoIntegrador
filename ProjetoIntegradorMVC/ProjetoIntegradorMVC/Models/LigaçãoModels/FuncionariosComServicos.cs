@@ -15,13 +15,12 @@ namespace ProjetoIntegradorMVC.Models.LigaçãoModels
         public int ServicoId { get; private set; }
         public int Id { get; private set; }
 
+        private FuncionariosComServicos() { }
+
         public FuncionariosComServicos(Funcionario funcionario, Servico servico)
         {
             this.Funcionario = funcionario;
             this.Servico = servico;
         }
-
-        private FuncionariosComServicos() { }   
-       
     }
 }

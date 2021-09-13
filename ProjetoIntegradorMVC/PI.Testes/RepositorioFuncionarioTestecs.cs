@@ -26,8 +26,8 @@ namespace PI.Testes
             contexto.Database.EnsureDeleted();
             contexto.Database.EnsureCreated();
 
-            contexto.Funcionarios.Add(new Funcionario("Cleide", "111.111.111-11"));
-            contexto.Funcionarios.Add(new Funcionario("Ravona", "222.222.222-22"));
+            contexto.Funcionarios.Add(new Funcionario("Cleide","cleide@cleide.com", "123", "111.111.111-11"));
+            contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             contexto.SaveChanges();
 
             var repo = new Repositorio_Funcionario(contexto);
@@ -50,7 +50,8 @@ namespace PI.Testes
             using var contexto = new Contexto(options);
             contexto.Database.EnsureDeleted();
             contexto.Database.EnsureCreated();
-            var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido", "131.111.111-11"), new Funcionario("Ravon", "422.222.222-22") };
+            var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
+                new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
 
             var repo = new Repositorio_Funcionario(contexto);
 
@@ -71,11 +72,12 @@ namespace PI.Testes
             using var contexto = new Contexto(options);
             contexto.Database.EnsureDeleted();
             contexto.Database.EnsureCreated();
-            contexto.Funcionarios.Add(new Funcionario("Cleide", "111.111.111-11"));
-            contexto.Funcionarios.Add(new Funcionario("Ravona", "222.222.222-22"));
+            contexto.Funcionarios.Add(new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"));
+            contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             contexto.SaveChanges();
 
-            var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "111.111.111-11"), new Funcionario("Ravona", "222.222.222-22") };
+            var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
+                new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
             var repo = new Repositorio_Funcionario(contexto);
 
@@ -97,11 +99,12 @@ namespace PI.Testes
             contexto.Database.EnsureDeleted();
             contexto.Database.EnsureCreated();
             //Arrange
-            contexto.Funcionarios.Add(new Funcionario("Cleide", "111.111.111-11"));
-            contexto.Funcionarios.Add(new Funcionario("Ravona", "222.222.222-22"));
+            contexto.Funcionarios.Add(new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"));
+            contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             contexto.SaveChanges();
 
-            var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "111.111.111-11"), new Funcionario("Ravona", "222.222.222-22") };
+            var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
+                new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
             var repo = new Repositorio_Funcionario(contexto);
 
