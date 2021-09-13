@@ -12,7 +12,6 @@ namespace PI.Testes
         private string _preco;
         private decimal _precoDecimal;
 
-
         public ServicoTeste()
         {
             _nome = "tananan";

@@ -14,49 +14,42 @@ namespace PI.Testes
 {
     public class RepositorioServicoTeste
     {
-        [Fact]
-        public void Deve_retornar_um_servico()
+        private readonly Contexto _contexto;
+        private readonly Repositorio_Servico _repo;
+
+        public RepositorioServicoTeste()
         {
-            //Arrange
             var options = new DbContextOptionsBuilder<Contexto>()
                 .UseInMemoryDatabase(databaseName: "DBTesteServicos")
                 .Options;
 
-            using var contexto = new Contexto(options);
-            contexto.Database.EnsureDeleted();
-            contexto.Database.EnsureCreated();
+            _contexto = new Contexto(options);
+            _contexto.Database.EnsureDeleted();
+            _contexto.Database.EnsureCreated();
 
-            contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            contexto.SaveChanges();
+            _repo = new Repositorio_Servico(_contexto);
+        }
 
-            var repo = new Repositorio_Servico(contexto);
+        [Fact]
+        public void Deve_retornar_um_servico()
+        {
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
+            _contexto.SaveChanges();
             var id = 1;
             
-            //Act
-            var servico = repo.GetServico(id);
+            var servico = _repo.GetServico(id);
 
-            //Assert
             Assert.Equal(id, servico.Id);
         }
 
         [Fact]
         public void Deve_retornar_uma_lista_de_servicos()
-        {
-            var options = new DbContextOptionsBuilder<Contexto>()
-                .UseInMemoryDatabase(databaseName: "DBTesteServicos")
-                .Options;
+        { 
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.SaveChanges();
 
-            using var contexto = new Contexto(options);
-            contexto.Database.EnsureDeleted();
-            contexto.Database.EnsureCreated();
-
-            contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
-            contexto.SaveChanges();
-
-            var repo = new Repositorio_Servico(contexto);
-
-            var servicos = repo.GetServicos();
+            var servicos = _repo.GetServicos();
 
             Assert.Equal(2, servicos.Count);
         }
@@ -64,19 +57,9 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_servicos_ao_banco_de_dados()
         {
-            var options = new DbContextOptionsBuilder<Contexto>()
-                .UseInMemoryDatabase(databaseName: "DBTesteServicos")
-                .Options;
-
-            using var contexto = new Contexto(options);
-            contexto.Database.EnsureDeleted();
-            contexto.Database.EnsureCreated();
-
-            var repo = new Repositorio_Servico(contexto);
-
             var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
 
-            repo.AddServicos(servicos);
+            _repo.AddServicos(servicos);
 
             Assert.Equal(2, servicos.Count);
         }
@@ -84,22 +67,13 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_servicos_existentes()
         {
-            var options = new DbContextOptionsBuilder<Contexto>()
-                .UseInMemoryDatabase(databaseName: "DBTestesServicos")
-                .Options;
-
-            using var contexto = new Contexto(options);
-            contexto.Database.EnsureDeleted();
-            contexto.Database.EnsureCreated();
-
-            contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
-            contexto.SaveChanges();
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.SaveChanges();
 
             var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
-            var repo = new Repositorio_Servico(contexto);
 
-            var servicoExistente = repo.VerificarServicoExistente(listaDeServicosExistentes[0]);
+            var servicoExistente = _repo.VerificarServicoExistente(listaDeServicosExistentes[0]);
 
             Assert.True(servicoExistente);
         }
@@ -109,25 +83,13 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço já existe";
 
-            var options = new DbContextOptionsBuilder<Contexto>()
-               .UseInMemoryDatabase(databaseName: "DBTesteFuncionarios")
-               .Options;
-
-            using var contexto = new Contexto(options);
-            contexto.Database.EnsureDeleted();
-            contexto.Database.EnsureCreated();
-
-            contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
-            contexto.SaveChanges();
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.SaveChanges();
 
             var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
-
-            var repo = new Repositorio_Servico(contexto);
-
             
-            void Acao() => repo.AddServicos(listaDeServicosExistentes);
-
+            void Acao() => _repo.AddServicos(listaDeServicosExistentes);
             
             var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
