@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models
 {
-    public abstract class Usuario : ClasseBase
+    public abstract class ClasseBase
     {
-        public string Email { get; set; }
-        public string Senha { get; set; }
+        public int Id { get; set; }
     }
 }

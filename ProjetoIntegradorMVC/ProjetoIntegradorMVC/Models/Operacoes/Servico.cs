@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Servico")]
-    public class Servico
+    public class Servico : ClasseBase
     {
-        public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }

@@ -7,6 +7,5 @@ namespace ProjetoIntegradorMVC.Repositorio
     {
         List<Funcionario> GetFuncionarios(List<int> id);
         void AddFuncionarios(List<Funcionario> funcionarios);
-        public bool VerificarFuncionarioExistente(Funcionario funcionario);
     }
 }

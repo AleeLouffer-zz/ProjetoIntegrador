@@ -9,38 +9,27 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_Servico : IRepositorio_Servico
+    public class Repositorio_Servico : BaseRepositorio<Servico>, IRepositorio_Servico
     {
-        private readonly Contexto _contexto;
+        public Repositorio_Servico(Contexto contexto) : base(contexto) { }
 
-        public Repositorio_Servico(Contexto contexto)
-        {
-            _contexto = contexto;
-        }
-
+        public Servico GetServico(int id) => GetPorId(id);
         public List<Servico> GetServicos() => _contexto.Set<Servico>().ToList();
-
-        public Servico GetServico(int id) => _contexto.Set<Servico>().Where(s => s.Id == id).SingleOrDefault();
 
         public void AddServicos(List<Servico> servicos)
         {
             foreach (var servico in servicos)
             {
-                if (VerificarServicoExistente(servico)) throw new DuplicateNameException("O serviço já existe");
-                _contexto.Set<Servico>().Add(servico);
+                if (VerificarSeExisteNoBanco(servico)) throw new DuplicateNameException("O serviço já existe");
+                Adicionar(servico);
             }
             _contexto.SaveChanges();
         }
 
-        public bool VerificarServicoExistente (Servico servico)
+        public override bool ExisteNoBanco(Servico objetoNoBanco)
         {
-            var servicosDoBanco = _contexto.Set<Servico>().ToList();
-
-            foreach (var servicoDoBanco in servicosDoBanco)
-            {
-                if (servicoDoBanco.Preco == servico.Preco &&
-                    servicoDoBanco.Nome == servico.Nome) return true;
-            }
+            if (objetoNoBanco.Preco == objetoNoBanco.Preco &&
+            objetoNoBanco.Nome == objetoNoBanco.Nome) return true;
             return false;
         }
     }

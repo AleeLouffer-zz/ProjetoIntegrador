@@ -81,7 +81,7 @@ namespace PI.Testes
 
             var repo = new Repositorio_Funcionario(contexto);
 
-            var funcionariosExistentes = repo.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
+            var funcionariosExistentes = repo.ExisteNoBanco(listaFuncionariosExistentes[0]);
 
             Assert.True(funcionariosExistentes);
         }
