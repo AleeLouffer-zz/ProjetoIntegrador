@@ -8,6 +8,7 @@ using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Repositorio;
 using ProjetoIntegradorMVC.Models.LigaçãoModels;
+using ProjetoIntegradorMVC.Models;
 
 namespace ProjetoIntegradorMVC
 {
@@ -51,10 +52,13 @@ namespace ProjetoIntegradorMVC
 
         private static List<Funcionario> SetFuncionarios()
         {
+            var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
+            var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
+            var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
-                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311"),
-                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312"),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313")
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311", jornada),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312", jornada),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313", jornada)
             };
         }
     }

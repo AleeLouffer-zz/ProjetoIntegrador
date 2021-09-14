@@ -1,10 +1,4 @@
-﻿using ProjetoIntegradorMVC.Models.Operacoes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -12,14 +6,16 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
+        public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
         private Funcionario() { }
-        public Funcionario (string nome, string email, string senha, string cpf)
+        public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada)
         {
             ValidarInformacoes(nome, email, senha, cpf);
             Nome = nome;
             Email = email;
             Senha = senha;
             CPF = cpf;
+            JornadaDeTrabalho = jornada;
         }
         public void ValidarInformacoes(string nome, string email, string senha, string cpf)
         {

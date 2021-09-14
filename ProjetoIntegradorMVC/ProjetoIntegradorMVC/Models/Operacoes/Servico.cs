@@ -15,6 +15,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public int TempoEstimado { get; private set; }
         private Servico(){ }
         public Servico(string nome, string descricao, string preco)
         {
