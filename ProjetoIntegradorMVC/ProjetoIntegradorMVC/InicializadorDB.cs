@@ -17,9 +17,9 @@ namespace ProjetoIntegradorMVC
         private readonly Contexto _contexto;
         private readonly IRepositorio_Funcionario _repositorioFuncionario;
         private readonly IRepositorio_Servico _repositorioServico;
-        private readonly IRepositorio_FuncionariosComServicos _repositorioFuncComServicos;
+        private readonly IRepositorio_FuncionarioServico _repositorioFuncComServicos;
 
-        public InicializadorDB(Contexto contexto, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_Servico repositorioServico, IRepositorio_FuncionariosComServicos repositorioFuncComServicos)
+        public InicializadorDB(Contexto contexto, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_Servico repositorioServico, IRepositorio_FuncionarioServico repositorioFuncComServicos)
         {
             _contexto = contexto;
             _repositorioFuncionario = repositorioFuncionario;
@@ -36,7 +36,7 @@ namespace ProjetoIntegradorMVC
             _repositorioFuncionario.AddFuncionarios(funcionarios);
             _repositorioServico.AddServicos(servicos);
 
-            List<FuncionariosComServicos> funcComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
+            List<FuncionarioServico> funcComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
             _repositorioFuncComServicos.AddFuncionariosComServicos(funcComServicos);
         }
 

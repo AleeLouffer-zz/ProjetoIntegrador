@@ -1,4 +1,4 @@
-﻿using ProjetoIntegradorMVC.Models.Operacoes;
+﻿using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +12,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
+        public List<FuncionarioServico> FuncionariosServicos { get; private set; }
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf)
         {

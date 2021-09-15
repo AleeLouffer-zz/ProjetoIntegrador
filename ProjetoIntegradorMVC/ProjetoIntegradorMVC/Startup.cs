@@ -31,7 +31,7 @@ namespace ProjetoIntegradorMVC
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddTransient<IRepositorio_Funcionario, Repositorio_Funcionario>();
             services.AddTransient<IRepositorio_Servico, Repositorio_Servico>();
-            services.AddTransient<IRepositorio_FuncionariosComServicos, Repositorio_FuncionariosComServicos>();
+            services.AddTransient<IRepositorio_FuncionarioServico, Repositorio_FuncionarioServico>();
             services.AddTransient<InicializadorDB>();
         }
 

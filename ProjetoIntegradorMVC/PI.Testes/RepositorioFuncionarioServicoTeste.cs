@@ -14,15 +14,15 @@ using ProjetoIntegradorMVC.Models.LigaçãoModels;
 
 namespace PI.Testes
 {
-    public class RepositorioFuncionariosComServicosTeste
+    public class RepositorioFuncionarioServicoTeste
     {
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
         private readonly Funcionario _funcionario2;
         private readonly Servico _servico2;
         private readonly Contexto _contexto;
-        private readonly Repositorio_FuncionariosComServicos _repo;
-        public RepositorioFuncionariosComServicosTeste()
+        private readonly Repositorio_FuncionarioServico _repo;
+        public RepositorioFuncionarioServicoTeste()
         {
             var options = new DbContextOptionsBuilder<Contexto>()
                 .UseInMemoryDatabase(databaseName: "DBTesteFuncionariosComServicos")
@@ -32,7 +32,7 @@ namespace PI.Testes
             _contexto.Database.EnsureDeleted();
             _contexto.Database.EnsureCreated();
 
-            _repo = new Repositorio_FuncionariosComServicos(_contexto);
+            _repo = new Repositorio_FuncionarioServico(_contexto);
 
             _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "111.111.111-11");
             _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "112.111.111-11");
@@ -43,29 +43,29 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_um_funcionario_com_servico()
         {
-            var funcComServico = new FuncionariosComServicos(_funcionario, _servico);
+            var funcComServico = new FuncionarioServico(_funcionario, _servico);
 
             _repo.AddFuncionarioComServico(funcComServico);
 
-            Assert.Equal(1, _contexto.FuncionariosComServicos.Count());
+            Assert.Equal(1, _contexto.FuncionarioServico.Count());
         }
 
         [Fact]
         public void Deve_adicionar_varios_funcionarios_com_servicos()
         { 
 
-            var funcsComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico), new FuncionariosComServicos(_funcionario2, _servico2) };
+            var funcsComServicos = new List<FuncionarioServico> { new FuncionarioServico(_funcionario, _servico), new FuncionarioServico(_funcionario2, _servico2) };
 
             _repo.AddFuncionariosComServicos(funcsComServicos);
 
-            Assert.Equal(2, _contexto.FuncionariosComServicos.Count());
+            Assert.Equal(2, _contexto.FuncionarioServico.Count());
         }
 
         [Fact]
         public void Deve_listar_ids_dos_funcionario_pela_id_de_servico()
         {
             var idEsperado = _contexto.Servicos.Where(a => a.Nome == "Corte").Select(a => a.Id).SingleOrDefault();
-            var idsFuncionariosEsperados = _contexto.FuncionariosComServicos.Select(a => a.FuncionarioId).ToList();
+            var idsFuncionariosEsperados = _contexto.FuncionarioServico.Select(a => a.FuncionarioId).ToList();
             var idFuncionario = _repo.ListarIdsFuncionariosPelaIDServico(idEsperado);
 
             Assert.Equal(idsFuncionariosEsperados, idFuncionario);

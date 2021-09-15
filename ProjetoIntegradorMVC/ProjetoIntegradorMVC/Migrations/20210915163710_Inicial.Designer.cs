@@ -9,7 +9,7 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210910170051_Inicial")]
+    [Migration("20210915163710_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace ProjetoIntegradorMVC.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionariosComServicos", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionarioServico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace ProjetoIntegradorMVC.Migrations
 
                     b.HasIndex("ServicoId");
 
-                    b.ToTable("FuncionariosComServicos");
+                    b.ToTable("FuncionarioServico");
                 });
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Operacoes.Servico", b =>
@@ -87,16 +87,16 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.ToTable("Funcionarios");
                 });
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionariosComServicos", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionarioServico", b =>
                 {
                     b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", "Funcionario")
-                        .WithMany()
+                        .WithMany("FuncionariosServicos")
                         .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoIntegradorMVC.Models.Operacoes.Servico", "Servico")
-                        .WithMany()
+                        .WithMany("FuncionariosServicos")
                         .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -104,6 +104,16 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Navigation("Funcionario");
 
                     b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Operacoes.Servico", b =>
+                {
+                    b.Navigation("FuncionariosServicos");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
+                {
+                    b.Navigation("FuncionariosServicos");
                 });
 #pragma warning restore 612, 618
         }

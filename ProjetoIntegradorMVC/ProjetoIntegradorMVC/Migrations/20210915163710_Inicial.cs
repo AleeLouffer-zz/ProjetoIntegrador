@@ -38,7 +38,7 @@ namespace ProjetoIntegradorMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FuncionariosComServicos",
+                name: "FuncionarioServico",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -48,15 +48,15 @@ namespace ProjetoIntegradorMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FuncionariosComServicos", x => x.Id);
+                    table.PrimaryKey("PK_FuncionarioServico", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FuncionariosComServicos_Funcionarios_FuncionarioId",
+                        name: "FK_FuncionarioServico_Funcionarios_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FuncionariosComServicos_Servico_ServicoId",
+                        name: "FK_FuncionarioServico_Servico_ServicoId",
                         column: x => x.ServicoId,
                         principalTable: "Servico",
                         principalColumn: "Id",
@@ -64,20 +64,20 @@ namespace ProjetoIntegradorMVC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FuncionariosComServicos_FuncionarioId",
-                table: "FuncionariosComServicos",
+                name: "IX_FuncionarioServico_FuncionarioId",
+                table: "FuncionarioServico",
                 column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FuncionariosComServicos_ServicoId",
-                table: "FuncionariosComServicos",
+                name: "IX_FuncionarioServico_ServicoId",
+                table: "FuncionarioServico",
                 column: "ServicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FuncionariosComServicos");
+                name: "FuncionarioServico");
 
             migrationBuilder.DropTable(
                 name: "Funcionarios");

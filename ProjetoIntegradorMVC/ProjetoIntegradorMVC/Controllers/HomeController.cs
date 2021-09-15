@@ -12,9 +12,9 @@ namespace ProjetoIntegradorMVC.Controllers
     {
         private readonly IRepositorio_Servico _repositorioServico;
         private readonly IRepositorio_Funcionario _repositorioFuncionario;
-        private readonly IRepositorio_FuncionariosComServicos _repositorioFuncComServicos;
+        private readonly IRepositorio_FuncionarioServico _repositorioFuncComServicos;
 
-        public HomeController(IRepositorio_Servico repositorioServico, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_FuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorio_Servico repositorioServico, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_FuncionarioServico repositorioFuncComServicos)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;

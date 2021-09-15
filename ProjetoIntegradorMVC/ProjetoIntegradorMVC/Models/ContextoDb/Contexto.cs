@@ -15,6 +15,6 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<FuncionariosComServicos> FuncionariosComServicos { get; set; }
+        public DbSet<FuncionarioServico> FuncionarioServico { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.Usuarios;
+﻿using ProjetoIntegradorMVC.Models.LigaçãoModels;
+using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public List<FuncionarioServico> FuncionariosServicos { get; private set; }
         private Servico(){ }
         public Servico(string nome, string descricao, string preco)
         {

@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_FuncionariosComServicos : IRepositorio_FuncionariosComServicos
+    public class Repositorio_FuncionarioServico : IRepositorio_FuncionarioServico
     {
         private readonly Contexto _contexto;
 
-        public Repositorio_FuncionariosComServicos(Contexto contexto)
+        public Repositorio_FuncionarioServico(Contexto contexto)
         {
             _contexto = contexto;
         }
 
-        public void AddFuncionarioComServico(FuncionariosComServicos funcionariosComServicos)
+        public void AddFuncionarioComServico(FuncionarioServico funcionariosComServicos)
         {
-            _contexto.Set<FuncionariosComServicos>().Add(funcionariosComServicos);
+            _contexto.Set<FuncionarioServico>().Add(funcionariosComServicos);
             
             _contexto.SaveChanges();
         }
 
-        public void AddFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
+        public void AddFuncionariosComServicos(List<FuncionarioServico> funcionariosComServicos)
         {
 
             foreach (var funcionarioComServico in funcionariosComServicos)
@@ -38,7 +38,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public List<int> ListarIdsFuncionariosPelaIDServico(int idServico)
         {
-            var servicos = _contexto.Set<FuncionariosComServicos>().Where(s => s.ServicoId == idServico).ToList();
+            var servicos = _contexto.Set<FuncionarioServico>().Where(s => s.ServicoId == idServico).ToList();
 
             var idFuncionarios = new List<int>();
             foreach (var servico in servicos)
@@ -49,9 +49,9 @@ namespace ProjetoIntegradorMVC.Repositorio
             return idFuncionarios;
         }
 
-        public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
+        public List<FuncionarioServico> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
         {
-            var funcComServicos = new List<FuncionariosComServicos>();
+            var funcComServicos = new List<FuncionarioServico>();
 
             var qtdFuncionarios = funcionarios.Count;
 
@@ -59,7 +59,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             {
                 foreach (var servico in servicos)
                 {
-                    funcComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
+                    funcComServicos.Add(new FuncionarioServico(funcionarios[i], servico));
                 }
             }
 
