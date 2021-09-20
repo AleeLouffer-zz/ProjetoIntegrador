@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorio_FuncionariosComServicos
+    public interface IRepositorioFuncionariosComServicos
     {
-        void AddFuncionarioComServico(FuncionariosComServicos funcionariosComServicos);
-        void AddFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
-        public List<int> ListarIdsFuncionariosPelaIDServico(int idServico);
+        void AdicionarFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos);
+        void AdicionarFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
+        public List<int> BuscarIdsDosFuncionariosPeloIdDoServico(int idServico);
         public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos);
     }
 }

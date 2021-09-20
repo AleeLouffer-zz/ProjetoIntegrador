@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
@@ -15,18 +16,16 @@ namespace PI.Testes
     public class RepositorioFuncionarioTeste
     {
         private readonly Contexto _contexto;
-        private readonly Repositorio_Funcionario _repo;
+        private readonly RepositorioFuncionario _repo;
+        private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         public RepositorioFuncionarioTeste()
         {
-            var options = new DbContextOptionsBuilder<Contexto>()
-                .UseInMemoryDatabase(databaseName: "DBTesteFuncionarios")
-                .Options;
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
 
-            _contexto = new Contexto(options);
-            _contexto.Database.EnsureDeleted();
-            _contexto.Database.EnsureCreated();
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionarios");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
-            _repo = new Repositorio_Funcionario(_contexto);
+            _repo = new RepositorioFuncionario(_contexto);
         }
         [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
@@ -37,7 +36,7 @@ namespace PI.Testes
 
             var ids = new List<int>() { 1, 2 };
 
-            var funcionarios = _repo.GetFuncionarios(ids);
+            var funcionarios = _repo.BuscarFuncionariosPorIds(ids);
 
             Assert.Equal(ids[1], funcionarios[1].Id);
         }
@@ -48,7 +47,7 @@ namespace PI.Testes
             var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
 
-            _repo.AddFuncionarios(listaFuncionarios);
+            _repo.Adicionarfuncionarios(listaFuncionarios);
 
             Assert.Equal(2, _contexto.Funcionarios.Count());
         }
@@ -80,7 +79,7 @@ namespace PI.Testes
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
-            void Acao() => _repo.AddFuncionarios(listaFuncionariosExistentes);
+            void Acao() => _repo.Adicionarfuncionarios(listaFuncionariosExistentes);
 
             var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

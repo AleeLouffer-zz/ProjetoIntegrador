@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.DTO
 {
-    public class DTOServicos
+    public class ServicoDTO
     {
-        private DTOServicos() { }
-        public DTOServicos(Servico servico, List<Funcionario> funcionario)
+        private ServicoDTO() { }
+        public ServicoDTO(Servico servico, List<Funcionario> funcionario)
         {
             Servico = servico;
             Funcionario = funcionario;
