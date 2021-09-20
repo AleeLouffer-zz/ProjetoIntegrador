@@ -10,11 +10,11 @@ namespace ProjetoIntegradorMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepositorio_Servico _repositorioServico;
-        private readonly IRepositorio_Funcionario _repositorioFuncionario;
-        private readonly IRepositorio_FuncionariosComServicos _repositorioFuncComServicos;
+        private readonly IRepositorioServico _repositorioServico;
+        private readonly IRepositorioFuncionario _repositorioFuncionario;
+        private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
 
-        public HomeController(IRepositorio_Servico repositorioServico, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_FuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorioServico repositorioServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;
@@ -23,16 +23,16 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult Home()
         {
-            return View(_repositorioServico.GetServicos());
+            return View(_repositorioServico.BuscarServicos());
         }
 
         public IActionResult Servico(int id)
         {
-             var servicoDTO = _repositorioServico.GetServico(id);
-             var idsFuncionario = _repositorioFuncComServicos.ListarIdsFuncionariosPelaIDServico(id);
-             var funcionarios = _repositorioFuncionario.GetFuncionarios(idsFuncionario);
+             var servicoDTO = _repositorioServico.BuscarServicoPorId(id);
+             var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
+             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 
-             var DTO = new DTOServicos(servicoDTO, funcionarios);
+             var DTO = new ServicoDTO(servicoDTO, funcionarios);
              return View(DTO);
         }
     }

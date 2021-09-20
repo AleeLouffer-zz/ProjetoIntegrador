@@ -29,9 +29,9 @@ namespace ProjetoIntegradorMVC
             services.AddControllersWithViews();
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddTransient<IRepositorio_Funcionario, Repositorio_Funcionario>();
-            services.AddTransient<IRepositorio_Servico, Repositorio_Servico>();
-            services.AddTransient<IRepositorio_FuncionariosComServicos, Repositorio_FuncionariosComServicos>();
+            services.AddTransient<IRepositorioFuncionario, RepositorioFuncionario>();
+            services.AddTransient<IRepositorioServico, RepositorioServico>();
+            services.AddTransient<IRepositorioFuncionariosComServicos, RepositorioFuncionariosComServicos>();
             services.AddTransient<InicializadorDB>();
         }
 
