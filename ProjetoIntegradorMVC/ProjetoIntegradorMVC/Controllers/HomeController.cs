@@ -35,5 +35,10 @@ namespace ProjetoIntegradorMVC.Controllers
              var DTO = new ServicoDTO(servicoDTO, funcionarios);
              return View(DTO);
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
