@@ -12,7 +12,6 @@ namespace PI.Testes
 {
     public class FuncionarioTeste
     {
-
         private string _nome;
         private string _email;
         private string _senha;
@@ -23,10 +22,10 @@ namespace PI.Testes
             _nome = "Daniel";
             _email = "daniel-zanelato@hotmail.com";
             _senha = "alecrimdourado";
-            _cpf = "43144383960";
+            _cpf = "59819300045";
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            _jornada = new(diasDeTrabalho, horariosDeTrabalho);
+            _jornada = new (diasDeTrabalho, horariosDeTrabalho);
         }
         [Fact]
         public void Deve_criar_um_funcionario()
@@ -94,6 +93,19 @@ namespace PI.Testes
         public void Nao_deve_criar_um_funcionario_sem_cpf(string cpfInvalido)
         {
             const string mensagemEsperada = "O funcionário deve ter um cpf";
+
+            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData("000000000000")]
+        [InlineData("1")]
+        public void Nao_deve_criar_um_funcionario_com_cpf_invalido(string cpfInvalido)
+        {
+            const string mensagemEsperada = "O funcionario deve ter um CPF valido";
 
             void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada);
 

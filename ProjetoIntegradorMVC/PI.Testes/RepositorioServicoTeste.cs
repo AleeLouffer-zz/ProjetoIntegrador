@@ -33,7 +33,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_retornar_um_servico()
         {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
             _contexto.SaveChanges();
             var id = 1;
             
@@ -45,8 +45,8 @@ namespace PI.Testes
         [Fact]
         public void Deve_retornar_uma_lista_de_servicos()
         { 
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
             _contexto.SaveChanges();
 
             var servicos = _repo.GetServicos();
@@ -57,7 +57,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_servicos_ao_banco_de_dados()
         {
-            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
+            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
 
             _repo.AddServicos(servicos);
 
@@ -67,11 +67,11 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_servicos_existentes()
         {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
             _contexto.SaveChanges();
 
-            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
+            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
 
             var servicoExistente = _repo.VerificarServicoExistente(listaDeServicosExistentes[0]);
 
@@ -83,11 +83,11 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço já existe";
 
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", "25,00"));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", "30,00"));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
             _contexto.SaveChanges();
 
-            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", "25,00"), new Servico("Manicure", "Manicure", "30,00") };
+            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
             
             void Acao() => _repo.AddServicos(listaDeServicosExistentes);
             

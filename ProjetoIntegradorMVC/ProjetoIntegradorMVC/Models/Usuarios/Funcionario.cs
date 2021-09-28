@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caelum.Stella.CSharp.Validation;
+using System;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -23,6 +24,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (string.IsNullOrWhiteSpace(email)) throw new Exception("O funcionário deve ter um email");
             if (string.IsNullOrWhiteSpace(senha)) throw new Exception("O funcionário deve ter uma senha");
             if (string.IsNullOrWhiteSpace(cpf)) throw new Exception("O funcionário deve ter um cpf");
+            if (!new CPFValidator().IsValid(cpf)) throw new Exception("O funcionario deve ter um CPF valido");
         }
     }
 } 

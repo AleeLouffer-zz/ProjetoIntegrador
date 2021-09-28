@@ -6,9 +6,7 @@ namespace ProjetoIntegradorMVC.Models
     {
         public int Id { get; private set; }
         public string DiaDaSemana { get; private set; }
-
         private DiaDeTrabalho() { }
-
         public DiaDeTrabalho (string diaDaSemana)
         {
             DiaDaSemana = diaDaSemana;

@@ -10,15 +10,12 @@ namespace ProjetoIntegradorMVC.Models
     {
         public int Id { get; private set; }
         public DateTime Horario { get; private set; }
-
         private HorarioDeTrabalho () { }
-
         public HorarioDeTrabalho(string horario)
         {
             Horario = ObterComoHoraEMinuto(horario);
         }
-
-        private DateTime ObterComoHoraEMinuto(string horario)
+        private static DateTime ObterComoHoraEMinuto(string horario)
         {
             var converteuCorretamente = DateTime.TryParseExact(horario, "HH:mm",
             CultureInfo.InvariantCulture, DateTimeStyles.None, out var horaEMinutoConvertido);

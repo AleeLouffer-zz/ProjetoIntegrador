@@ -12,19 +12,17 @@ namespace ProjetoIntegradorMVC.Models
         public int Id { get; private set;  }
         public List<DiaDeTrabalho> DiasDeTrabalho { get; private set; } = new();
         public List<HorarioDeTrabalho> HorariosDeTrabalho { get; private set; } = new();
-
         private JornadaDeTrabalho() { }
-
         public JornadaDeTrabalho(List<DiaDeTrabalho> diasDeTrabalho, List<HorarioDeTrabalho> horariosDeTrabalho)
         {
+            ValidarInformacoes(diasDeTrabalho, horariosDeTrabalho);
             DiasDeTrabalho = diasDeTrabalho;
             HorariosDeTrabalho = horariosDeTrabalho;
         }
-        public void ValidarInformacoes(List<string> diasDeTrabalho, List<DateTime> horarioDeTrabalho)
+        public void ValidarInformacoes(List<DiaDeTrabalho> diasDeTrabalho, List<HorarioDeTrabalho> horarioDeTrabalho)
         {
-            if (diasDeTrabalho == null) throw new Exception("O funcionário deve ter um nome");
-            if (horarioDeTrabalho == null || horarioDeTrabalho.Any()) throw new Exception("O funcionário deve ter um nome");
+            if (diasDeTrabalho == null || !diasDeTrabalho.Any()) throw new Exception("A jornada deve ter dias de trabalho");
+            if (horarioDeTrabalho == null || !horarioDeTrabalho.Any()) throw new Exception("A jornada deve ter horários de trabalho");
         }
-       
     }
 }

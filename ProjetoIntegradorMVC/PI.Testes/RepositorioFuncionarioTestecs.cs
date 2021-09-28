@@ -37,8 +37,8 @@ namespace PI.Testes
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
-            _funcionario = new("Cleide", "cleide@cleide.com", "123", "111.111.111-11", _jornada);
-            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22", _jornada);
+            _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _jornada);
+            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _jornada);
         }
         [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
@@ -57,8 +57,8 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_os_funcionarios()
         {
-            var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11", _jornada), 
-                new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22", _jornada) };
+            var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "23882052040", _jornada), 
+                new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada) };
 
             _repo.AddFuncionarios(listaFuncionarios);
 
