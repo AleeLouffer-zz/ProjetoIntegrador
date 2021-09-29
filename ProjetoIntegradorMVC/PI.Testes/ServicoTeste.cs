@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Operacoes;
+using Caelum.Stella.CSharp.Vault;
 
 namespace PI.Testes
 {
@@ -9,12 +10,13 @@ namespace PI.Testes
     {
         private string _nome;
         private string _descricao;
-        private decimal _precoDecimal;
+        private decimal _preco;
 
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
+            _preco = 10m;
         }
 
         [Fact]
@@ -22,11 +24,12 @@ namespace PI.Testes
         {
             var servicoEsperado = new
             {
+                Nome = _nome,
                 Descricao = _descricao,
                 Preco = _preco
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _precoDecimal);
+            var servico = new Servico(_nome, _descricao, _preco);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -39,7 +42,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal);
+            void Acao() => new Servico(nomeInvalido, _descricao, _preco);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -53,7 +56,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter uma descrição";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal);
+            void Acao() => new Servico(_nome, descricaoInvalida, _preco);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -62,6 +65,17 @@ namespace PI.Testes
         [Theory]
         [InlineData(0)]
         public void Nao_deve_criar_um_servico_sem_preco(decimal precoInvalido)
+        {
+            const string mensagemEsperada = "O serviço deve ter um preço";
+
+            void Acao() => new Servico(_nome, _descricao, precoInvalido);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Nao_deve_criar_um_servico_com_tempo_estimado_negativo()
         {
             const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
 

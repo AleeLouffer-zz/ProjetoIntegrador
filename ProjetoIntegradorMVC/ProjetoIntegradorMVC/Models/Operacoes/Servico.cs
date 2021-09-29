@@ -23,8 +23,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
             Descricao = descricao;
-            Money precoConvertido = preco;
-            Preco = precoConvertido;
+            Preco = preco;
             TempoEstimado = tempoEstimado;
         }
         public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
