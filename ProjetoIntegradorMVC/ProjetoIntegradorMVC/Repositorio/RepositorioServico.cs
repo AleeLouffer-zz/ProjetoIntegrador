@@ -34,14 +34,13 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public bool VerificarServicoExistente (Servico servico)
         {
-            var servicosDoBanco = _contexto.Set<Servico>().ToList();
+            return BuscarServicoPorNomeEPreco(servico.Nome, servico.Preco) != null;
+        }
 
-            foreach (var servicoDoBanco in servicosDoBanco)
-            {
-                if (servicoDoBanco.Preco == servico.Preco &&
-                    servicoDoBanco.Nome == servico.Nome) return true;
-            }
-            return false;
+        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco)
+        {
+            return _contexto.Set<Servico>().Where(servico => servico.Nome == nome 
+                                                    && servico.Preco == preco).SingleOrDefault();
         }
     }
 }

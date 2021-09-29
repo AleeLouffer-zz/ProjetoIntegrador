@@ -27,6 +27,7 @@ namespace PI.Testes
 
             _repo = new RepositorioFuncionario(_contexto);
         }
+
         [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
         {
