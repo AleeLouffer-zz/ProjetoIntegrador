@@ -53,9 +53,9 @@ namespace PI.Testes
         public void Deve_adicionar_varios_funcionarios_com_servicos()
         { 
 
-            var funcsComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico), new FuncionariosComServicos(_funcionario2, _servico2) };
+            var funcionariosComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico), new FuncionariosComServicos(_funcionario2, _servico2) };
 
-            _repositorio.AdicionarFuncionariosComServicos(funcsComServicos);
+            _repositorio.AdicionarFuncionariosComServicos(funcionariosComServicos);
 
             Assert.Equal(2, _contexto.FuncionariosComServicos.Count());
         }
@@ -65,6 +65,7 @@ namespace PI.Testes
         {
             var idEsperado = _contexto.Servicos.Where(a => a.Nome == "Corte").Select(a => a.Id).SingleOrDefault();
             var idsFuncionariosEsperados = _contexto.FuncionariosComServicos.Select(a => a.FuncionarioId).ToList();
+
             var idFuncionario = _repositorio.BuscarIdsDosFuncionariosPeloIdDoServico(idEsperado);
 
             Assert.Equal(idsFuncionariosEsperados, idFuncionario);
@@ -77,7 +78,7 @@ namespace PI.Testes
             var servicos = new List<Servico> { _servico, _servico2 };
 
             var funcionariosComServicos = _repositorio.VincularFuncionariosComServicos(funcionarios, servicos);
-
+            
             Assert.Equal(4, funcionariosComServicos.Count());
         }
     }

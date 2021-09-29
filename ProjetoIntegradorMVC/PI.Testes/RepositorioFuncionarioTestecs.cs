@@ -33,24 +33,30 @@ namespace PI.Testes
             _contexto.Funcionarios.Add(new Funcionario("Cleide","cleide@cleide.com", "123", "111.111.111-11"));
             _contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             _contexto.SaveChanges();
-
             var ids = new List<int>() { 1, 2 };
 
             var funcionarios = _repo.BuscarFuncionariosPorIds(ids);
-            var funcionariosIds = funcionarios.Select(funcionario => funcionario.Id).ToList();
 
+            var funcionariosIds = funcionarios.Select(funcionario => funcionario.Id).ToList();
             Assert.Equal(ids, funcionariosIds);
         }
 
         [Fact]
         public void Deve_adicionar_os_funcionarios()
         {
-            var listaFuncionarios = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
+            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
 
-            _repo.Adicionarfuncionarios(listaFuncionarios);
+            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
 
-            Assert.Equal(2, _contexto.Funcionarios.Count());
+            var funcionariosRetornados = new List<Funcionario>();
+
+            foreach (var funcionario in funcionariosASeremAdicionados)
+            {
+                funcionariosRetornados.Add(_repo.BuscarFuncionarioPorCpf(funcionario.CPF));
+            }
+
+            Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
         }
 
         [Fact]
