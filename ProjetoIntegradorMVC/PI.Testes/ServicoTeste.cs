@@ -10,12 +10,14 @@ namespace PI.Testes
         private string _nome;
         private string _descricao;
         private decimal _precoDecimal;
+        private Local _localDoServico;
 
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
             _precoDecimal = 99m;
+            _localDoServico = Local.ADomicilio;
         }
 
         [Fact]
@@ -24,10 +26,11 @@ namespace PI.Testes
             var servicoEsperado = new
             {
                 Descricao = _descricao,
-                Preco = _precoDecimal
+                Preco = _precoDecimal,
+                LocalDoServico = _localDoServico
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _precoDecimal);
+            var servico = new Servico(_nome, _descricao, _precoDecimal, _localDoServico);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -40,7 +43,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal);
+            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal, _localDoServico);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -54,7 +57,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter uma descrição";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal);
+            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal, _localDoServico);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -66,10 +69,11 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um preço";
 
-            void Acao() => new Servico(_nome, _descricao, precoInvalido);
+            void Acao() => new Servico(_nome, _descricao, precoInvalido, _localDoServico);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
+
     }
 }

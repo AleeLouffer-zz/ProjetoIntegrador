@@ -35,8 +35,8 @@ namespace PI.Testes
 
             _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "111.111.111-11");
             _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "112.111.111-11");
-            _servico = new Servico("Corte", "Corte de Cabelo", 50m);
-            _servico2 = new Servico("Manicure", "Manicure", 30m);
+            _servico = new Servico("Corte", "Corte de Cabelo", 50m, Local.NaEmpresa);
+            _servico2 = new Servico("Manicure", "Manicure", 30m, Local.Ambos);
         }
 
         [Fact]

@@ -32,7 +32,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_retornar_um_servico()
         {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, Local.Ambos));
             _contexto.SaveChanges();
             var id = 1;
             
@@ -44,8 +44,8 @@ namespace PI.Testes
         [Fact]
         public void Deve_retornar_uma_lista_de_servicos()
         { 
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, Local.ADomicilio));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m, Local.Ambos));
             _contexto.SaveChanges();
 
             var servicos = _repositorio.BuscarServicos();
@@ -56,7 +56,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_servicos_ao_banco_de_dados()
         {
-            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
+            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, Local.ADomicilio), new Servico("Manicure", "Manicure", 30m, Local.NaEmpresa) };
 
             _repositorio.AdicionarServicos(servicos);
 
@@ -66,11 +66,11 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_servicos_existentes()
         {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, Local.NaEmpresa));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m, Local.Ambos));
             _contexto.SaveChanges();
 
-            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
+            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, Local.NaEmpresa), new Servico("Manicure", "Manicure", 30m, Local.Ambos) };
 
             var servicoExistente = _repositorio.VerificarServicoExistente(listaDeServicosExistentes[0]);
 
@@ -81,10 +81,10 @@ namespace PI.Testes
         public void Nao_deve_adicionar_servicos_existentes()
         {
             const string mensagemEsperada = "O serviço já existe";
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, Local.NaEmpresa));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m, Local.Ambos));
             _contexto.SaveChanges();
-            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
+            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, Local.NaEmpresa), new Servico("Manicure", "Manicure", 30m, Local.Ambos) };
             
             void Acao() => _repositorio.AdicionarServicos(listaDeServicosExistentes);
             
