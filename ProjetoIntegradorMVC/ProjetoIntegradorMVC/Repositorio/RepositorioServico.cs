@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_Servico : IRepositorio_Servico
+    public class RepositorioServico : IRepositorioServico
     {
         private readonly Contexto _contexto;
 
-        public Repositorio_Servico(Contexto contexto)
+        public RepositorioServico(Contexto contexto)
         {
             _contexto = contexto;
         }
 
-        public List<Servico> GetServicos() => _contexto.Set<Servico>().ToList();
+        public List<Servico> BuscarServicos() => _contexto.Set<Servico>().ToList();
 
-        public Servico GetServico(int id) => _contexto.Set<Servico>().Where(s => s.Id == id).SingleOrDefault();
+        public Servico BuscarServicoPorId(int id) => _contexto.Set<Servico>().Where(servico => servico.Id == id).SingleOrDefault();
 
-        public void AddServicos(List<Servico> servicos)
+        public void AdicionarServicos(List<Servico> servicos)
         {
             foreach (var servico in servicos)
             {
@@ -34,14 +34,13 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public bool VerificarServicoExistente (Servico servico)
         {
-            var servicosDoBanco = _contexto.Set<Servico>().ToList();
+            return BuscarServicoPorNomeEPreco(servico.Nome, servico.Preco) != null;
+        }
 
-            foreach (var servicoDoBanco in servicosDoBanco)
-            {
-                if (servicoDoBanco.Preco == servico.Preco &&
-                    servicoDoBanco.Nome == servico.Nome) return true;
-            }
-            return false;
+        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco)
+        {
+            return _contexto.Set<Servico>().Where(servico => servico.Nome == nome 
+                                                    && servico.Preco == preco).SingleOrDefault();
         }
     }
 }

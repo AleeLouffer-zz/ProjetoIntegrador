@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorio_Funcionario
+    public interface IRepositorioFuncionario
     {
-        List<Funcionario> GetFuncionarios(List<int> id);
-        void AddFuncionarios(List<Funcionario> funcionarios);
+        List<Funcionario> BuscarFuncionariosPorIds(List<int> id);
+        void Adicionarfuncionarios(List<Funcionario> funcionarios);
         public bool VerificarFuncionarioExistente(Funcionario funcionario);
     }
 }

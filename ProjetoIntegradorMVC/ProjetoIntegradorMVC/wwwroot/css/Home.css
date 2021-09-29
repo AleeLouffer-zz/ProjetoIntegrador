@@ -1,0 +1,190 @@
+﻿body {
+    background: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.corpo {
+    width: 60vw;
+    margin: 200px auto;
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 2px 2px 40px gray;
+}
+
+.infos {
+    display: flex;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+    .infos button {
+        background: none;
+        border: 0;
+        cursor: pointer;
+    }
+
+.infos-img {
+    margin: 30px;
+}
+
+.infos-txt {
+    margin: 30px;
+}
+
+    .infos-txt h1 {
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .infos-txt p {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .infos-txt :nth-child(3) {
+        margin-top: 10px;
+    }
+
+.botao {
+    position: absolute;
+    margin: 30px;
+    top: 0;
+    right: 0;
+}
+
+.func-cadastrados, .serv-cadastrados, .fotos {
+    margin-top: 20px;
+}
+
+    .func-cadastrados h1, .serv-cadastrados h1, .fotos h1 {
+        font-size: 25px;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+.caixa-func-cadastrados, .caixa-serv-cadastrados, .imgs-fotos {
+    background: whitesmoke;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px gray;
+}
+
+.imgs-fotos {
+    position: relative;
+}
+
+    .caixa-func-cadastrados button, .caixa-serv-cadastrados button, .imgs-fotos button {
+        padding: 5px 20px;
+        border: 0;
+        background: white;
+        border-radius: 100px;
+        margin: 0 10px;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0px 2px 5px gray;
+        transition: 1s;
+    }
+
+        .caixa-func-cadastrados button:hover {
+            transform: scale(1.2);
+        }
+
+        .caixa-serv-cadastrados button:hover {
+            transform: scale(1.2);
+        }
+
+    .imgs-fotos button {
+        transform: scale(1.2);
+    }
+
+    .imgs-fotos .mais {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        top: 70%;
+        left: calc(50% - 40px);
+        padding: 0;
+    }
+
+
+    .imgs-fotos img {
+        margin-right: 30px;
+        width: 30%;
+    }
+
+.adiciona-servico, .funcionario-informacoes {
+    display: flex;
+    margin: 50px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.col-1, .col-2, .col-3, .col-4 {
+    margin: 20px;
+}
+
+    .col-2 input, .col-3 input, .col-4 input {
+        border-radius: 20px;
+        border: 1px solid gray;
+        margin-top: 15px;
+    }
+
+.adiciona-servico .col-3 .btn-adicionar, .btn-add .btn-adicionar, .funcionario-informacoes .col-4 .btn-adicionar {
+    padding: 5px 20px;
+    border: 0;
+    background: none;
+    border-radius: none;
+    margin: 0 10px;
+    margin-top: 5px;
+    margin-left: -10px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: none;
+    transition: none;
+}
+
+.adiciona-servico .col-4 .btn-confirmar, funcionario-informacoes {
+    padding: 5px 20px;
+    border: 0;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-left: 70px;
+    font-size: 15px;
+    background: rgb(66, 129, 177);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: none;
+    transition: none;
+}
+
+.col-4 .btn-confirmar {
+    padding: 5px 20px;
+    border: 0;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-left: 70px;
+    font-size: 15px;
+    background: rgb(66, 129, 177);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: none;
+    transition: none;
+}
+
+.nome input, .tel input, .email input, .end input {
+    border-radius: 20px;
+    border: 1px solid gray;
+    display: inline-block;
+    font-size: 15px;
+}
+
+
+.opcoes select {
+    border-radius: 150px;
+    margin-top: 15px;
+}

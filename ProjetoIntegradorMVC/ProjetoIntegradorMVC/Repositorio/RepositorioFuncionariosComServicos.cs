@@ -9,36 +9,36 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_FuncionariosComServicos : IRepositorio_FuncionariosComServicos
+    public class RepositorioFuncionariosComServicos : IRepositorioFuncionariosComServicos
     {
         private readonly Contexto _contexto;
 
-        public Repositorio_FuncionariosComServicos(Contexto contexto)
+        public RepositorioFuncionariosComServicos(Contexto contexto)
         {
             _contexto = contexto;
         }
 
-        public void AddFuncionarioComServico(FuncionariosComServicos funcionariosComServicos)
+        public void AdicionarFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos)
         {
             _contexto.Set<FuncionariosComServicos>().Add(funcionariosComServicos);
             
             _contexto.SaveChanges();
         }
 
-        public void AddFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
+        public void AdicionarFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos)
         {
 
             foreach (var funcionarioComServico in funcionariosComServicos)
             {
-                AddFuncionarioComServico(funcionarioComServico);
+                AdicionarFuncionariosComServicos(funcionarioComServico);
             }
 
             _contexto.SaveChanges();
         }
 
-        public List<int> ListarIdsFuncionariosPelaIDServico(int idServico)
+        public List<int> BuscarIdsDosFuncionariosPeloIdDoServico(int idServico)
         {
-            var servicos = _contexto.Set<FuncionariosComServicos>().Where(s => s.ServicoId == idServico).ToList();
+            var servicos = _contexto.Set<FuncionariosComServicos>().Where(funcionariosComServicos => funcionariosComServicos.ServicoId == idServico).ToList();
 
             var idFuncionarios = new List<int>();
             foreach (var servico in servicos)
@@ -53,9 +53,9 @@ namespace ProjetoIntegradorMVC.Repositorio
         {
             var funcComServicos = new List<FuncionariosComServicos>();
 
-            var qtdFuncionarios = funcionarios.Count;
+            var quantidadeDeFuncionarios = funcionarios.Count;
 
-            for (int i = 0; i < qtdFuncionarios; i++)
+            for (int i = 0; i < quantidadeDeFuncionarios; i++)
             {
                 foreach (var servico in servicos)
                 {

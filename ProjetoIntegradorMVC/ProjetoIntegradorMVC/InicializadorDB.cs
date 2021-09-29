@@ -16,11 +16,11 @@ namespace ProjetoIntegradorMVC
     {
 
         private readonly Contexto _contexto;
-        private readonly IRepositorio_Funcionario _repositorioFuncionario;
-        private readonly IRepositorio_Servico _repositorioServico;
-        private readonly IRepositorio_FuncionariosComServicos _repositorioFuncComServicos;
+        private readonly IRepositorioFuncionario _repositorioFuncionario;
+        private readonly IRepositorioServico _repositorioServico;
+        private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
 
-        public InicializadorDB(Contexto contexto, IRepositorio_Funcionario repositorioFuncionario, IRepositorio_Servico repositorioServico, IRepositorio_FuncionariosComServicos repositorioFuncComServicos)
+        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
         {
             _contexto = contexto;
             _repositorioFuncionario = repositorioFuncionario;
@@ -34,11 +34,11 @@ namespace ProjetoIntegradorMVC
             List<Funcionario> funcionarios = SetFuncionarios();
             List<Servico> servicos = SetServicos();           
 
-            _repositorioFuncionario.AddFuncionarios(funcionarios);
-            _repositorioServico.AddServicos(servicos);
+            _repositorioFuncionario.Adicionarfuncionarios(funcionarios);
+            _repositorioServico.AdicionarServicos(servicos);
 
-            List<FuncionariosComServicos> funcComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
-            _repositorioFuncComServicos.AddFuncionariosComServicos(funcComServicos);
+            List<FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
+            _repositorioFuncComServicos.AdicionarFuncionariosComServicos(funcionariosComServicos);
         }
 
         private static List<Servico> SetServicos()
