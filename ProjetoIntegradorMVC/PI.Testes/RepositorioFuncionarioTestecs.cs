@@ -37,8 +37,9 @@ namespace PI.Testes
             var ids = new List<int>() { 1, 2 };
 
             var funcionarios = _repo.BuscarFuncionariosPorIds(ids);
+            var funcionariosIds = funcionarios.Select(funcionario => funcionario.Id).ToList();
 
-            Assert.Equal(ids[1], funcionarios[1].Id);
+            Assert.Equal(ids, funcionariosIds);
         }
 
         [Fact]
@@ -62,9 +63,9 @@ namespace PI.Testes
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
-            var funcionariosExistentes = _repo.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
+            var funcionarioExiste = _repo.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
 
-            Assert.True(funcionariosExistentes);
+            Assert.True(funcionarioExiste);
         }
 
         [Fact]

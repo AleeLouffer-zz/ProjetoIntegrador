@@ -41,13 +41,12 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public bool VerificarFuncionarioExistente(Funcionario funcionario)
         {
-            var funcionariosDoBanco = _contexto.Set<Funcionario>().ToList();
+            return BuscarFuncionarioPorCpf(funcionario.CPF) != null;
+        }
 
-            foreach (var funcionarioDoBanco in funcionariosDoBanco)
-            {
-                if (funcionarioDoBanco.CPF == funcionario.CPF) return true;
-            }
-            return false;
+        public Funcionario BuscarFuncionarioPorCpf(string cpf)
+        {
+            return _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
         }
     }
 }
