@@ -59,5 +59,16 @@ namespace PI.Testes
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
+
+        [Fact]
+        public void Nao_deve_criar_um_servico_com_tempo_estimado_negativo()
+        {
+            const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
+
+            void Acao() => new Servico(_nome, _descricao, _preco, -1);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
     }
 }

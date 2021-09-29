@@ -18,19 +18,21 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public decimal Preco { get; private set; }
         public int TempoEstimado { get; private set; }
         private Servico(){ }
-        public Servico(string nome, string descricao, decimal preco)
+        public Servico(string nome, string descricao, decimal preco, int tempoEstimado = 0)
         {
-            ValidarInformacoes(nome, descricao, preco);
+            ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
             Descricao = descricao;
             Money precoConvertido = preco;
             Preco = precoConvertido;
+            TempoEstimado = tempoEstimado;
         }
-        public void ValidarInformacoes(string nome, string descricao, decimal preco)
+        public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O serviço deve ter um nome");
             if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("O serviço deve ter uma descrição");
             if (preco <= 0) throw new Exception("O serviço deve ter um preço");
+            if (tempoEstimado < 0) throw new Exception("O tempo estimado é menor que 0 minutos");
         }
     }
 }
