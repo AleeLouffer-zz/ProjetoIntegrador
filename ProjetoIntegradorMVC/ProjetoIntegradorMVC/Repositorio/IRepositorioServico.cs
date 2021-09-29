@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorio_Servico 
+    public interface IRepositorioServico
     {
-        public Servico GetServico(int id);
-        List<Servico> GetServicos();
-        void AddServicos(List<Servico> servicos);
+        List<Servico> BuscarServicos();
+        Servico BuscarServicoPorId(int id);
+        void AdicionarServicos(List<Servico> servicos);
     }
 }

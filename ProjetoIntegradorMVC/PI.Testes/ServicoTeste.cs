@@ -9,14 +9,11 @@ namespace PI.Testes
     {
         private string _nome;
         private string _descricao;
-        private string _preco;
         private decimal _precoDecimal;
-
 
         public ServicoTeste()
         {
             _nome = "tananan";
-            _preco = "99";
             _descricao = "tananan";
             _precoDecimal = 99m;
         }
@@ -30,7 +27,7 @@ namespace PI.Testes
                 Preco = _precoDecimal
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _preco);
+            var servico = new Servico(_nome, _descricao, _precoDecimal);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -43,7 +40,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _preco);
+            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -57,17 +54,15 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter uma descrição";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _preco);
+            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void Nao_deve_criar_um_servico_sem_preco(string precoInvalido)
+        [InlineData(0)]
+        public void Nao_deve_criar_um_servico_sem_preco(decimal precoInvalido)
         {
             const string mensagemEsperada = "O serviço deve ter um preço";
 
