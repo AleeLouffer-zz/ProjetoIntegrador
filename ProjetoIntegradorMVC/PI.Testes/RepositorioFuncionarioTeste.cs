@@ -46,9 +46,7 @@ namespace PI.Testes
         {
             var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
-
             _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
-
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
@@ -65,7 +63,6 @@ namespace PI.Testes
             _contexto.Funcionarios.Add(new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"));
             _contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             _contexto.SaveChanges();
-
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
@@ -78,11 +75,9 @@ namespace PI.Testes
         public void Nao_deve_adicionar_funcionario_existente()
         {
             const string mensagemEsperada = "O funcionário já existe";
-
             _contexto.Funcionarios.Add(new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"));
             _contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
             _contexto.SaveChanges();
-
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
