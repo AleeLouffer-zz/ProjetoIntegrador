@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_Funcionario : BaseRepositorio<Funcionario>, IRepositorioFuncionario
+    public class RepositorioFuncionario : BaseRepositorio<Funcionario>, IRepositorioFuncionario
     {
-        public Repositorio_Funcionario(Contexto contexto) : base(contexto) { }
+        public RepositorioFuncionario(Contexto contexto) : base(contexto) { }
 
         public List<Funcionario> BuscarFuncionariosPorIds(List<int> Ids)
         {

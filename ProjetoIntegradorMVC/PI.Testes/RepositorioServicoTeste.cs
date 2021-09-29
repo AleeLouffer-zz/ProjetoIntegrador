@@ -64,20 +64,6 @@ namespace PI.Testes
         }
 
         [Fact]
-        public void Deve_verificar_servicos_existentes()
-        {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
-            _contexto.SaveChanges();
-
-            var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
-
-            var servicoExistente = _repositorio.VerificarServicoExistente(listaDeServicosExistentes[0]);
-
-            Assert.True(servicoExistente);
-        }
-
-        [Fact]
         public void Nao_deve_adicionar_servicos_existentes()
         {
             const string mensagemEsperada = "O serviço já existe";

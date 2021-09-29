@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class Repositorio_Servico : BaseRepositorio<Servico>, IRepositorioServico
+    public class RepositorioServico : BaseRepositorio<Servico>, IRepositorioServico
     {
-        public Repositorio_Servico(Contexto contexto) : base(contexto) { }
+        public RepositorioServico(Contexto contexto) : base(contexto) { }
 
         public List<Servico> BuscarServicos() => _contexto.Set<Servico>().ToList();
 
