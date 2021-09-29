@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjetoIntegradorMVC.Models.ContextoDb;
+using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +27,16 @@ namespace ProjetoIntegradorMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<Contexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddTransient<IRepositorioFuncionario, RepositorioFuncionario>();
+            services.AddTransient<IRepositorioServico, RepositorioServico>();
+            services.AddTransient<IRepositorioFuncionariosComServicos, RepositorioFuncionariosComServicos>();
+            services.AddTransient<InicializadorDB>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +61,8 @@ namespace ProjetoIntegradorMVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //serviceProvider.GetService<InicializadorDB>().IniciarDB();
         }
     }
 }
