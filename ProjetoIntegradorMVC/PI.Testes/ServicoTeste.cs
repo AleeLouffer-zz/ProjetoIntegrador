@@ -25,6 +25,7 @@ namespace PI.Testes
         {
             var servicoEsperado = new
             {
+                Nome = _nome,
                 Descricao = _descricao,
                 Preco = _precoDecimal,
                 LocalDoServico = _localDoServico
@@ -73,6 +74,25 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData(Local.ADomicilio)]
+        [InlineData(Local.NaEmpresa)]
+        [InlineData(Local.Ambos)]
+        public void Deve_criar_um_servico_com_local_do_servico(Local localDoServico)
+        {
+            var servicoEsperado = new
+            {
+                Nome = _nome,
+                Descricao = _descricao,
+                Preco = _precoDecimal,
+                LocalDoServico = localDoServico
+            }.ToExpectedObject();
+
+            var servico = new Servico(_nome, _descricao, _precoDecimal, localDoServico);
+
+            servicoEsperado.ShouldMatch(servico);
         }
 
     }

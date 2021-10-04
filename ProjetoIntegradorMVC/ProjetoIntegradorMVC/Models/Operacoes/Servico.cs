@@ -23,6 +23,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Nome = nome;
             Descricao = descricao; 
             Preco = preco;
+            LocalDoServico = localDoServico;
         }
         public void ValidarInformacoes(string nome, string descricao, decimal preco)
         {
