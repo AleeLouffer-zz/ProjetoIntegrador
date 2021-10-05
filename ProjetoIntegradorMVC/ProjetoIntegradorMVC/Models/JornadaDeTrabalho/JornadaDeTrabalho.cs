@@ -19,7 +19,7 @@ namespace ProjetoIntegradorMVC.Models
             DiasDeTrabalho = diasDeTrabalho;
             HorariosDeTrabalho = horariosDeTrabalho;
         }
-        public void ValidarInformacoes(List<DiaDaSemana> diasDeTrabalho, List<Horario> horarioDeTrabalho)
+        private void ValidarInformacoes(List<DiaDaSemana> diasDeTrabalho, List<Horario> horarioDeTrabalho)
         {
             if (diasDeTrabalho == null || !diasDeTrabalho.Any()) throw new Exception("A jornada deve ter dias de trabalho");
             if (horarioDeTrabalho == null || !horarioDeTrabalho.Any()) throw new Exception("A jornada deve ter horários de trabalho");

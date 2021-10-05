@@ -26,7 +26,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Preco = preco;
             TempoEstimado = tempoEstimado;
         }
-        public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
+        private void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O serviço deve ter um nome");
             if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("O serviço deve ter uma descrição");

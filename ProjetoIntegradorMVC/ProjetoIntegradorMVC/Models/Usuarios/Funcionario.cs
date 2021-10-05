@@ -22,7 +22,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             CPF = cpf;
             JornadaDeTrabalho = jornada;
         }
-        public void ValidarInformacoes(string nome, string email, string senha, string cpf)
+        private void ValidarInformacoes(string nome, string email, string senha, string cpf)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O funcionário deve ter um nome");
             if (string.IsNullOrWhiteSpace(email)) throw new Exception("O funcionário deve ter um email");
