@@ -13,23 +13,43 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Preco)
+                Descrição
             </th>
-            <th></th>
+            <th>
+                Preço
+            </th>
+            <th>
+                Tempo Estimado
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Preco)
             </td>
+            @if (item.TempoEstimado > 0)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempoEstimado);
+                </td>
+            }
+            else
+            {
+            <td>
+                 -
+            </td>
+            }
             <td>
                 <a asp-action="Servico" asp-route-id="@item.Id">Selecionar Servico</a>
             </td>

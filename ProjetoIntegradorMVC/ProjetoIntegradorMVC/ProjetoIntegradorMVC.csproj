@@ -5,14 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\JornadaDeTrabalho\DiasDeTrabalho.cs" />
+    <Compile Remove="Models\JornadaDeTrabalho\HorariosDeTrabalho.cs" />
     <Compile Remove="Models\Usuarios\IUsuario.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Models\JornadaDeTrabalho\DiaDeTrabalho" />
+    <None Remove="Models\JornadaDeTrabalho\NewFile1.txt" />
+    <None Remove="Models\JornadaDeTrabalho\NewFile2.txt" />
+    <None Remove="Models\NewFile1.txt" />
     <None Remove="Models\Usuarios\NewFile.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Caelum.Stella.CSharp" Version="1.4.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
