@@ -1,4 +1,5 @@
 ﻿using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
@@ -14,6 +15,9 @@ namespace PI.Testes
         private readonly Contexto _contexto;
         private readonly RepositorioFuncionario _repo;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private Funcionario _funcionario;
+        private Funcionario _funcionario2;
+        private JornadaDeTrabalho _jornada;
         public RepositorioFuncionarioTeste()
         {
             _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
@@ -22,13 +26,20 @@ namespace PI.Testes
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
             _repo = new RepositorioFuncionario(_contexto);
+
+            var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
+            var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
+            _jornada = new(diasDeTrabalho, horariosDeTrabalho);
+
+            _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _jornada);
+            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _jornada);
         }
 
         [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
         {
-            _contexto.Funcionarios.Add(new Funcionario("Cleide","cleide@cleide.com", "123", "111.111.111-11"));
-            _contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
+            _contexto.Funcionarios.Add(_funcionario);
+            _contexto.Funcionarios.Add(_funcionario2);
             _contexto.SaveChanges();
             var ids = new List<int>() { 1, 2 };
 
@@ -41,9 +52,9 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_os_funcionarios()
         {
-            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
-                new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
-            _repo.AdicionarFuncionarios(funcionariosASeremAdicionados);
+            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "23882052040", _jornada), 
+                new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada) };
+            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
@@ -58,11 +69,10 @@ namespace PI.Testes
         public void Nao_deve_adicionar_funcionario_existente()
         {
             const string mensagemEsperada = "O funcionário já existe";
-            _contexto.Funcionarios.Add(new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"));
-            _contexto.Funcionarios.Add(new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22"));
+            _contexto.Funcionarios.Add(_funcionario);
+            _contexto.Funcionarios.Add(_funcionario2);
             _contexto.SaveChanges();
-            var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
-                new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
+            var listaFuncionariosExistentes = new List<Funcionario> { _funcionario, _funcionario2 };
 
             void Acao() => _repo.AdicionarFuncionarios(listaFuncionariosExistentes);
 

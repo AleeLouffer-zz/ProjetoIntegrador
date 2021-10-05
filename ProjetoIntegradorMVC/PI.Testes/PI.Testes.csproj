@@ -7,11 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DiaDaSemana.cs" />
+    <Compile Remove="DiaDeTrabalho.cs" />
     <Compile Remove="Servico.cs" />
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Jornada" />
+    <None Remove="NewFile1.txt" />
+    <None Remove="NewFile2.txt" />
+    <None Remove="NewFile3.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caelum.Stella.CSharp" Version="1.4.7" />
     <PackageReference Include="ExpectedObjects" Version="3.5.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />

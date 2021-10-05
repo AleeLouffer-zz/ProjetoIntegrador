@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.Usuarios;
+﻿using Caelum.Stella.CSharp.Vault;
+using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,16 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public int TempoEstimado { get; private set; }
 
         private Servico(){ }
-
-        public Servico(string nome, string descricao, decimal preco)
+        public Servico(string nome, string descricao, decimal preco, int tempoEstimado = 0)
         {
-            ValidarInformacoes(nome, descricao, preco);
+            ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
             Descricao = descricao;
             Preco = preco;
+            TempoEstimado = tempoEstimado;
         }
 
         private Servico AdicionarRepositorio(RepositorioServico repositorioServico)
@@ -40,11 +42,12 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             return false;
         }
 
-        public void ValidarInformacoes(string nome, string descricao, decimal preco)
+        public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O serviço deve ter um nome");
             if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("O serviço deve ter uma descrição");
-            if (preco == 0) throw new Exception("O serviço deve ter um preço");
+            if (preco <= 0) throw new Exception("O serviço deve ter um preço");
+            if (tempoEstimado < 0) throw new Exception("O tempo estimado é menor que 0 minutos");
         }
     }
 }
