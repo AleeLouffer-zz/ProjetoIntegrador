@@ -1,5 +1,7 @@
 ﻿using Caelum.Stella.CSharp.Validation;
+using ProjetoIntegradorMVC.Models.Operacoes;
 using System;
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -8,6 +10,8 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
+        public List<Horario> HorariosDisponiveis { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada)
         {

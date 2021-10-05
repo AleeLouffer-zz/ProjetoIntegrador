@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="AgendamentoTeste" />
     <None Remove="Jornada" />
     <None Remove="NewFile1.txt" />
     <None Remove="NewFile2.txt" />
