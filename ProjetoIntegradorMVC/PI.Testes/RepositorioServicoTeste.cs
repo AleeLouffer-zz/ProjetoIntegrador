@@ -69,7 +69,6 @@ namespace PI.Testes
             _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
             _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
             _contexto.SaveChanges();
-
             var listaDeServicosExistentes = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
 
             var servicoExistente = _repositorio.VerificarServicoExistente(listaDeServicosExistentes[0]);

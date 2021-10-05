@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DiaDaSemana.cs" />
+    <Compile Remove="DiaDeTrabalho.cs" />
     <Compile Remove="Servico.cs" />
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Jornada" />
     <None Remove="NewFile1.txt" />
+    <None Remove="NewFile2.txt" />
+    <None Remove="NewFile3.txt" />
   </ItemGroup>
 
   <ItemGroup>
