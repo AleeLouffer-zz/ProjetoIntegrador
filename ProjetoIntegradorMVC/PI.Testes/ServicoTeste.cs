@@ -91,7 +91,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_que_servico_existe_no_banco()
         {
-            var servico = new Servico(_nome, _descricao, _precoDecimal);
+            var servico = new Servico(_nome, _descricao, _preco);
             _repositorio.AdicionarUm(servico);
 
             var existeNoBanco = servico.ExisteNoBanco(_repositorio);

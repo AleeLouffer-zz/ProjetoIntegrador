@@ -5,6 +5,8 @@ using ProjetoIntegradorMVC.Models.Usuarios;
 using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Repositorio;
 using ProjetoIntegradorMVC.Models.ContextoDb;
+using ProjetoIntegradorMVC.Models;
+using System.Collections.Generic;
 
 namespace PI.Testes
 {

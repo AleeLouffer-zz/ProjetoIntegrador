@@ -54,7 +54,7 @@ namespace PI.Testes
         {
             var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "23882052040", _jornada), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada) };
-            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
+            _repo.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
