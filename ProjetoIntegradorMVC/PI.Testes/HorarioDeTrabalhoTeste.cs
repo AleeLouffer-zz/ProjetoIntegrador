@@ -17,16 +17,5 @@ namespace PI.Testes
 
             Assert.Equal(horario, horarioDeTrabalho.Horario);
         }
-
-        [Fact]
-        public void Deve_obter_a_string_como_hora_e_minuto()
-        {
-            DateTime.TryParseExact("13:00", "HH:mm",
-            CultureInfo.InvariantCulture, DateTimeStyles.None, out var horaEMinutoConvertido);
-
-            var horarioDeTrabalho = new HorarioDeTrabalho("13:00");
-
-            Assert.Equal(horaEMinutoConvertido, horarioDeTrabalho.Horario);
-        }
     }
 }
