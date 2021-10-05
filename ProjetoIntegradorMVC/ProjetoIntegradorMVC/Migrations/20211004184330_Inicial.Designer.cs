@@ -10,8 +10,8 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210914210124_CriandoJornada")]
-    partial class CriandoJornada
+    [Migration("20211004184330_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,47 +21,7 @@ namespace ProjetoIntegradorMVC.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.DiaDeTrabalho", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DiaDaSemana")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("JornadaDeTrabalhoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JornadaDeTrabalhoId");
-
-                    b.ToTable("DiaDeTrabalho");
-                });
-
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.HorarioDeTrabalho", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Horario")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("JornadaDeTrabalhoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JornadaDeTrabalhoId");
-
-                    b.ToTable("HorarioDeTrabalho");
-                });
-
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.EnderecoDaEmpresa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +30,7 @@ namespace ProjetoIntegradorMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JornadaDeTrabalho");
+                    b.ToTable("EnderecoDaEmpresa");
                 });
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionariosComServicos", b =>
@@ -80,6 +40,9 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("FuncionarioId")
                         .HasColumnType("int");
 
@@ -87,6 +50,8 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("FuncionarioId");
 
@@ -105,18 +70,52 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TempoEstimado")
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("Servico");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CNPJ")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
+
+                    b.Property<string>("NomeFantasia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RazaoSocial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Servico");
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Empresas");
                 });
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
@@ -132,7 +131,7 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("JornadaDeTrabalhoId")
+                    b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -143,27 +142,17 @@ namespace ProjetoIntegradorMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JornadaDeTrabalhoId");
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("Funcionarios");
                 });
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.DiaDeTrabalho", b =>
-                {
-                    b.HasOne("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", null)
-                        .WithMany("DiasDeTrabalho")
-                        .HasForeignKey("JornadaDeTrabalhoId");
-                });
-
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.HorarioDeTrabalho", b =>
-                {
-                    b.HasOne("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", null)
-                        .WithMany("HorariosDeTrabalho")
-                        .HasForeignKey("JornadaDeTrabalhoId");
-                });
-
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.LigaçãoModels.FuncionariosComServicos", b =>
                 {
+                    b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Empresa", null)
+                        .WithMany("FuncionariosComServicos")
+                        .HasForeignKey("EmpresaId");
+
                     b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", "Funcionario")
                         .WithMany()
                         .HasForeignKey("FuncionarioId")
@@ -181,20 +170,36 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Navigation("Servico");
                 });
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Operacoes.Servico", b =>
                 {
-                    b.HasOne("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", "JornadaDeTrabalho")
-                        .WithMany()
-                        .HasForeignKey("JornadaDeTrabalhoId");
-
-                    b.Navigation("JornadaDeTrabalho");
+                    b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Empresa", null)
+                        .WithMany("Servicos")
+                        .HasForeignKey("EmpresaId");
                 });
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Empresa", b =>
                 {
-                    b.Navigation("DiasDeTrabalho");
+                    b.HasOne("ProjetoIntegradorMVC.Models.EnderecoDaEmpresa", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
 
-                    b.Navigation("HorariosDeTrabalho");
+                    b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
+                {
+                    b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Empresa", null)
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("EmpresaId");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Empresa", b =>
+                {
+                    b.Navigation("Funcionarios");
+
+                    b.Navigation("FuncionariosComServicos");
+
+                    b.Navigation("Servicos");
                 });
 #pragma warning restore 612, 618
         }

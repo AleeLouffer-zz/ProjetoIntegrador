@@ -1,5 +1,6 @@
 ﻿using Caelum.Stella.CSharp.Http;
 using ExpectedObjects;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,83 @@ namespace PI.Testes
                 Email = _email,
                 Senha = _senha,
                 CNPJ = _cnpj,
-                Endereco = new ViaCEP().GetEndereco(_cep),
+                Endereco = new EnderecoDaEmpresa(_cep),
             }.ToExpectedObject();
 
             var empresa = new Empresa(_razaoSocial, _nomeFantasia, _email, _senha, _cnpj, _cep);
 
             empresaEsperada.ShouldMatch(empresa);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Nao_deve_criar_uma_empresa_sem_razao_social(string razaoSocialInvalida)
+        {
+            const string mensagemEsperada = "A empresa deve ter uma Razao Social";
+
+            void Acao() => new Empresa(razaoSocialInvalida, _nomeFantasia, _email, _senha, _cnpj, _cep);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Nao_deve_criar_uma_empresa_sem_nome_fantasia(string nomeFantasiaInvalido)
+        {
+            const string mensagemEsperada = "A empresa deve ter um Nome Fantasia";
+
+            void Acao() => new Empresa(_razaoSocial, nomeFantasiaInvalido, _email, _senha, _cnpj, _cep);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Nao_deve_criar_uma_empresa_sem_email(string emailInvalido)
+        {
+            const string mensagemEsperada = "A empresa deve ter um email";
+
+            void Acao() => new Empresa(_razaoSocial, _nomeFantasia, emailInvalido, _senha, _cnpj, _cep);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Nao_deve_criar_uma_empresa_sem_senha(string senhaInvalida)
+        {
+            const string mensagemEsperada = "A empresa deve ter uma senha";
+
+            void Acao() => new Empresa(_razaoSocial, _nomeFantasia, _email, senhaInvalida, _cnpj, _cep);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("111111111111111")]
+        public void Nao_deve_criar_uma_empresa_com_cnpj_invalido(string cnpj)
+        {
+            const string mensagemEsperada = "A empresa deve ter um CNPJ valido";
+
+            void Acao() => new Empresa(_razaoSocial, _nomeFantasia, _email, _senha, cnpj, _cep);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
         }
     }
 }

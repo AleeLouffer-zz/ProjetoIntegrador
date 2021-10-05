@@ -18,26 +18,46 @@ namespace ProjetoIntegradorMVC
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioServico _repositorioServico;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
+        private readonly IRepositorioEmpresa _repositorioEmpresa;
 
-        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
+        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioEmpresa repositorioEmpresa)
         {
             _contexto = contexto;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioServico = repositorioServico;
             _repositorioFuncComServicos = repositorioFuncComServicos;
+            _repositorioEmpresa = repositorioEmpresa;
         }
 
         public void IniciarDB()
         {
             _contexto.Database.Migrate();
-            List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos();           
 
-            _repositorioFuncionario.Adicionarfuncionarios(funcionarios);
+            Empresa empresa = SetEmpresa();
+            List<Funcionario> funcionarios = SetFuncionarios();
+            List<Servico> servicos = SetServicos();
+
+            _repositorioEmpresa.AdicionarEmpresa(empresa);
+            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
 
-            List<FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
+            foreach(var funcionario in funcionarios)
+            {
+                _repositorioEmpresa.VincularFuncionario(empresa.CNPJ, funcionario);
+            }
+
+            foreach (var servico in servicos)
+            {
+                _repositorioEmpresa.VincularServico(empresa.CNPJ, servico);
+            }
+
+            List <FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
             _repositorioFuncComServicos.AdicionarFuncionariosComServicos(funcionariosComServicos);
+        }
+
+        private static Empresa SetEmpresa()
+        {
+            return new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
         }
 
         private static List<Servico> SetServicos()

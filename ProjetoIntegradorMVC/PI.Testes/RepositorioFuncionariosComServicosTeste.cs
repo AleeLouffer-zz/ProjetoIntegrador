@@ -52,7 +52,6 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_varios_funcionarios_com_servicos()
         { 
-
             var funcionariosComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico), new FuncionariosComServicos(_funcionario2, _servico2) };
 
             _repositorio.AdicionarFuncionariosComServicos(funcionariosComServicos);

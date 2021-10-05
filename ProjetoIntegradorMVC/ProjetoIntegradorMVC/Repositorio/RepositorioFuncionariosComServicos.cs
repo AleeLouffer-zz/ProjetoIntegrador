@@ -51,7 +51,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
         {
-            var funcComServicos = new List<FuncionariosComServicos>();
+            var funcionariosComServicos = new List<FuncionariosComServicos>();
 
             var quantidadeDeFuncionarios = funcionarios.Count;
 
@@ -59,11 +59,11 @@ namespace ProjetoIntegradorMVC.Repositorio
             {
                 foreach (var servico in servicos)
                 {
-                    funcComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
+                    funcionariosComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
                 }
             }
 
-            return funcComServicos;
+            return funcionariosComServicos;
         }
     }
 }

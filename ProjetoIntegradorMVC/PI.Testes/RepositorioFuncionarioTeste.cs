@@ -16,7 +16,7 @@ namespace PI.Testes
     public class RepositorioFuncionarioTeste
     {
         private readonly Contexto _contexto;
-        private readonly RepositorioFuncionario _repo;
+        private readonly RepositorioFuncionario _repositorio;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         public RepositorioFuncionarioTeste()
         {
@@ -25,7 +25,7 @@ namespace PI.Testes
             _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionarios");
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
-            _repo = new RepositorioFuncionario(_contexto);
+            _repositorio = new RepositorioFuncionario(_contexto);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace PI.Testes
             _contexto.SaveChanges();
             var ids = new List<int>() { 1, 2 };
 
-            var funcionarios = _repo.BuscarFuncionariosPorIds(ids);
+            var funcionarios = _repositorio.BuscarFuncionariosPorIds(ids);
 
             var funcionariosIds = funcionarios.Select(funcionario => funcionario.Id).ToList();
             Assert.Equal(ids, funcionariosIds);
@@ -47,12 +47,12 @@ namespace PI.Testes
         {
             var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
-            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
+            _repositorio.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
             {
-                funcionariosRetornados.Add(_repo.BuscarFuncionarioPorCpf(funcionario.CPF));
+                funcionariosRetornados.Add(_repositorio.BuscarFuncionarioPorCpf(funcionario.CPF));
             }
 
             Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
@@ -67,7 +67,7 @@ namespace PI.Testes
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
-            var funcionarioExiste = _repo.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
+            var funcionarioExiste = _repositorio.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
 
             Assert.True(funcionarioExiste);
         }
@@ -82,7 +82,7 @@ namespace PI.Testes
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
-            void Acao() => _repo.Adicionarfuncionarios(listaFuncionariosExistentes);
+            void Acao() => _repositorio.AdicionarFuncionarios(listaFuncionariosExistentes);
 
             var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

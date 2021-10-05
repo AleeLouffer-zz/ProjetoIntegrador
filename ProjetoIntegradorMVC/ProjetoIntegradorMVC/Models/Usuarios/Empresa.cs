@@ -16,7 +16,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string CNPJ { get; private set; }
-        public Endereco Endereco { get; private set; }
+        public EnderecoDaEmpresa Endereco { get; private set; }
         public List<Funcionario> Funcionarios { get; private set; }
         public List<Servico> Servicos { get; private set; }
         public List<FuncionariosComServicos> FuncionariosComServicos { get; private set; }
@@ -25,33 +25,25 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 
         public Empresa(string razaoSocial, string nomeFantasia, string email, string senha, string cnpj, string cep)
         {
-            
+            Funcionarios = new List<Funcionario>();
+            Servicos = new List<Servico>();
+            FuncionariosComServicos = new List<FuncionariosComServicos>();
             ValidarInformacoes(razaoSocial, nomeFantasia, email, senha, cnpj);
             RazaoSocial = razaoSocial;
             NomeFantasia = nomeFantasia;
             Email = email;
             Senha = senha;
             CNPJ = cnpj;
-            Endereco = BuscaEnderecoPeloCEP(cep);
+            Endereco = new EnderecoDaEmpresa(cep);
         }
 
         public void ValidarInformacoes(string razaoSocial, string nomeFantasia, string email, string senha, string cnpj)
         {
             if (string.IsNullOrWhiteSpace(razaoSocial)) throw new Exception("A empresa deve ter uma Razao Social");
             if (string.IsNullOrWhiteSpace(nomeFantasia)) throw new Exception("A empresa deve ter um Nome Fantasia");
-            if (string.IsNullOrWhiteSpace(email)) throw new Exception("O empresa deve ter um email");
-            if (string.IsNullOrWhiteSpace(senha)) throw new Exception("O empresa deve ter uma senha");
-            if (!new CNPJValidator().IsValid(cnpj)) throw new Exception("A empresa deve ter um CNPJ valido");
-        }
-
-        public Endereco BuscaEnderecoPeloCEP(string cep)
-        {
-            var endereco = new ViaCEP().GetEndereco(cep);
-            if (endereco == null)
-            {
-                throw new Exception("CEP Invalido");
-            }
-            return endereco;
+            if (string.IsNullOrWhiteSpace(email)) throw new Exception("A empresa deve ter um email");
+            if (string.IsNullOrWhiteSpace(senha)) throw new Exception("A empresa deve ter uma senha");
+            if (string.IsNullOrWhiteSpace(cnpj) || !new CNPJValidator().IsValid(cnpj)) throw new Exception("A empresa deve ter um CNPJ valido");
         }
     }
 }

@@ -15,7 +15,9 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public int EmpresaId { get; private set; }
         private Servico(){ }
+
         public Servico(string nome, string descricao, decimal preco)
         {
             ValidarInformacoes(nome, descricao, preco);

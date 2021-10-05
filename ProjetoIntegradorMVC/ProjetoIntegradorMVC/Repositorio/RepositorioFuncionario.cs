@@ -17,6 +17,10 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto = contexto;
         }
 
+        public bool VerificarFuncionarioExistente(Funcionario funcionario) => BuscarFuncionarioPorCpf(funcionario.CPF) != null;
+
+        private Funcionario BuscarFuncionarioPorCpf(string cpf) => _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
+
         public List<Funcionario> BuscarFuncionariosPorIds(List<int> Ids)
         {
             var funcionarios = new List<Funcionario>();
@@ -29,7 +33,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             return funcionarios;
         }
 
-        public void Adicionarfuncionarios(List<Funcionario> funcionarios)
+        public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
             foreach (var funcionario in funcionarios) {
                 if (VerificarFuncionarioExistente(funcionario)) throw new DuplicateNameException("O funcionário já existe");
@@ -37,16 +41,6 @@ namespace ProjetoIntegradorMVC.Repositorio
             }
             
             _contexto.SaveChanges();
-        }
-
-        public bool VerificarFuncionarioExistente(Funcionario funcionario)
-        {
-            return BuscarFuncionarioPorCpf(funcionario.CPF) != null;
-        }
-
-        public Funcionario BuscarFuncionarioPorCpf(string cpf)
-        {
-            return _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
         }
     }
 }
