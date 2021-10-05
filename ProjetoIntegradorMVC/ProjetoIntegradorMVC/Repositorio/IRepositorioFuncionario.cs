@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorioFuncionario
+    public interface IRepositorioFuncionario : IBaseRepositorio<Funcionario>
     {
         List<Funcionario> BuscarFuncionariosPorIds(List<int> id);
-        void Adicionarfuncionarios(List<Funcionario> funcionarios);
+        void AdicionarFuncionarios(List<Funcionario> funcionarios);
     }
 }

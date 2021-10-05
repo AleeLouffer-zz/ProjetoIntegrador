@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public abstract class BaseRepositorio<T> where T : ClasseBase
+    public abstract class BaseRepositorio<T> : IBaseRepositorio<T> where T : ClasseBase
     {
         protected readonly Contexto _contexto;
 
@@ -17,26 +17,20 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto = contexto;
         }
 
-        protected T GetPorId(int id)
+        public T BuscarPorId(int id)
         {
             return _contexto.Set<T>().Where(t => t.Id == id).SingleOrDefault();
         }
 
-        protected void Adicionar(T objeto)
+        public List<T> BuscarTodos()
+        {
+            return _contexto.Set<T>().ToList();
+        }
+
+        public void AdicionarUm(T objeto)
         {
             _contexto.Set<T>().Add(objeto);
+            _contexto.SaveChanges();
         }
-
-        protected bool VerificarSeExisteNoBanco(T objeto)
-        {
-            var objetosBanco = _contexto.Set<T>().ToList();
-            foreach(var objetoBanco in objetosBanco)
-            {
-                if(ExisteNoBanco(objetoBanco)) return true;
-            }
-            return false;
-        }
-
-        public abstract bool ExisteNoBanco(T objetoNoBanco);
     }
 }

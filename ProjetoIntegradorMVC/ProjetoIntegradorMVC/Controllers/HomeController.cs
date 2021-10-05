@@ -23,12 +23,12 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult Home()
         {
-            return View(_repositorioServico.BuscarServicos());
+            return View(_repositorioServico.BuscarTodos());
         }
 
         public IActionResult Servico(int id)
         {
-             var servicoDTO = _repositorioServico.BuscarServicoPorId(id);
+             var servicoDTO = _repositorioServico.BuscarPorId(id);
              var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
              var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 

@@ -36,7 +36,7 @@ namespace PI.Testes
             _contexto.SaveChanges();
             var id = 1;
             
-            var servico = _repositorio.BuscarServicoPorId(id);
+            var servico = _repositorio.BuscarPorId(id);
 
             Assert.Equal(id, servico.Id);
         }
@@ -48,7 +48,7 @@ namespace PI.Testes
             _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
             _contexto.SaveChanges();
 
-            var servicos = _repositorio.BuscarServicos();
+            var servicos = _repositorio.BuscarTodos();
 
             Assert.Equal(2, servicos.Count);
         }

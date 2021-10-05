@@ -33,7 +33,7 @@ namespace ProjetoIntegradorMVC
             List<Funcionario> funcionarios = SetFuncionarios();
             List<Servico> servicos = SetServicos();           
 
-            _repositorioFuncionario.Adicionarfuncionarios(funcionarios);
+            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
 
             List<FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);

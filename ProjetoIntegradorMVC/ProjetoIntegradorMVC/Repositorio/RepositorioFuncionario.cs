@@ -19,26 +19,21 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             foreach(var id in Ids)
             {
-                var funcionario = GetPorId(id);    
+                var funcionario = BuscarPorId(id);    
                 funcionarios.Add(funcionario);    
             }
 
             return funcionarios;
         }
 
-        public void Adicionarfuncionarios(List<Funcionario> funcionarios)
+        public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
             foreach (var funcionario in funcionarios) {
-                if (VerificarSeExisteNoBanco(funcionario)) throw new DuplicateNameException("O funcionário já existe");
-                Adicionar(funcionario);
+                if (funcionario.ExisteNoBanco(this)) throw new DuplicateNameException("O funcionário já existe");
+                AdicionarUm(funcionario);
             }
             
             _contexto.SaveChanges();
-        }
-
-        public override bool ExisteNoBanco(Funcionario funcionario)
-        {
-            return BuscarFuncionarioPorCpf(funcionario.CPF) != null;
         }
 
         public Funcionario BuscarFuncionarioPorCpf(string cpf)

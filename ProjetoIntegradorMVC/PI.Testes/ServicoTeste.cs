@@ -2,6 +2,9 @@ using System;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Operacoes;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 
 namespace PI.Testes
 {
@@ -11,11 +14,22 @@ namespace PI.Testes
         private string _descricao;
         private decimal _precoDecimal;
 
+        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private RepositorioServico _repositorio;
+        private Contexto _contexto;
+
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
             _precoDecimal = 99m;
+
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServico");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
+
+            _repositorio = new RepositorioServico(_contexto);
         }
 
         [Fact]
@@ -70,6 +84,27 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_servico_existe_no_banco()
+        {
+            var servico = new Servico(_nome, _descricao, _precoDecimal);
+            _repositorio.AdicionarUm(servico);
+
+            var existeNoBanco = servico.ExisteNoBanco(_repositorio);
+
+            Assert.True(existeNoBanco);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_servico_nao_existe_no_banco()
+        {
+            var servico = new Servico("zapzap2", _descricao, 123m);
+
+            var existeNoBanco = servico.ExisteNoBanco(_repositorio);
+
+            Assert.False(existeNoBanco);
         }
     }
 }

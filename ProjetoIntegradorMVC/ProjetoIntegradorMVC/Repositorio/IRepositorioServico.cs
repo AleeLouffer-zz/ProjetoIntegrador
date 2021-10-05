@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorioServico
+    public interface IRepositorioServico : IBaseRepositorio<Servico>
     {
-        List<Servico> BuscarServicos();
-        Servico BuscarServicoPorId(int id);
         void AdicionarServicos(List<Servico> servicos);
     }
 }

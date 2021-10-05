@@ -43,7 +43,7 @@ namespace PI.Testes
         {
             var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "131.111.111-11"), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "422.222.222-22") };
-            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
+            _repo.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
@@ -64,7 +64,7 @@ namespace PI.Testes
             var listaFuncionariosExistentes = new List<Funcionario> { new Funcionario("Cleide", "cleide@cleide.com", "123", "111.111.111-11"), 
                 new Funcionario("Ravona", "ravona@ravona.com", "ravona@ravona.com", "222.222.222-22") };
 
-            void Acao() => _repo.Adicionarfuncionarios(listaFuncionariosExistentes);
+            void Acao() => _repo.AdicionarFuncionarios(listaFuncionariosExistentes);
 
             var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

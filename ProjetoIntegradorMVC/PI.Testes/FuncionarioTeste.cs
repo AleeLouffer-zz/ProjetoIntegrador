@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Usuarios;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 
 namespace PI.Testes
 {
@@ -16,13 +15,26 @@ namespace PI.Testes
         private string _email;
         private string _senha;
         private string _cpf;
+
+        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private RepositorioFuncionario _repositorio;
+        private Contexto _contexto;
+
         public FuncionarioTeste()
         {
             _nome = "Daniel";
             _email = "daniel-zanelato@hotmail.com";
             _senha = "alecrimdourado";
             _cpf = "43144383960";
+
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionario");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
+
+            _repositorio = new RepositorioFuncionario(_contexto);
         }
+
         [Fact]
         public void Deve_criar_um_funcionario()
         {
@@ -93,6 +105,27 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_funcionario_existe_no_banco()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf);
+            _repositorio.AdicionarUm(funcionario);
+
+            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+
+            Assert.True(existeNoBanco);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_funcionario_nao_existe_no_banco()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, "00207862125");
+
+            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+
+            Assert.False(existeNoBanco);
         }
     }
 }
