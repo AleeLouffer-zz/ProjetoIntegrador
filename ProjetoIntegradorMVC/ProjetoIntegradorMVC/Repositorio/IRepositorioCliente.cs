@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorioCliente
+    public interface IRepositorioCliente : IBaseRepositorio<Cliente>
     {
         Cliente BuscarClientePorCPF(string cpf);
         void AdicionarClientes(List<Cliente> clientes);

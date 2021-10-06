@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class RepositorioCliente : IRepositorioCliente
+    public class RepositorioCliente : BaseRepositorio<Cliente>, IRepositorioCliente
     {
-        private readonly Contexto _contexto;
-
-        public RepositorioCliente(Contexto contexto)
+        public RepositorioCliente(Contexto contexto) : base(contexto)
         {
-            _contexto = contexto;
         }
 
         public Cliente BuscarClientePorCPF(string cpf)
@@ -27,7 +24,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             foreach (var cliente in clientes)
             {
                 if (cliente.ExisteNoBanco(this)) throw new DuplicateNameException("O cliente já existe.");
-                _contexto.Set<Cliente>().Add(cliente);//AdicionarUm base
+                Adicionar(cliente);
             }
             _contexto.SaveChanges();
         }

@@ -37,7 +37,7 @@ namespace ProjetoIntegradorMVC
             List<Servico> servicos = SetServicos();
             List<Cliente> cliente = SetClientes();
 
-            _repositorioFuncionario.Adicionarfuncionarios(funcionarios);
+            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
 
@@ -68,7 +68,7 @@ namespace ProjetoIntegradorMVC
 
         private static List<Cliente> SetClientes()
         {
-                return new List<Cliente>() {
+               return new List<Cliente>() {
                new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147"),
                new Cliente("Carlos", "carlos@gmail.com", "carlao", "11122233345"),
                new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","33344455567" )

@@ -20,8 +20,15 @@ namespace PI.Testes
         private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private RepositorioCliente _repositorioCliente;
         private Contexto _contexto;
+        
         public ClienteTeste()
         {
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteCliente");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
+
+            _repositorioCliente = new RepositorioCliente(_contexto);
             _nome = "Jessica";
             _email = "jessica@hotmail.com";
             _senha = "jessicalindona";
