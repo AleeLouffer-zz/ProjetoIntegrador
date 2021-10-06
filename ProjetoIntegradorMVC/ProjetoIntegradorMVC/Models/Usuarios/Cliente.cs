@@ -1,5 +1,8 @@
-﻿using Caelum.Stella.CSharp.Validation;
+﻿using ProjetoIntegradorMVC.Models.Operacoes;
+using ProjetoIntegradorMVC.Repositorio;
+using Caelum.Stella.CSharp.Validation;
 using System;
+
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -7,6 +10,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
+        private RepositorioCliente _repositorioCliente;
         private Cliente() { }
         public Cliente(string nome, string email, string senha, string cpf)
         {
@@ -15,6 +19,19 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             Email = email;
             Senha = senha;
             CPF = cpf;
+        }
+
+        private Cliente AdicionarRepositorio(RepositorioCliente repositorioCliente)
+        {
+            _repositorioCliente = repositorioCliente;
+            return this;
+        }
+
+        public bool ExisteNoBanco(RepositorioCliente repositorioCliente)
+        {
+            AdicionarRepositorio(repositorioCliente);
+            if (_repositorioCliente.BuscarClientePorCPF(CPF) != null) return true;
+            return false;
         }
         public void ValidarInformacoes(string nome, string email, string senha, string cpf)
         {

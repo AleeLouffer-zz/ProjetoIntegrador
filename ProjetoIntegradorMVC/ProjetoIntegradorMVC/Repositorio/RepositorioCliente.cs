@@ -22,20 +22,14 @@ namespace ProjetoIntegradorMVC.Repositorio
             return _contexto.Set<Cliente>().Where(cliente => cliente.CPF == cpf).SingleOrDefault();
         }
                  
-        public void AdicionarCliente(List<Cliente> clientes)
+        public void AdicionarClientes(List<Cliente> clientes)
         {
             foreach (var cliente in clientes)
             {
-                if (VerificarClienteExistente(cliente)) throw new DuplicateNameException("O cliente já existe.");
+                if (cliente.ExisteNoBanco(this)) throw new DuplicateNameException("O cliente já existe.");
                 _contexto.Set<Cliente>().Add(cliente);//AdicionarUm base
             }
-
             _contexto.SaveChanges();
-        }
-
-        public bool VerificarClienteExistente(Cliente cliente)
-        {
-            return BuscarClientePorCPF(cliente.CPF) != null;
         }
     }
 }

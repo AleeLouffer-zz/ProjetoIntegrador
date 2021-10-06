@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Usuarios;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models;
+using System.Collections.Generic;
 
 namespace PI.Testes
 {
@@ -16,6 +16,10 @@ namespace PI.Testes
         private string _email;
         private string _senha;
         private string _cpf;
+
+        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private RepositorioCliente _repositorioCliente;
+        private Contexto _contexto;
         public ClienteTeste()
         {
             _nome = "Jessica";
@@ -107,6 +111,27 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        //[Fact]
+        //public void Deve_verificar_se_o_cliente_existe_no_banco()
+        //{
+        //    var cliente = new Cliente(_nome, _email, _senha, _cpf);
+        //    _repositorioCliente.AdicionarUm(cliente);
+
+        //    var existeNoBanco = cliente.ExisteNoBanco(_repositorioCliente);
+
+        //    Assert.True(existeNoBanco);
+        //}
+
+        [Fact]
+        public void Deve_verificar_se_o_cliente_nao_existe_no_banco()
+        {
+            var cliente = new Cliente(_nome, _email, _senha, "00207862125");
+
+            var existeNoBanco = cliente.ExisteNoBanco(_repositorioCliente);
+
+            Assert.False(existeNoBanco);
         }
     }
 }
