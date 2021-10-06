@@ -9,7 +9,7 @@ namespace ProjetoIntegradorMVC.Repositorio
     {
         void AdicionarFuncionariosComServicos(FuncionariosComServicos funcionariosComServicos);
         void AdicionarFuncionariosComServicos(List<FuncionariosComServicos> funcionariosComServicos);
-        public List<int> BuscarIdsDosFuncionariosPeloIdDoServico(int idServico);
-        public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos);
+        List<int> BuscarIdsDosFuncionariosPeloIdDoServico(int idServico);
+        List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos);
     }
 }

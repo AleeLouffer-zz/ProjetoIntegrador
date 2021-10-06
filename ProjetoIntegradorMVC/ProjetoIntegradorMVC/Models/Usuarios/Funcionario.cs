@@ -1,4 +1,6 @@
-﻿using Caelum.Stella.CSharp.Validation;
+﻿using ProjetoIntegradorMVC.Models.Operacoes;
+using ProjetoIntegradorMVC.Repositorio;
+using Caelum.Stella.CSharp.Validation;
 using System;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
@@ -8,6 +10,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
+        private RepositorioFuncionario _repositorioFuncionario;
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada)
         {
@@ -18,6 +21,20 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             CPF = cpf;
             JornadaDeTrabalho = jornada;
         }
+
+        private Funcionario AdicionarRepositorio(RepositorioFuncionario repositorioFuncionario)
+        {
+            _repositorioFuncionario = repositorioFuncionario;
+            return this;
+        }
+
+        public bool ExisteNoBanco(RepositorioFuncionario repositorioFuncionario)
+        {
+            AdicionarRepositorio(repositorioFuncionario);
+            if (_repositorioFuncionario.BuscarFuncionarioPorCpf(CPF) != null) return true;
+            return false;
+        }
+
         public void ValidarInformacoes(string nome, string email, string senha, string cpf)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O funcionário deve ter um nome");

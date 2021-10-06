@@ -1,15 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PI.Testes.Helpers;
+﻿using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PI.Testes
@@ -58,7 +54,7 @@ namespace PI.Testes
         {
             var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "23882052040", _jornada), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada) };
-            _repo.Adicionarfuncionarios(funcionariosASeremAdicionados);
+            _repo.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 
             foreach (var funcionario in funcionariosASeremAdicionados)
@@ -70,19 +66,6 @@ namespace PI.Testes
         }
 
         [Fact]
-        public void Deve_verificar_funcionario_existente()
-        {
-            _contexto.Funcionarios.Add(_funcionario);
-            _contexto.Funcionarios.Add(_funcionario2);
-            _contexto.SaveChanges();
-            var listaFuncionariosExistentes = new List<Funcionario> {_funcionario, _funcionario2 };
-
-            var funcionarioExiste = _repo.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
-
-            Assert.True(funcionarioExiste);
-        }
-
-        [Fact]
         public void Nao_deve_adicionar_funcionario_existente()
         {
             const string mensagemEsperada = "O funcionário já existe";
@@ -91,7 +74,7 @@ namespace PI.Testes
             _contexto.SaveChanges();
             var listaFuncionariosExistentes = new List<Funcionario> { _funcionario, _funcionario2 };
 
-            void Acao() => _repo.Adicionarfuncionarios(listaFuncionariosExistentes);
+            void Acao() => _repo.AdicionarFuncionarios(listaFuncionariosExistentes);
 
             var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

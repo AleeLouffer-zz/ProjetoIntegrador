@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Usuarios;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models;
+using System.Collections.Generic;
 
 namespace PI.Testes
 {
@@ -16,6 +16,11 @@ namespace PI.Testes
         private string _email;
         private string _senha;
         private string _cpf;
+
+        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private RepositorioFuncionario _repositorio;
+        private Contexto _contexto;
+
         private JornadaDeTrabalho _jornada;
         public FuncionarioTeste()
         {
@@ -23,10 +28,19 @@ namespace PI.Testes
             _email = "daniel-zanelato@hotmail.com";
             _senha = "alecrimdourado";
             _cpf = "59819300045";
+
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             _jornada = new (diasDeTrabalho, horariosDeTrabalho);
+
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionario");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
+
+            _repositorio = new RepositorioFuncionario(_contexto);
         }
+
         [Fact]
         public void Deve_criar_um_funcionario()
         {
@@ -111,6 +125,27 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_funcionario_existe_no_banco()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada);
+            _repositorio.AdicionarUm(funcionario);
+
+            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+
+            Assert.True(existeNoBanco);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_funcionario_nao_existe_no_banco()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, "00207862125", _jornada);
+
+            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+
+            Assert.False(existeNoBanco);
         }
     }
 }
