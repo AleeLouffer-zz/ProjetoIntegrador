@@ -13,6 +13,8 @@ namespace ProjetoIntegradorMVC.Repositorio
     {
         public RepositorioFuncionario(Contexto contexto) : base(contexto) { }
 
+        public Funcionario BuscarFuncionarioPorCpf(string cpf) => _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
+
         public List<Funcionario> BuscarFuncionariosPorIds(List<int> Ids)
         {
             var funcionarios = new List<Funcionario>();
@@ -29,16 +31,11 @@ namespace ProjetoIntegradorMVC.Repositorio
         public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
             foreach (var funcionario in funcionarios) {
-                if (funcionario.ExisteNoBanco(this)) throw new DuplicateNameException("O funcionário já existe");
-                AdicionarUm(funcionario);
+                if (funcionario.ValidarFuncionarioExistente(this)) throw new DuplicateNameException("O funcionário já existe");
+                Adicionar(funcionario);
             }
             
             _contexto.SaveChanges();
-        }
-
-        public Funcionario BuscarFuncionarioPorCpf(string cpf)
-        {
-            return _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
         }
     }
 }

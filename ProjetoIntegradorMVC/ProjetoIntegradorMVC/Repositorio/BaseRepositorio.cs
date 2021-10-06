@@ -17,17 +17,11 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto = contexto;
         }
 
-        public T BuscarPorId(int id)
-        {
-            return _contexto.Set<T>().Where(t => t.Id == id).SingleOrDefault();
-        }
+        public T BuscarPorId(int id) => _contexto.Set<T>().Where(t => t.Id == id).SingleOrDefault();
 
-        public List<T> BuscarTodos()
-        {
-            return _contexto.Set<T>().ToList();
-        }
+        public List<T> BuscarTodos() => _contexto.Set<T>().ToList();
 
-        public void AdicionarUm(T objeto)
+        public void Adicionar(T objeto)
         {
             _contexto.Set<T>().Add(objeto);
             _contexto.SaveChanges();

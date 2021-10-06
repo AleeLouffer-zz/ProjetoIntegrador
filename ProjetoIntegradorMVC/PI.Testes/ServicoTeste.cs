@@ -92,9 +92,9 @@ namespace PI.Testes
         public void Deve_verificar_que_servico_existe_no_banco()
         {
             var servico = new Servico(_nome, _descricao, _preco);
-            _repositorio.AdicionarUm(servico);
+            _repositorio.Adicionar(servico);
 
-            var existeNoBanco = servico.ExisteNoBanco(_repositorio);
+            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
 
             Assert.True(existeNoBanco);
         }
@@ -104,7 +104,7 @@ namespace PI.Testes
         {
             var servico = new Servico("zapzap2", _descricao, 123m);
 
-            var existeNoBanco = servico.ExisteNoBanco(_repositorio);
+            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
 
             Assert.False(existeNoBanco);
         }

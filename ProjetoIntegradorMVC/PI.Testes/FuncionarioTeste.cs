@@ -131,9 +131,9 @@ namespace PI.Testes
         public void Deve_verificar_que_funcionario_existe_no_banco()
         {
             var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada);
-            _repositorio.AdicionarUm(funcionario);
+            _repositorio.Adicionar(funcionario);
 
-            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+            var existeNoBanco = funcionario.ValidarFuncionarioExistente(_repositorio);
 
             Assert.True(existeNoBanco);
         }
@@ -143,7 +143,7 @@ namespace PI.Testes
         {
             var funcionario = new Funcionario(_nome, _email, _senha, "00207862125", _jornada);
 
-            var existeNoBanco = funcionario.ExisteNoBanco(_repositorio);
+            var existeNoBanco = funcionario.ValidarFuncionarioExistente(_repositorio);
 
             Assert.False(existeNoBanco);
         }

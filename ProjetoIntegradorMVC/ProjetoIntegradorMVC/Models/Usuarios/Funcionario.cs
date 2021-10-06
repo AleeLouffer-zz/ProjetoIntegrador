@@ -28,7 +28,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             return this;
         }
 
-        public bool ExisteNoBanco(RepositorioFuncionario repositorioFuncionario)
+        public bool ValidarFuncionarioExistente(RepositorioFuncionario repositorioFuncionario)
         {
             AdicionarRepositorio(repositorioFuncionario);
             if (_repositorioFuncionario.BuscarFuncionarioPorCpf(CPF) != null) return true;

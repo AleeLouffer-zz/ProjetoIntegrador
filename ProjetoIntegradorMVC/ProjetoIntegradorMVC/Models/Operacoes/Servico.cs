@@ -35,7 +35,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             return this;
         }
 
-        public bool ExisteNoBanco(RepositorioServico repositorioServico)
+        public bool ValidarServicoExistente(RepositorioServico repositorioServico)
         {
             AdicionarRepositorio(repositorioServico);
             if (_repositorioServico.BuscarServicoPorNomeEPreco(Nome, Preco) != null) return true;
