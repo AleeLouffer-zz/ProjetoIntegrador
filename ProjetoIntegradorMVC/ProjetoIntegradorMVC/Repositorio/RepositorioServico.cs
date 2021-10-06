@@ -10,38 +10,21 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class RepositorioServico : IRepositorioServico
+    public class RepositorioServico : BaseRepositorio<Servico>, IRepositorioServico
     {
-        private readonly Contexto _contexto;
+        public RepositorioServico(Contexto contexto) : base(contexto) { }
 
-        public RepositorioServico(Contexto contexto)
-        {
-            _contexto = contexto;
-        }
-
-        public List<Servico> BuscarServicos() => _contexto.Set<Servico>().ToList();
-
-        public Servico BuscarServicoPorId(int id) => _contexto.Set<Servico>().Where(servico => servico.Id == id).SingleOrDefault();
+        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco) => _contexto.Set<Servico>().Where(servico => servico.Nome == nome && servico.Preco == preco).SingleOrDefault();
 
         public void AdicionarServicos(List<Servico> servicos)
         {
             foreach (var servico in servicos)
             {
-                if (VerificarServicoExistente(servico)) throw new DuplicateNameException("O serviço já existe");
-                _contexto.Set<Servico>().Add(servico);
+                if (servico.ValidarServicoExistente(this)) throw new DuplicateNameException("O serviço já existe");
+                Adicionar(servico);
             }
+
             _contexto.SaveChanges();
-        }
-
-        public bool VerificarServicoExistente (Servico servico)
-        {
-            return BuscarServicoPorNomeEPreco(servico.Nome, servico.Preco) != null;
-        }
-
-        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco)
-        {
-            return _contexto.Set<Servico>().Where(servico => servico.Nome == nome 
-                                                    && servico.Preco == preco).SingleOrDefault();
         }
     }
 }

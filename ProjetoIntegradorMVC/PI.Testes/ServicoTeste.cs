@@ -2,6 +2,9 @@ using System;
 using Xunit;
 using ExpectedObjects;
 using ProjetoIntegradorMVC.Models.Operacoes;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using Caelum.Stella.CSharp.Vault;
 
 namespace PI.Testes
@@ -12,11 +15,22 @@ namespace PI.Testes
         private string _descricao;
         private decimal _preco;
 
+        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
+        private RepositorioServico _repositorio;
+        private Contexto _contexto;
+
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
             _preco = 10m;
+
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServico");
+            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
+
+            _repositorio = new RepositorioServico(_contexto);
         }
 
         [Fact]
@@ -75,14 +89,24 @@ namespace PI.Testes
         }
 
         [Fact]
-        public void Nao_deve_criar_um_servico_com_tempo_estimado_negativo()
+        public void Deve_verificar_que_servico_existe_no_banco()
         {
-            const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
+            var servico = new Servico(_nome, _descricao, _preco);
+            _repositorio.Adicionar(servico);
 
-            void Acao() => new Servico(_nome, _descricao, _preco, -1);
+            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
 
-            var mensagem = Assert.Throws<Exception>(Acao).Message;
-            Assert.Equal(mensagemEsperada, mensagem);
+            Assert.True(existeNoBanco);
+        }
+
+        [Fact]
+        public void Deve_verificar_que_servico_nao_existe_no_banco()
+        {
+            var servico = new Servico("zapzap2", _descricao, 123m);
+
+            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
+
+            Assert.False(existeNoBanco);
         }
     }
 }
