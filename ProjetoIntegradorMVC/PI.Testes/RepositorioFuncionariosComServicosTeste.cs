@@ -26,6 +26,7 @@ namespace PI.Testes
         private readonly RepositorioFuncionariosComServicos _repositorio;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private readonly JornadaDeTrabalho _jornada;
+        private readonly Empresa _empresa;
         public RepositorioFuncionariosComServicosTeste()
         {
             _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
@@ -39,6 +40,7 @@ namespace PI.Testes
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
+            _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@gmail.com", "12345", "05389493000117", "79004394");
             _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "85769390026", _jornada);
             _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "25807814045", _jornada);
             _servico = new Servico("Corte", "Corte de Cabelo", 50m);
@@ -48,7 +50,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_um_funcionario_com_servico()
         {
-            var funcComServico = new FuncionariosComServicos(_funcionario, _servico);
+            var funcComServico = new FuncionariosComServicos(_funcionario, _servico, _empresa);
 
             _repositorio.AdicionarFuncionariosComServicos(funcComServico);
 
@@ -58,7 +60,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_varios_funcionarios_com_servicos()
         { 
-            var funcionariosComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico), new FuncionariosComServicos(_funcionario2, _servico2) };
+            var funcionariosComServicos = new List<FuncionariosComServicos> { new FuncionariosComServicos(_funcionario, _servico, _empresa), new FuncionariosComServicos(_funcionario2, _servico2, _empresa) };
 
             _repositorio.AdicionarFuncionariosComServicos(funcionariosComServicos);
 
@@ -82,7 +84,7 @@ namespace PI.Testes
             var funcionarios = new List<Funcionario> { _funcionario, _funcionario2 };
             var servicos = new List<Servico> { _servico, _servico2 };
 
-            var funcionariosComServicos = _repositorio.VincularFuncionariosComServicos(funcionarios, servicos);
+            var funcionariosComServicos = _repositorio.VincularFuncionariosComServicosDaEmpresa(funcionarios, servicos, _empresa);
             
             Assert.Equal(4, funcionariosComServicos.Count());
         }

@@ -15,10 +15,6 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public Funcionario BuscarFuncionarioPorCpf(string cpf) => _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
 
-        public bool VerificarFuncionarioExistente(Funcionario funcionario) => BuscarFuncionarioPorCpf(funcionario.CPF) != null;
-
-        public Funcionario BuscarFuncionarioPorCpf(string cpf) => _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
-
         public List<Funcionario> BuscarFuncionariosPorIds(List<int> Ids)
         {
             var funcionarios = new List<Funcionario>();

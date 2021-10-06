@@ -52,7 +52,7 @@ namespace ProjetoIntegradorMVC
                 _repositorioEmpresa.VincularServico(empresa.CNPJ, servico);
             }
 
-            List <FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicos(funcionarios, servicos);
+            List <FuncionariosComServicos> funcionariosComServicos = _repositorioFuncComServicos.VincularFuncionariosComServicosDaEmpresa(funcionarios, servicos, empresa);
             _repositorioFuncComServicos.AdicionarFuncionariosComServicos(funcionariosComServicos);
         }
 

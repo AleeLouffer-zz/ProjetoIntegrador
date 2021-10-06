@@ -49,7 +49,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             return idFuncionarios;
         }
 
-        public List<FuncionariosComServicos> VincularFuncionariosComServicos(List<Funcionario> funcionarios, List<Servico> servicos)
+        public List<FuncionariosComServicos> VincularFuncionariosComServicosDaEmpresa(List<Funcionario> funcionarios, List<Servico> servicos, Empresa empresa)
         {
             var funcionariosComServicos = new List<FuncionariosComServicos>();
 
@@ -59,7 +59,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             {
                 foreach (var servico in servicos)
                 {
-                    funcionariosComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico));
+                    funcionariosComServicos.Add(new FuncionariosComServicos(funcionarios[i], servico, empresa));
                 }
             }
 

@@ -21,16 +21,16 @@ namespace PI.Testes
         private readonly RepositorioEmpresa _repositorio;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private readonly Contexto _contexto;
-        private Empresa _empresa;
+        private readonly Empresa _empresa;
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
         private readonly JornadaDeTrabalho _jornada;
 
         public RepositorioEmpresaTeste()
         {
-             _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
+            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
 
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteEmpresa");
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteRepositorioEmpresa");
 
             _repositorio = new RepositorioEmpresa(_contexto);
 
@@ -88,18 +88,6 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
-        }
-
-        [Fact]
-        public void Deve_verificar_a_empresa_existente()
-        {
-            var empresaExistente = new Empresa("Fulana de Tal LTDA", "Fulana de Tal", "fulana@fulana.com.br", "123", "05042060000190", "79004394");
-            _contexto.Empresas.Add(empresaExistente);
-            _contexto.SaveChanges();
-
-            var empresaExiste = _repositorio.VerificarSeEmpresaExiste(empresaExistente.CNPJ);
-
-            Assert.True(empresaExiste);
         }
 
         [Fact]

@@ -2,6 +2,7 @@
 using Caelum.Stella.CSharp.Validation;
 using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using ProjetoIntegradorMVC.Models.Operacoes;
+using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     public class Empresa : Usuario
     {
+        private RepositorioEmpresa _repositorioEmpresa;
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string CNPJ { get; private set; }
@@ -35,6 +37,18 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             Senha = senha;
             CNPJ = cnpj;
             Endereco = new EnderecoDaEmpresa(cep);
+        }
+        private Empresa AdicionarRepositorio(RepositorioEmpresa repositorioEmpresa)
+        {
+            _repositorioEmpresa = repositorioEmpresa;
+            return this;
+        }
+
+        public bool ValidarEmpresaExistente(RepositorioEmpresa repositorioEmpresa)
+        {
+            AdicionarRepositorio(repositorioEmpresa);
+            if (_repositorioEmpresa.BuscarEmpresaPorCNPJ(CNPJ) != null) return true;
+            return false;
         }
 
         public void ValidarInformacoes(string razaoSocial, string nomeFantasia, string email, string senha, string cnpj)

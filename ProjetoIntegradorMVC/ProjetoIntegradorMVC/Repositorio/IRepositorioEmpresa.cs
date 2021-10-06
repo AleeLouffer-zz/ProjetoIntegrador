@@ -7,7 +7,6 @@ namespace ProjetoIntegradorMVC.Repositorio
     public interface IRepositorioEmpresa
     {
        Empresa BuscarEmpresaPorCNPJ(string cnpj);
-       bool VerificarSeEmpresaExiste(string cnpj);
        void AdicionarEmpresa(Empresa empresa);
        void VincularServico(string cnpj, Servico servico);
        void VincularFuncionario(string cnpj, Funcionario funcionario);
