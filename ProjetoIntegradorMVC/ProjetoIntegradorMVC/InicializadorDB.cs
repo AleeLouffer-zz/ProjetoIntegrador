@@ -44,9 +44,9 @@ namespace ProjetoIntegradorMVC
         private static List<Servico> SetServicos()
         {
             return new List<Servico>() {
-                new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, Local.ADomicilio),
-                new Servico("Manicure", "Manicure",999m, Local.Ambos),
-                new Servico("Barba Grande", "Barba Grande", 200m, Local.ADomicilio)
+                new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, 0, Local.ADomicilio),
+                new Servico("Manicure", "Manicure",999m, 0, Local.Ambos),
+                new Servico("Barba Grande", "Barba Grande", 200m, 0, Local.ADomicilio)
             };
         }
 

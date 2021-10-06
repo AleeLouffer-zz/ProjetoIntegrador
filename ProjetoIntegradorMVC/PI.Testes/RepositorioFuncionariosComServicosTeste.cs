@@ -35,18 +35,14 @@ namespace PI.Testes
 
             _repositorio = new RepositorioFuncionariosComServicos(_contexto);
 
-            _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "111.111.111-11");
-            _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "112.111.111-11");
-            _servico = new Servico("Corte", "Corte de Cabelo", 50m, Local.NaEmpresa);
-            _servico2 = new Servico("Manicure", "Manicure", 30m, Local.Ambos);
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
             _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "85769390026", _jornada);
             _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "25807814045", _jornada);
-            _servico = new Servico("Corte", "Corte de Cabelo", 50m);
-            _servico2 = new Servico("Manicure", "Manicure", 30m);
+            _servico = new Servico("Corte", "Corte de Cabelo", 50m, 0, Local.ADomicilio);
+            _servico2 = new Servico("Manicure", "Manicure", 30m, 0, Local.ADomicilio);
         }
 
         [Fact]

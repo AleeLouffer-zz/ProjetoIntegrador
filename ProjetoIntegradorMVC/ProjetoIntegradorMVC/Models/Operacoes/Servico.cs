@@ -18,16 +18,17 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
         public int TempoEstimado { get; private set; }
+        public Local Local { get; set; }
 
-        public Local LocalDoServico { get; set; }
         private Servico(){ }
-        public Servico(string nome, string descricao, decimal preco, Local localDoServico)
+        public Servico(string nome, string descricao, decimal preco, int tempoEstimado, Local local)
         {
             ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
             Descricao = descricao; 
             Preco = preco;
             TempoEstimado = tempoEstimado;
+            Local = local;
         }
 
         private Servico AdicionarRepositorio(RepositorioServico repositorioServico)
@@ -41,7 +42,6 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             AdicionarRepositorio(repositorioServico);
             if (_repositorioServico.BuscarServicoPorNomeEPreco(Nome, Preco) != null) return true;
             return false;
-            LocalDoServico = localDoServico;
         }
 
         public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)

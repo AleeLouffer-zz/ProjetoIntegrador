@@ -64,6 +64,7 @@ namespace PI.Testes
 
             Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
         }
+        
 
         [Fact]
         public void Nao_deve_adicionar_funcionario_existente()
