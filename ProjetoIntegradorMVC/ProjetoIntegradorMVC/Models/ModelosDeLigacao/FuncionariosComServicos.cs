@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.LigaçãoModels
 {
-    public class FuncionariosComServicos
+    public class FuncionariosComServicos : ClasseBase
     {
         public Funcionario Funcionario { get; private set; }
         public int FuncionarioId { get; private set; }
         public Servico Servico { get; private set; }
         public int ServicoId { get; private set; }
-        public int Id { get; private set; }
 
         private FuncionariosComServicos() { }
 
