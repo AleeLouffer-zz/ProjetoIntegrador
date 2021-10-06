@@ -120,16 +120,16 @@ namespace PI.Testes
             Assert.Equal(mensagemEsperada, mensagem);
         }
 
-        //[Fact]
-        //public void Deve_verificar_se_o_cliente_existe_no_banco()
-        //{
-        //    var cliente = new Cliente(_nome, _email, _senha, _cpf);
-        //    _repositorioCliente.AdicionarUm(cliente);
+        [Fact]
+        public void Deve_verificar_se_o_cliente_existe_no_banco()
+        {
+            var cliente = new Cliente(_nome, _email, _senha, _cpf);
+            _repositorioCliente.Adicionar(cliente);
 
-        //    var existeNoBanco = cliente.ExisteNoBanco(_repositorioCliente);
+            var existeNoBanco = cliente.ExisteNoBanco(_repositorioCliente);
 
-        //    Assert.True(existeNoBanco);
-        //}
+            Assert.True(existeNoBanco);
+        }
 
         [Fact]
         public void Deve_verificar_se_o_cliente_nao_existe_no_banco()
