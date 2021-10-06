@@ -14,21 +14,17 @@ namespace ProjetoIntegradorMVC.Repositorio
     {
         public RepositorioServico(Contexto contexto) : base(contexto) { }
 
+        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco) => _contexto.Set<Servico>().Where(servico => servico.Nome == nome && servico.Preco == preco).SingleOrDefault();
+
         public void AdicionarServicos(List<Servico> servicos)
         {
             foreach (var servico in servicos)
             {
-                if (servico.ExisteNoBanco(this)) throw new DuplicateNameException("O serviço já existe");
-                AdicionarUm(servico);
+                if (servico.ValidarServicoExistente(this)) throw new DuplicateNameException("O serviço já existe");
+                Adicionar(servico);
             }
 
             _contexto.SaveChanges();
-        }
-
-        public Servico BuscarServicoPorNomeEPreco(string nome, decimal preco)
-        {
-            return _contexto.Set<Servico>().Where(servico => servico.Nome == nome 
-                                                    && servico.Preco == preco).SingleOrDefault();
         }
     }
 }
