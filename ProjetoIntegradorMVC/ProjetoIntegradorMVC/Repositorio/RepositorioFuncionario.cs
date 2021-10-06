@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using ProjetoIntegradorMVC.Models;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public class RepositorioFuncionario : IRepositorioFuncionario
+    public class RepositorioFuncionario : BaseRepositorio<Funcionario>, IRepositorioFuncionario
     {
-        private readonly Contexto _contexto;
+        public RepositorioFuncionario(Contexto contexto) : base(contexto) { }
 
-        public RepositorioFuncionario(Contexto contexto)
-        {
-            _contexto = contexto;
-        }
+        public Funcionario BuscarFuncionarioPorCpf(string cpf) => _contexto.Set<Funcionario>().Where(funcionario => funcionario.CPF == cpf).SingleOrDefault();
 
         public bool VerificarFuncionarioExistente(Funcionario funcionario) => BuscarFuncionarioPorCpf(funcionario.CPF) != null;
 
@@ -27,7 +25,8 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             foreach(var id in Ids)
             {
-                funcionarios.Add(_contexto.Set<Funcionario>().Where(funcionario => funcionario.Id == id).SingleOrDefault());    
+                var funcionario = BuscarPorId(id);    
+                funcionarios.Add(funcionario);    
             }
 
             return funcionarios;
@@ -36,8 +35,8 @@ namespace ProjetoIntegradorMVC.Repositorio
         public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
             foreach (var funcionario in funcionarios) {
-                if (VerificarFuncionarioExistente(funcionario)) throw new DuplicateNameException("O funcionário já existe");
-                _contexto.Set<Funcionario>().Add(funcionario);
+                if (funcionario.ValidarFuncionarioExistente(this)) throw new DuplicateNameException("O funcionário já existe");
+                Adicionar(funcionario);
             }
             
             _contexto.SaveChanges();

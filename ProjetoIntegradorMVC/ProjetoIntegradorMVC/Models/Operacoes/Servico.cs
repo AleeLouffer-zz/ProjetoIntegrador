@@ -1,5 +1,6 @@
 ﻿using Caelum.Stella.CSharp.Vault;
 using ProjetoIntegradorMVC.Models.Usuarios;
+using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,14 +11,15 @@ using System.Threading.Tasks;
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Servico")]
-    public class Servico
+    public class Servico : ClasseBase
     {
-        public int Id { get; private set; }
+        private RepositorioServico _repositorioServico;
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
         public int EmpresaId { get; private set; }
         public int TempoEstimado { get; private set; }
+
         private Servico(){ }
         public Servico(string nome, string descricao, decimal preco, int tempoEstimado = 0)
         {
@@ -27,6 +29,20 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Preco = preco;
             TempoEstimado = tempoEstimado;
         }
+
+        private Servico AdicionarRepositorio(RepositorioServico repositorioServico)
+        {
+            _repositorioServico = repositorioServico;
+            return this;
+        }
+
+        public bool ValidarServicoExistente(RepositorioServico repositorioServico)
+        {
+            AdicionarRepositorio(repositorioServico);
+            if (_repositorioServico.BuscarServicoPorNomeEPreco(Nome, Preco) != null) return true;
+            return false;
+        }
+
         public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
         {
             if (string.IsNullOrWhiteSpace(nome)) throw new Exception("O serviço deve ter um nome");

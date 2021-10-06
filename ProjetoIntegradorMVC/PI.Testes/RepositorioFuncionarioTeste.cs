@@ -1,15 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PI.Testes.Helpers;
+﻿using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PI.Testes
@@ -56,7 +52,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_os_funcionarios()
         {
-            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "23882052040", _jornada), 
+            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "06297337160", _jornada), 
                 new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada) };
             _repositorio.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
@@ -67,19 +63,6 @@ namespace PI.Testes
             }
 
             Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
-        }
-
-        [Fact]
-        public void Deve_verificar_funcionario_existente()
-        {
-            _contexto.Funcionarios.Add(_funcionario);
-            _contexto.Funcionarios.Add(_funcionario2);
-            _contexto.SaveChanges();
-            var listaFuncionariosExistentes = new List<Funcionario> {_funcionario, _funcionario2 };
-
-            var funcionarioExiste = _repositorio.VerificarFuncionarioExistente(listaFuncionariosExistentes[0]);
-
-            Assert.True(funcionarioExiste);
         }
 
         [Fact]
