@@ -14,23 +14,11 @@ namespace PI.Testes
         private string _nome;
         private string _descricao;
         private decimal _preco;
-
-        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private RepositorioServico _repositorio;
-        private Contexto _contexto;
-
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
             _preco = 10m;
-
-            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
-
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServico");
-            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
-
-            _repositorio = new RepositorioServico(_contexto);
         }
 
         [Fact]
@@ -86,27 +74,6 @@ namespace PI.Testes
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_servico_existe_no_banco()
-        {
-            var servico = new Servico(_nome, _descricao, _preco);
-            _repositorio.Adicionar(servico);
-
-            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
-
-            Assert.True(existeNoBanco);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_servico_nao_existe_no_banco()
-        {
-            var servico = new Servico("zapzap2", _descricao, 123m);
-
-            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
-
-            Assert.False(existeNoBanco);
         }
     }
 }

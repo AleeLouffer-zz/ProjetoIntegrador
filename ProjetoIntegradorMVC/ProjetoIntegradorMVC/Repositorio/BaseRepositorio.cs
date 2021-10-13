@@ -1,9 +1,12 @@
-﻿using ProjetoIntegradorMVC.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
@@ -23,8 +26,16 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void Adicionar(T objeto)
         {
-            _contexto.Set<T>().Add(objeto);
-            _contexto.SaveChanges();
+            try
+            {
+                _contexto.Set<T>().Add(objeto);
+                _contexto.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                SqlException innerExeption = ex.InnerException as SqlException;
+                if(innerExeption.Number == 2627 || innerExeption.Number == 2601) throw new DbUpdateException("Deu ruim no Banco");
+            }
         }
     }
 }

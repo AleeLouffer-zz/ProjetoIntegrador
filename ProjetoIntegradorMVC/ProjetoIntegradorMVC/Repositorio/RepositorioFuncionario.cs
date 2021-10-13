@@ -1,4 +1,6 @@
-﻿using ProjetoIntegradorMVC.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
@@ -30,12 +32,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
-            foreach (var funcionario in funcionarios) {
-                if (funcionario.ValidarFuncionarioExistente(this)) throw new DuplicateNameException("O funcionário já existe");
-                Adicionar(funcionario);
-            }
-            
-            _contexto.SaveChanges();
+            foreach (var funcionario in funcionarios) Adicionar(funcionario);
         }
     }
 }

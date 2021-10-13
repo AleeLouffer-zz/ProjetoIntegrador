@@ -1,8 +1,11 @@
-﻿using PI.Testes.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC;
 using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -32,7 +35,7 @@ namespace PI.Testes
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
             _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _jornada);
-            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _jornada);
+            _funcionario2 = new("Ravona", "ravona@ravona.com", "123", "17159590007", _jornada);
         }
 
         [Fact]
@@ -63,21 +66,6 @@ namespace PI.Testes
             }
 
             Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
-        }
-
-        [Fact]
-        public void Nao_deve_adicionar_funcionario_existente()
-        {
-            const string mensagemEsperada = "O funcionário já existe";
-            _contexto.Funcionarios.Add(_funcionario);
-            _contexto.Funcionarios.Add(_funcionario2);
-            _contexto.SaveChanges();
-            var listaFuncionariosExistentes = new List<Funcionario> { _funcionario, _funcionario2 };
-
-            void Acao() => _repo.AdicionarFuncionarios(listaFuncionariosExistentes);
-
-            var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
-            Assert.Equal(mensagemEsperada, mensagem);
         }
     }
 }
