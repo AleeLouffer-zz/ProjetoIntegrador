@@ -37,7 +37,7 @@ namespace ProjetoIntegradorMVC
             List<Servico> servicos = SetServicos();
             List<Cliente> cliente = SetClientes();
 
-            _repositorioFuncionario.Adicionarfuncionarios(funcionarios);
+            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
 
@@ -60,18 +60,18 @@ namespace ProjetoIntegradorMVC
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             var jornada = new JornadaDeTrabalho(diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
-                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311", jornada),
-                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312", jornada),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313", jornada)
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "75348264032", jornada),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "42646342020", jornada),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "94909242023", jornada)
             };
         }
 
         private static List<Cliente> SetClientes()
         {
-                return new List<Cliente>() {
+               return new List<Cliente>() {
                new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147"),
-               new Cliente("Carlos", "carlos@gmail.com", "carlao", "11122233345"),
-               new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","33344455567" )
+               new Cliente("Carlos", "carlos@gmail.com", "carlao", "85526580032"),
+               new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","05806188035" )
             };
         }
     }

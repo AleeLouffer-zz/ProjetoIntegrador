@@ -10,8 +10,8 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210914210124_CriandoJornada")]
-    partial class CriandoJornada
+    [Migration("20211006212102_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,6 +117,30 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Servico");
+                });
+
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Cliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
