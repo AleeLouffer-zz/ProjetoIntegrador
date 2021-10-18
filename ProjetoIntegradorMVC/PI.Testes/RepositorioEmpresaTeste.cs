@@ -39,7 +39,7 @@ namespace PI.Testes
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
             _funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada);
-            _servico = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m);
+            _servico = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, _empresa);
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
 
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
@@ -72,11 +72,11 @@ namespace PI.Testes
         [Fact]
         public void Deve_vincular_um_servico_a_uma_empresa()
         {
-            var servicoEsperado = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m);
+            var servicoEsperado = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, _empresa);
 
             _repositorio.VincularServico(_empresa.CNPJ, servicoEsperado);
 
-            Assert.Equal(servicoEsperado.EmpresaId, _empresa.Id);
+            Assert.Equal(servicoEsperado.Empresa.Id, _empresa.Id);
         }
 
         [Fact]

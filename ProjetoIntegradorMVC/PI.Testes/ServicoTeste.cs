@@ -6,6 +6,7 @@ using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Repositorio;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using Caelum.Stella.CSharp.Vault;
+using ProjetoIntegradorMVC.Models.Usuarios;
 
 namespace PI.Testes
 {
@@ -14,6 +15,7 @@ namespace PI.Testes
         private string _nome;
         private string _descricao;
         private decimal _preco;
+        private Empresa _empresa;
 
         private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private RepositorioServico _repositorio;
@@ -21,6 +23,7 @@ namespace PI.Testes
 
         public ServicoTeste()
         {
+            _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _nome = "tananan";
             _descricao = "tananan";
             _preco = 10m;
@@ -43,7 +46,7 @@ namespace PI.Testes
                 Preco = _preco
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _preco);
+            var servico = new Servico(_nome, _descricao, _preco, _empresa);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -56,7 +59,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _preco);
+            void Acao() => new Servico(nomeInvalido, _descricao, _preco, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -70,7 +73,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter uma descrição";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _preco);
+            void Acao() => new Servico(_nome, descricaoInvalida, _preco, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -82,7 +85,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um preço";
 
-            void Acao() => new Servico(_nome, _descricao, precoInvalido);
+            void Acao() => new Servico(_nome, _descricao, precoInvalido, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -91,7 +94,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_que_servico_existe_no_banco()
         {
-            var servico = new Servico(_nome, _descricao, _preco);
+            var servico = new Servico(_nome, _descricao, _preco, _empresa);
             _repositorio.Adicionar(servico);
 
             var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
@@ -102,7 +105,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_verificar_que_servico_nao_existe_no_banco()
         {
-            var servico = new Servico("zapzap2", _descricao, 123m);
+            var servico = new Servico("zapzap2", _descricao, 123m, _empresa);
 
             var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
 

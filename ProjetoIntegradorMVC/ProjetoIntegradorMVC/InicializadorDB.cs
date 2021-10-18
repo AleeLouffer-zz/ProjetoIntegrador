@@ -36,9 +36,9 @@ namespace ProjetoIntegradorMVC
 
             Empresa empresa = SetEmpresa();
             List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos();
-
             _repositorioEmpresa.AdicionarEmpresa(empresa);
+
+            List<Servico> servicos = SetServicos(empresa);
             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
 
@@ -61,12 +61,12 @@ namespace ProjetoIntegradorMVC
             return new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
         }
 
-        private static List<Servico> SetServicos()
+        private static List<Servico> SetServicos(Empresa empresa)
         {
             return new List<Servico>() {
-                new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m),
-                new Servico("Manicure", "Manicure", 999m),
-                new Servico("Barba Grande", "Barba Grande", 200m)
+                new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, empresa),
+                new Servico("Manicure", "Manicure", 999m, empresa),
+                new Servico("Barba Grande", "Barba Grande", 200m, empresa)
             };
         }
 
