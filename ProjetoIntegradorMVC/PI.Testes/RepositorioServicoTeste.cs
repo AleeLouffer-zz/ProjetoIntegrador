@@ -19,8 +19,6 @@ namespace PI.Testes
         private readonly Contexto _contexto;
         private readonly RepositorioServico _repositorio;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private Servico _servico1;
-        private Servico _servico2;
 
         public RepositorioServicoTeste()
         {
@@ -28,17 +26,13 @@ namespace PI.Testes
 
             _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServicos");
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
-
             _repositorio = new RepositorioServico(_contexto);
-
-            _servico1 = new("Manicure", "Manicure", 30m);
-            _servico2 = new("Corte", "Corte de Cabelo", 25m);
         }
 
         [Fact]
         public void Deve_retornar_um_servico()
         {
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, 0, Local.Ambos));
             _contexto.SaveChanges();
             var id = 1;
             
@@ -50,8 +44,8 @@ namespace PI.Testes
         [Fact]
         public void Deve_retornar_uma_lista_de_servicos()
         { 
-            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m));
-            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m));
+            _contexto.Servicos.Add(new Servico("Corte", "Corte de Cabelo", 25m, 0, Local.ADomicilio));
+            _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m, 0,Local.Ambos));
             _contexto.SaveChanges();
 
             var servicos = _repositorio.BuscarTodos();
@@ -62,7 +56,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_servicos_ao_banco_de_dados()
         {
-            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m), new Servico("Manicure", "Manicure", 30m) };
+            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, 0, Local.ADomicilio), new Servico("Manicure", "Manicure", 30m, 0, Local.NaEmpresa) };
 
             _repositorio.AdicionarServicos(servicos);
 

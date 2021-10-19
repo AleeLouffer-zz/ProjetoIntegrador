@@ -13,12 +13,17 @@ namespace PI.Testes
     {
         private string _nome;
         private string _descricao;
-        private decimal _preco;
+        private decimal _precoDecimal;
+        private Local _local;
+        private int _tempoEstimado;
+      
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
-            _preco = 10m;
+            _precoDecimal = 99m;
+            _tempoEstimado = 0;
+            _local = Local.ADomicilio;
         }
 
         [Fact]
@@ -28,10 +33,12 @@ namespace PI.Testes
             {
                 Nome = _nome,
                 Descricao = _descricao,
-                Preco = _preco
+                Preco = _precoDecimal,
+                TempoEstimado = _tempoEstimado,
+                Local = _local
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _preco);
+            var servico = new Servico(_nome, _descricao, _precoDecimal, _tempoEstimado, Local.ADomicilio);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -42,9 +49,9 @@ namespace PI.Testes
         [InlineData(" ")]
         public void Nao_deve_criar_um_servico_sem_nome(string nomeInvalido)
         {
-            const string mensagemEsperada = "O serviço deve ter um nome";
+            const string mensagemEsperada = "O serviÃ§o deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _preco);
+            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal, _tempoEstimado, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -56,9 +63,9 @@ namespace PI.Testes
         [InlineData(" ")]
         public void Nao_deve_criar_um_servico_sem_descricao(string descricaoInvalida)
         {
-            const string mensagemEsperada = "O serviço deve ter uma descrição";
+            const string mensagemEsperada = "O serviÃ§o deve ter uma descriÃ§Ã£o";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _preco);
+            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal, _tempoEstimado, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -68,9 +75,21 @@ namespace PI.Testes
         [InlineData(0)]
         public void Nao_deve_criar_um_servico_sem_preco(decimal precoInvalido)
         {
-            const string mensagemEsperada = "O serviço deve ter um preço";
+            const string mensagemEsperada = "O serviÃ§o deve ter um preÃ§o";
 
-            void Acao() => new Servico(_nome, _descricao, precoInvalido);
+            void Acao() => new Servico(_nome, _descricao, precoInvalido, _tempoEstimado, _local);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Nao_deve_criar_um_servico_sem_tempo_estimado_menor_que_0()
+        {
+            const string mensagemEsperada = "O tempo estimado Ã© menor que 0 minutos";
+            var tempoEstimadoInvalido = -1;
+
+            void Acao() => new Servico(_nome, _descricao, _precoDecimal, tempoEstimadoInvalido, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
