@@ -35,14 +35,11 @@ namespace ProjetoIntegradorMVC.Repositorio
             {
                 SqlException innerException = ex.InnerException as SqlException;
 
-                if (ExisteNoBanco(innerException)) throw new DuplicacaoDeDadosException("Este objeto já existe no banco.");
+                var excecaoRepresentaDuplicidade = innerException.Number == 2627 || innerException.Number == 2601;
+
+                if (excecaoRepresentaDuplicidade) throw new DuplicacaoDeDadosException("Este objeto já existe no banco.");
                 throw;
             }
-        }
-
-        private static bool ExisteNoBanco(SqlException innerException)
-        {
-            return innerException.Number == 2627 || innerException.Number == 2601;
         }
     }
 }
