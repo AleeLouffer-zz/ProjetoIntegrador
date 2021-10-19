@@ -20,10 +20,12 @@ namespace PI.Testes
         private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private RepositorioFuncionario _repositorio;
         private Contexto _contexto;
+        private Empresa _empresa;
 
         private JornadaDeTrabalho _jornada;
         public FuncionarioTeste()
         {
+            _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _nome = "Daniel";
             _email = "daniel-zanelato@hotmail.com";
             _senha = "alecrimdourado";
@@ -53,7 +55,7 @@ namespace PI.Testes
                 JornadaDeTrabalho = _jornada
             }.ToExpectedObject();
 
-            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada);
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada, _empresa);
 
             funcionarioEsperado.ShouldMatch(funcionario);
         }
@@ -66,7 +68,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um nome";
 
-            void Acao() => new Funcionario(nomeInvalido, _email,  _senha, _cpf, _jornada);
+            void Acao() => new Funcionario(nomeInvalido, _email,  _senha, _cpf, _jornada, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -80,7 +82,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um email";
 
-            void Acao() => new Funcionario(_nome, emailInvalido, _senha, _cpf, _jornada);
+            void Acao() => new Funcionario(_nome, emailInvalido, _senha, _cpf, _jornada, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -94,7 +96,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter uma senha";
 
-            void Acao() => new Funcionario(_nome, _email, senhaInvalida, _cpf, _jornada);
+            void Acao() => new Funcionario(_nome, _email, senhaInvalida, _cpf, _jornada, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -108,7 +110,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um cpf";
 
-            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada);
+            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -121,31 +123,10 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionario deve ter um CPF valido";
 
-            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada);
+            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_funcionario_existe_no_banco()
-        {
-            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada);
-            _repositorio.Adicionar(funcionario);
-
-            var existeNoBanco = funcionario.ValidarFuncionarioExistente(_repositorio);
-
-            Assert.True(existeNoBanco);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_funcionario_nao_existe_no_banco()
-        {
-            var funcionario = new Funcionario(_nome, _email, _senha, "00207862125", _jornada);
-
-            var existeNoBanco = funcionario.ValidarFuncionarioExistente(_repositorio);
-
-            Assert.False(existeNoBanco);
         }
     }
 }

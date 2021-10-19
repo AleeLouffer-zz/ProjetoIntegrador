@@ -30,10 +30,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
-            foreach (var funcionario in funcionarios) {
-                if (funcionario.ValidarFuncionarioExistente(this)) throw new DuplicateNameException("O funcionário já existe");
-                Adicionar(funcionario);
-            }
+            foreach (var funcionario in funcionarios) Adicionar(funcionario); 
             
             _contexto.SaveChanges();
         }

@@ -16,8 +16,6 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void AdicionarEmpresa(Empresa empresa)
         {
-            if (empresa.ValidarEmpresaExistente(this)) throw new DuplicateNameException("A Empresa já existe");
-
             Adicionar(empresa);
         }
 

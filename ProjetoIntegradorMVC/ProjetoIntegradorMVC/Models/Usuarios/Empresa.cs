@@ -38,18 +38,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             CNPJ = cnpj;
             Endereco = new EnderecoDaEmpresa(cep);
         }
-        private Empresa AdicionarRepositorio(RepositorioEmpresa repositorioEmpresa)
-        {
-            _repositorioEmpresa = repositorioEmpresa;
-            return this;
-        }
-
-        public bool ValidarEmpresaExistente(RepositorioEmpresa repositorioEmpresa)
-        {
-            AdicionarRepositorio(repositorioEmpresa);
-            if (_repositorioEmpresa.BuscarEmpresaPorCNPJ(CNPJ) != null) return true;
-            return false;
-        }
 
         public void ValidarInformacoes(string razaoSocial, string nomeFantasia, string email, string senha, string cnpj)
         {

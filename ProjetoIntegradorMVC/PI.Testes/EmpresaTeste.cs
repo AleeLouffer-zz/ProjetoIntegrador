@@ -132,26 +132,5 @@ namespace PI.Testes
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
-
-        [Fact]
-        public void Deve_verificar_se_empresa_existe_no_banco()
-        {
-            var empresa = new Empresa(_razaoSocial, _nomeFantasia, _email, _senha, _cnpj, _cep);
-            _repositorio.Adicionar(empresa);
-
-            var existeNoBanco = empresa.ValidarEmpresaExistente(_repositorio);
-
-            Assert.True(existeNoBanco);
-        }
-
-        [Fact]
-        public void Deve_verificar_se_empresa_nao_existe_no_banco()
-        {
-            var empresa = new Empresa(_razaoSocial, _nomeFantasia, _email, _senha, "28868694000100", _cep);
-
-            var existeNoBanco = empresa.ValidarEmpresaExistente(_repositorio);
-
-            Assert.False(existeNoBanco);
-        }
     }
 }

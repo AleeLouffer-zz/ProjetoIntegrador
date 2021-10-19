@@ -1,19 +1,12 @@
 ﻿using Caelum.Stella.CSharp.Http;
-using Caelum.Stella.CSharp.Validation;
-using ProjetoIntegradorMVC.Models.LigaçãoModels;
-using ProjetoIntegradorMVC.Models.Operacoes;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models
 {
-    public class EnderecoDaEmpresa
+    [Owned]
+    public class EnderecoDaEmpresa : ObjetoDeValor
     {
-        public int Id { get; set; }
         public string CEP { get; }
         public string Logradouro { get; }
         public string Complemento { get; }
@@ -21,7 +14,7 @@ namespace ProjetoIntegradorMVC.Models
         public string Localidade { get; }
         public string UF { get; }
 
-        private EnderecoDaEmpresa() { }
+        protected EnderecoDaEmpresa() { }
 
         public EnderecoDaEmpresa(string cep)
         {
@@ -32,6 +25,16 @@ namespace ProjetoIntegradorMVC.Models
             Bairro = endereco.Bairro;
             Localidade = endereco.Localidade;
             UF = endereco.UF;
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return CEP;
+            yield return Logradouro;
+            yield return Complemento;
+            yield return Bairro;
+            yield return Localidade;
+            yield return UF;
         }
     }
 }

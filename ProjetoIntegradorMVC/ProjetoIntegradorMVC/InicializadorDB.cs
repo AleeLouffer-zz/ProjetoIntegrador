@@ -35,7 +35,7 @@ namespace ProjetoIntegradorMVC
             _contexto.Database.Migrate();
 
             Empresa empresa = SetEmpresa();
-            List<Funcionario> funcionarios = SetFuncionarios();
+            List<Funcionario> funcionarios = SetFuncionarios(empresa);
             _repositorioEmpresa.AdicionarEmpresa(empresa);
 
             List<Servico> servicos = SetServicos(empresa);
@@ -70,15 +70,15 @@ namespace ProjetoIntegradorMVC
             };
         }
 
-        private static List<Funcionario> SetFuncionarios()
+        private static List<Funcionario> SetFuncionarios(Empresa empresa)
         {
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
-                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311", jornada),
-                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312", jornada),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313", jornada)
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", jornada, empresa),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", jornada, empresa),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "86390362099", jornada, empresa)
             };
         }
     }

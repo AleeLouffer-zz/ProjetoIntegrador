@@ -1,23 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoIntegradorMVC.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "EnderecoDaEmpresa",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EnderecoDaEmpresa", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Empresas",
                 columns: table => new
@@ -27,17 +16,71 @@ namespace ProjetoIntegradorMVC.Migrations
                     RazaoSocial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NomeFantasia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnderecoId = table.Column<int>(type: "int", nullable: true),
+                    CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Localidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UF = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empresas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JornadaDeTrabalho",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JornadaDeTrabalho", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Servico",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    TempoEstimado = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Servico", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Empresas_EnderecoDaEmpresa_EnderecoId",
-                        column: x => x.EnderecoId,
-                        principalTable: "EnderecoDaEmpresa",
+                        name: "FK_Servico_Empresas_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DiaDeTrabalho",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiaDaSemana = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JornadaDeTrabalhoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiaDeTrabalho", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DiaDeTrabalho_JornadaDeTrabalho_JornadaDeTrabalhoId",
+                        column: x => x.JornadaDeTrabalhoId,
+                        principalTable: "JornadaDeTrabalho",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -50,7 +93,8 @@ namespace ProjetoIntegradorMVC.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    EmpresaId = table.Column<int>(type: "int", nullable: false),
+                    JornadaDeTrabalhoId = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -62,27 +106,31 @@ namespace ProjetoIntegradorMVC.Migrations
                         column: x => x.EmpresaId,
                         principalTable: "Empresas",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Funcionarios_JornadaDeTrabalho_JornadaDeTrabalhoId",
+                        column: x => x.JornadaDeTrabalhoId,
+                        principalTable: "JornadaDeTrabalho",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Servico",
+                name: "HorarioDeTrabalho",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    EmpresaId = table.Column<int>(type: "int", nullable: true)
+                    Horario = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    JornadaDeTrabalhoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Servico", x => x.Id);
+                    table.PrimaryKey("PK_HorarioDeTrabalho", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Servico_Empresas_EmpresaId",
-                        column: x => x.EmpresaId,
-                        principalTable: "Empresas",
+                        name: "FK_HorarioDeTrabalho_JornadaDeTrabalho_JornadaDeTrabalhoId",
+                        column: x => x.JornadaDeTrabalhoId,
+                        principalTable: "JornadaDeTrabalho",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -121,14 +169,19 @@ namespace ProjetoIntegradorMVC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empresas_EnderecoId",
-                table: "Empresas",
-                column: "EnderecoId");
+                name: "IX_DiaDeTrabalho_JornadaDeTrabalhoId",
+                table: "DiaDeTrabalho",
+                column: "JornadaDeTrabalhoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Funcionarios_EmpresaId",
                 table: "Funcionarios",
                 column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Funcionarios_JornadaDeTrabalhoId",
+                table: "Funcionarios",
+                column: "JornadaDeTrabalhoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FuncionariosComServicos_EmpresaId",
@@ -146,6 +199,11 @@ namespace ProjetoIntegradorMVC.Migrations
                 column: "ServicoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HorarioDeTrabalho_JornadaDeTrabalhoId",
+                table: "HorarioDeTrabalho",
+                column: "JornadaDeTrabalhoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Servico_EmpresaId",
                 table: "Servico",
                 column: "EmpresaId");
@@ -154,7 +212,13 @@ namespace ProjetoIntegradorMVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DiaDeTrabalho");
+
+            migrationBuilder.DropTable(
                 name: "FuncionariosComServicos");
+
+            migrationBuilder.DropTable(
+                name: "HorarioDeTrabalho");
 
             migrationBuilder.DropTable(
                 name: "Funcionarios");
@@ -163,10 +227,10 @@ namespace ProjetoIntegradorMVC.Migrations
                 name: "Servico");
 
             migrationBuilder.DropTable(
-                name: "Empresas");
+                name: "JornadaDeTrabalho");
 
             migrationBuilder.DropTable(
-                name: "EnderecoDaEmpresa");
+                name: "Empresas");
         }
     }
 }

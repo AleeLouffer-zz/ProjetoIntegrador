@@ -38,9 +38,9 @@ namespace PI.Testes
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             _jornada = new(diasDeTrabalho, horariosDeTrabalho);
 
-            _funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada);
-            _servico = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, _empresa);
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
+            _funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada, _empresa);
+            _servico = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, _empresa);
 
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
             _contexto.Empresas.Add(_empresa);
@@ -51,7 +51,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_vincular_um_funcionario_a_uma_empresa()
         {
-            var funcionarioEsperado = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada);
+            var funcionarioEsperado = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada, _empresa);
 
             _repositorio.VincularFuncionario(_empresa.CNPJ, funcionarioEsperado);
 
@@ -87,17 +87,6 @@ namespace PI.Testes
             void Acao() => _repositorio.VincularServico("28868694000100", _servico);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
-            Assert.Equal(mensagemEsperada, mensagem);
-        }
-
-        [Fact]
-        public void Nao_deve_adicionar_empresa_existente()
-        {
-            const string mensagemEsperada = "A Empresa já existe";
-
-            void Acao() => _repositorio.AdicionarEmpresa(_empresa);
-
-            var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
     }
