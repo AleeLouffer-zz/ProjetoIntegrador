@@ -33,9 +33,16 @@ namespace ProjetoIntegradorMVC.Repositorio
             }
             catch (DbUpdateException ex)
             {
-                SqlException innerExeption = ex.InnerException as SqlException;
-                if(innerExeption.Number == 2627 || innerExeption.Number == 2601) throw new DbUpdateException("Deu ruim no Banco");
+                SqlException innerException = ex.InnerException as SqlException;
+
+                if (ExisteNoBanco(innerException)) throw new DuplicacaoDeDadosException("Este objeto já existe no banco.");
+                throw;
             }
+        }
+
+        private static bool ExisteNoBanco(SqlException innerException)
+        {
+            return innerException.Number == 2627 || innerException.Number == 2601;
         }
     }
 }
