@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ProjetoIntegradorMVC.Models.Operacoes.Servico>
+
+@{
+    ViewData["Title"] = "Catálogo de serviços";
+}
+
+<header>
+    <div class="menu">
+        <img src="/Imagens/Senac_Logo.png" id="logo">
+        <nav>
+            <ul class="opcoes">
+                <!-- Ancoras para ir para a pagina de criar conta e entrar -->
+                <li><a href="criar.html" class="criarConta">Criar Conta</a></li>
+                <li><a href="entrar.html" class="entrar">Entrar</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="servicos">
+    <!-- Ancoras para ir para a pagina de detalhes do servico clicado -->
+    @foreach (var servico in Model)
+    {
+        <a asp-action="DetalhesDoServico" asp-route-id="@servico.Id">
+            <div class="servico">
+                <h1 class="servico-item">@servico.Nome</h1>
+                <p class="servico-item">Descrição: @servico.Descricao</p>
+                <p class="servico-item">Preço: @servico.Preco </p>
+                <p class="servico-item">Duração: @servico.TempoEstimado</p>
+                <p class="servico-item">Emrpesa : Emrpesa teste</p>
+                <p class="servico-item">Local: Domicílio/Empresa</p>
+            </div>
+        </a>
+    }
+</div>
+<footer class="rodape">&copyCopyright Catálogo de Serviços</footer>
+
+
+

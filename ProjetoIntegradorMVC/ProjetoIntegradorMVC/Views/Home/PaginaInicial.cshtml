@@ -1,0 +1,28 @@
+@model IEnumerable<ProjetoIntegradorMVC.Models.Operacoes.Servico>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<header>
+    <div class="menu">
+        <img src="/Imagens/Senac_Logo.png" id="logo">
+        <nav>
+            <ul class="opcoes">
+                <!-- Ancoras para ir para a pagina de criar conta e entrar -->
+                <li><a href="criar.html" class="criarConta">Criar Conta</a></li>
+                <li><a href="entrar.html" class="entrar">Entrar</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="buscar">
+    <h1>Qual Serviço você Procura Hoje</h1>
+    <div class="caixadebusca">
+        <input type="text" id="barradebusca" name="busca" placeholder="Buscar">
+        <button class="botaobuscar">
+            <img src="/Icones/IconeDeBuscaBranco.svg" alt="">
+        </button>
+    </div>
+</div>
+<footer class="rodapeInicial">&copyCopyright - NomeDoProjeto</footer>       

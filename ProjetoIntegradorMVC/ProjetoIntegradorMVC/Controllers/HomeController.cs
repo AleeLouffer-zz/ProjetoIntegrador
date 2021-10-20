@@ -21,19 +21,24 @@ namespace ProjetoIntegradorMVC.Controllers
             _repositorioFuncComServicos = repositorioFuncComServicos;
         }
 
-        public IActionResult Home()
+        public IActionResult PaginaInicial()
+        {
+            return View();
+        }
+
+        public IActionResult CatalogoDeServicos()
         {
             return View(_repositorioServico.BuscarTodos());
         }
 
-        public IActionResult Servico(int id)
+        public IActionResult DetalhesDoServico(int id)
         {
-             var servicoDTO = _repositorioServico.BuscarPorId(id);
-             var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
-             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
+            var servicoDTO = _repositorioServico.BuscarPorId(id);
+            var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
+            var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 
-             var DTO = new ServicoDTO(servicoDTO, funcionarios);
-             return View(DTO);
+            var DTO = new ServicoDTO(servicoDTO, funcionarios);
+            return View(DTO);
         }
 
         public IActionResult Index()

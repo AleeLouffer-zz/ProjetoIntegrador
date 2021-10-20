@@ -1,0 +1,47 @@
+.detalhesservico{   
+    width: 90%;
+    height: 100%;
+    display: grid;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    margin: 20px auto;
+    border: whitesmoke 2px;
+    box-shadow: 0px 1px 10px gray;
+    padding: 40px 0;
+}
+
+.detalheservico{
+    padding: 20px;
+    width: 70%;
+    margin: 10px auto;
+    border-radius: 20px;
+}
+
+.precoservico{
+    font-size: 20px;
+}
+
+.funcionario{   
+    padding: 20px;
+    width: 70%;
+    height: 80%;
+    margin: 10px auto;
+    background-color: rgba(30, 121, 224, 0.815);
+    border-radius: 20px;
+    color: white;
+}
+
+.funcionario h1{
+    text-align: center;
+}
+
+.agendar{
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
