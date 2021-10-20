@@ -32,7 +32,9 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void AdicionarFuncionarios(List<Funcionario> funcionarios)
         {
-            foreach (var funcionario in funcionarios) Adicionar(funcionario);
+            foreach (var funcionario in funcionarios) Adicionar(funcionario); 
+            
+            _contexto.SaveChanges();
         }
     }
 }

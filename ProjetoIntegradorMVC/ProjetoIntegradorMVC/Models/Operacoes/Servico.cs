@@ -13,18 +13,19 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public Empresa Empresa { get; private set; }
         public int TempoEstimado { get; private set; }
         public Local Local { get; set; }
         
         private Servico(){ }
-        
-        public Servico(string nome, string descricao, decimal preco, int tempoEstimado = 0, Local local)
 
+        public Servico(string nome, string descricao, decimal preco, Empresa empresa, Local local, int tempoEstimado = 0)
         {
             ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
-            Descricao = descricao; 
-            Preco = preco;
+            Descricao = descricao;
+            Preco = preco; 
+            Empresa = empresa;
             TempoEstimado = tempoEstimado;
             Local = local;
         }

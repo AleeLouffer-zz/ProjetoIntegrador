@@ -6,6 +6,7 @@ using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Repositorio;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using Caelum.Stella.CSharp.Vault;
+using ProjetoIntegradorMVC.Models.Usuarios;
 
 namespace PI.Testes
 {
@@ -13,16 +14,16 @@ namespace PI.Testes
     {
         private string _nome;
         private string _descricao;
-        private decimal _precoDecimal;
+        private Empresa _empresa;
+        private decimal _preco;
         private Local _local;
-        private int _tempoEstimado;
       
         public ServicoTeste()
         {
+            _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _nome = "tananan";
             _descricao = "tananan";
-            _precoDecimal = 99m;
-            _tempoEstimado = 0;
+            _preco= 99m;
             _local = Local.ADomicilio;
         }
 
@@ -33,12 +34,12 @@ namespace PI.Testes
             {
                 Nome = _nome,
                 Descricao = _descricao,
-                Preco = _precoDecimal,
-                TempoEstimado = _tempoEstimado,
-                Local = _local
+                Preco = _preco,
+                Local = _local,
+                Empresa = _empresa
             }.ToExpectedObject();
 
-            var servico = new Servico(_nome, _descricao, _precoDecimal, _tempoEstimado, Local.ADomicilio);
+            var servico = new Servico(_nome, _descricao, _preco, _empresa, Local.ADomicilio);
 
             servicoEsperado.ShouldMatch(servico);
         }
@@ -51,7 +52,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um nome";
 
-            void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal, _tempoEstimado, _local);
+            void Acao() => new Servico(nomeInvalido, _descricao, _preco, _empresa, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -65,7 +66,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter uma descrição";
 
-            void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal, _tempoEstimado, _local);
+            void Acao() => new Servico(_nome, descricaoInvalida, _preco, _empresa, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -77,7 +78,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O serviço deve ter um preço";
 
-            void Acao() => new Servico(_nome, _descricao, precoInvalido, _tempoEstimado, _local);
+            void Acao() => new Servico(_nome, _descricao, precoInvalido, _empresa, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -89,7 +90,7 @@ namespace PI.Testes
             const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
             var tempoEstimadoInvalido = -1;
 
-            void Acao() => new Servico(_nome, _descricao, _precoDecimal, tempoEstimadoInvalido, _local);
+            void Acao() => new Servico(_nome, _descricao, _preco, _empresa, _local, tempoEstimadoInvalido);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

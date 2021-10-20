@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
-using ProjetoIntegradorMVC.Models.Usuarios;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
