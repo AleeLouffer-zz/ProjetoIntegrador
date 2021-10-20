@@ -2,15 +2,16 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
+    [Index(nameof(CPF), IsUnique = true)]
     public class Funcionario : Usuario
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
-        private RepositorioFuncionario _repositorioFuncionario;
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada)
         {
@@ -20,19 +21,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             Senha = senha;
             CPF = cpf;
             JornadaDeTrabalho = jornada;
-        }
-
-        private Funcionario AdicionarRepositorio(RepositorioFuncionario repositorioFuncionario)
-        {
-            _repositorioFuncionario = repositorioFuncionario;
-            return this;
-        }
-
-        public bool ValidarFuncionarioExistente(RepositorioFuncionario repositorioFuncionario)
-        {
-            AdicionarRepositorio(repositorioFuncionario);
-            if (_repositorioFuncionario.BuscarFuncionarioPorCpf(CPF) != null) return true;
-            return false;
         }
 
         public void ValidarInformacoes(string nome, string email, string senha, string cpf)

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20211013193724_inicial")]
+    partial class inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,7 +126,7 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.ToTable("Servico");
                 });
 
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Cliente", b =>
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,28 +134,7 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CPF")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -168,11 +149,11 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-                    
+
                     b.HasIndex("CPF")
                         .IsUnique()
                         .HasFilter("[CPF] IS NOT NULL");
-                        
+
                     b.HasIndex("JornadaDeTrabalhoId");
 
                     b.ToTable("Funcionarios");
