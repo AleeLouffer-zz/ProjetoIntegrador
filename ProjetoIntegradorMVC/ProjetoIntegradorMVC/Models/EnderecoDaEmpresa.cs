@@ -19,16 +19,21 @@ namespace ProjetoIntegradorMVC.Models
 
         public EnderecoDaEmpresa(string cep)
         {
+            Endereco endereco = ObterEnderecoCompleto(cep);
+            CEP = endereco.CEP;
+            Logradouro = endereco.Logradouro;
+            Complemento = endereco.Complemento;
+            Bairro = endereco.Bairro;
+            Localidade = endereco.Localidade;
+            UF = endereco.UF;
+        }
+
+        private static Endereco ObterEnderecoCompleto(string cep)
+        {
             try
             {
-                var endereco = new ViaCEP().GetEndereco(cep);
-                CEP = endereco.CEP;
-                Logradouro = endereco.Logradouro;
-                Complemento = endereco.Complemento;
-                Bairro = endereco.Bairro;
-                Localidade = endereco.Localidade;
-                UF = endereco.UF;
-            }
+                return new ViaCEP().GetEndereco(cep);
+            }                
             catch (InvalidZipCodeFormat)
             {
                 throw new CEPInvalidoException("CEP inválido");
