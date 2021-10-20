@@ -16,22 +16,11 @@ namespace PI.Testes
         private decimal _precoDecimal;
         private Local _local;
         private int _tempoEstimado;
-
-        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private RepositorioServico _repositorio;
-        private Contexto _contexto;
-
+      
         public ServicoTeste()
         {
             _nome = "tananan";
             _descricao = "tananan";
-
-            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
-
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServico");
-            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
-
-            _repositorio = new RepositorioServico(_contexto);
             _precoDecimal = 99m;
             _tempoEstimado = 0;
             _local = Local.ADomicilio;
@@ -60,7 +49,7 @@ namespace PI.Testes
         [InlineData(" ")]
         public void Nao_deve_criar_um_servico_sem_nome(string nomeInvalido)
         {
-            const string mensagemEsperada = "O serviço deve ter um nome";
+            const string mensagemEsperada = "O serviÃ§o deve ter um nome";
 
             void Acao() => new Servico(nomeInvalido, _descricao, _precoDecimal, _tempoEstimado, _local);
 
@@ -74,7 +63,7 @@ namespace PI.Testes
         [InlineData(" ")]
         public void Nao_deve_criar_um_servico_sem_descricao(string descricaoInvalida)
         {
-            const string mensagemEsperada = "O serviço deve ter uma descrição";
+            const string mensagemEsperada = "O serviÃ§o deve ter uma descriÃ§Ã£o";
 
             void Acao() => new Servico(_nome, descricaoInvalida, _precoDecimal, _tempoEstimado, _local);
 
@@ -86,7 +75,7 @@ namespace PI.Testes
         [InlineData(0)]
         public void Nao_deve_criar_um_servico_sem_preco(decimal precoInvalido)
         {
-            const string mensagemEsperada = "O serviço deve ter um preço";
+            const string mensagemEsperada = "O serviÃ§o deve ter um preÃ§o";
 
             void Acao() => new Servico(_nome, _descricao, precoInvalido, _tempoEstimado, _local);
 
@@ -97,34 +86,13 @@ namespace PI.Testes
         [Fact]
         public void Nao_deve_criar_um_servico_sem_tempo_estimado_menor_que_0()
         {
-            const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
+            const string mensagemEsperada = "O tempo estimado Ã© menor que 0 minutos";
             var tempoEstimadoInvalido = -1;
 
             void Acao() => new Servico(_nome, _descricao, _precoDecimal, tempoEstimadoInvalido, _local);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_servico_existe_no_banco()
-        {
-            var servico = new Servico(_nome, _descricao, _precoDecimal, _tempoEstimado, _local);
-            _repositorio.Adicionar(servico);
-
-            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
-
-            Assert.True(existeNoBanco);
-        }
-
-        [Fact]
-        public void Deve_verificar_que_servico_nao_existe_no_banco()
-        {
-            var servico = new Servico("zapzap2", _descricao, 123m, _tempoEstimado, _local);
-
-            var existeNoBanco = servico.ValidarServicoExistente(_repositorio);
-
-            Assert.False(existeNoBanco);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace ProjetoIntegradorMVC.Models.LigaçãoModels
 
         public FuncionariosComServicos(Funcionario funcionario, Servico servico)
         {
-            this.Funcionario = funcionario;
-            this.Servico = servico;
+            Funcionario = funcionario;
+            Servico = servico;
         }
     }
 }
