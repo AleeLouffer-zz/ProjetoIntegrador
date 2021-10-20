@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ProjetoIntegradorMVC.Models
 {
     [Owned]
-    public class EnderecoDaEmpresa : ObjetoDeValor
+    public class EnderecoDaEmpresa
     {
         public string CEP { get; }
         public string Logradouro { get; }
@@ -25,16 +25,6 @@ namespace ProjetoIntegradorMVC.Models
             Bairro = endereco.Bairro;
             Localidade = endereco.Localidade;
             UF = endereco.UF;
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return CEP;
-            yield return Logradouro;
-            yield return Complemento;
-            yield return Bairro;
-            yield return Localidade;
-            yield return UF;
         }
     }
 }
