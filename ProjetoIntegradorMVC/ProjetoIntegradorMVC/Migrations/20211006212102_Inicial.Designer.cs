@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20211006212102_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,7 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(18,2)");
@@ -113,13 +115,6 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Nome")
-                        .IsUnique()
-                        .HasFilter("[Nome] IS NOT NULL");
-
-                    b.HasIndex("Preco")
-                        .IsUnique();
 
                     b.ToTable("Servico");
                 });
@@ -155,6 +150,9 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -168,11 +166,7 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-                    
-                    b.HasIndex("CPF")
-                        .IsUnique()
-                        .HasFilter("[CPF] IS NOT NULL");
-                        
+
                     b.HasIndex("JornadaDeTrabalhoId");
 
                     b.ToTable("Funcionarios");

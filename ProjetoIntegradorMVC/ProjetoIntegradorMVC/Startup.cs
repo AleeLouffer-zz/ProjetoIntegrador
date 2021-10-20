@@ -32,6 +32,7 @@ namespace ProjetoIntegradorMVC
             services.AddTransient<IRepositorioFuncionario, RepositorioFuncionario>();
             services.AddTransient<IRepositorioServico, RepositorioServico>();
             services.AddTransient<IRepositorioFuncionariosComServicos, RepositorioFuncionariosComServicos>();
+            services.AddTransient<IRepositorioCliente, RepositorioCliente>();
             services.AddTransient<InicializadorDB>();
         }
 
@@ -62,7 +63,7 @@ namespace ProjetoIntegradorMVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //serviceProvider.GetService<InicializadorDB>().IniciarDB();
+            serviceProvider.GetService<InicializadorDB>().IniciarDB();
         }
     }
 }
