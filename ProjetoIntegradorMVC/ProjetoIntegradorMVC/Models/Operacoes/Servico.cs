@@ -13,15 +13,16 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
     [Table("Servico")]
     public class Servico : ClasseBase
     {
-        private RepositorioServico _repositorioServico;
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
         public Empresa Empresa { get; private set; }
         public int TempoEstimado { get; private set; }
+        public Local Local { get; set; }
 
         private Servico(){ }
-        public Servico(string nome, string descricao, decimal preco, Empresa empresa, int tempoEstimado = 0)
+
+        public Servico(string nome, string descricao, decimal preco, Empresa empresa, Local local, int tempoEstimado = 0)
         {
             ValidarInformacoes(nome, descricao, preco, tempoEstimado);
             Nome = nome;
@@ -29,19 +30,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Preco = preco; 
             Empresa = empresa;
             TempoEstimado = tempoEstimado;
-        }
-
-        private Servico AdicionarRepositorio(RepositorioServico repositorioServico)
-        {
-            _repositorioServico = repositorioServico;
-            return this;
-        }
-
-        public bool ValidarServicoExistente(RepositorioServico repositorioServico)
-        {
-            AdicionarRepositorio(repositorioServico);
-            if (_repositorioServico.BuscarServicoPorNomeEPreco(Nome, Preco) != null) return true;
-            return false;
+            Local = local;
         }
 
         public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)
