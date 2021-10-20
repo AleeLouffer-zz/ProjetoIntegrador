@@ -15,7 +15,7 @@ namespace PI.Testes
         private string _nome;
         private string _descricao;
         private Empresa _empresa;
-        private decimal _precoDecimal;
+        private decimal _preco;
         private Local _local;
         
         public ServicoTeste()
@@ -23,7 +23,7 @@ namespace PI.Testes
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _nome = "tananan";
             _descricao = "tananan";
-            _precoDecimal = 99m;
+            _preco= 99m;
             _local = Local.ADomicilio;
         }
 
@@ -34,7 +34,7 @@ namespace PI.Testes
             {
                 Nome = _nome,
                 Descricao = _descricao,
-                Preco = _precoDecimal,
+                Preco = _preco,
                 Local = _local,
                 Empresa = _empresa
             }.ToExpectedObject();
@@ -90,7 +90,7 @@ namespace PI.Testes
             const string mensagemEsperada = "O tempo estimado é menor que 0 minutos";
             var tempoEstimadoInvalido = -1;
 
-            void Acao() => new Servico(_nome, _descricao, _precoDecimal, tempoEstimadoInvalido, _local);
+            void Acao() => new Servico(_nome, _descricao, _preco, _empresa, _local, tempoEstimadoInvalido);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

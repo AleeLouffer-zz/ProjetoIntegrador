@@ -111,6 +111,9 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Local")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 

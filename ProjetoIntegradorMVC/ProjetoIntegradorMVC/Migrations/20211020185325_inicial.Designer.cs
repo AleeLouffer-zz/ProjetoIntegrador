@@ -10,8 +10,8 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20211020164748_Initial")]
-    partial class Initial
+    [Migration("20211020185325_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,9 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Local")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")

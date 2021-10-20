@@ -12,7 +12,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public Empresa Empresa { get; private set; }
         public int EmpresaId { get; private set; }
         public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
-        private RepositorioFuncionario _repositorioFuncionario;
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada, Empresa empresa)
         {

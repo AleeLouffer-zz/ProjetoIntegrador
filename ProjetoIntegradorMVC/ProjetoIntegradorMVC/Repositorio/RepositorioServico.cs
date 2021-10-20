@@ -18,12 +18,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void AdicionarServicos(List<Servico> servicos)
         {
-            foreach (var servico in servicos)
-            {
-                if (servico.ValidarServicoExistente(this)) throw new DuplicateNameException("O serviço já existe");
-                Adicionar(servico);
-            }
-
+            foreach (var servico in servicos) Adicionar(servico);
             _contexto.SaveChanges();
         }
     }

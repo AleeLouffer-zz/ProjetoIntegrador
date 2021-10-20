@@ -30,7 +30,7 @@ namespace PI.Testes
             _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteServicos");
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
             _repositorio = new RepositorioServico(_contexto);
-            _servico = new Servico("Corte", "Corte de Cabelo", 25m, 0, Local.NaEmpresa);
+            _servico = new Servico("Corte", "Corte de Cabelo", 25m, _empresa, Local.NaEmpresa);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_servicos_ao_banco_de_dados()
         {
-            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, _empresa), new Servico("Manicure", "Manicure", 30m, _empresa, Local.NaEmpresa)) };
+            var servicos = new List<Servico> { new Servico("Corte", "Corte de Cabelo", 25m, _empresa, Local.ADomicilio), new Servico("Manicure", "Manicure", 30m, _empresa, Local.NaEmpresa) };
 
             _repositorio.AdicionarServicos(servicos);
 

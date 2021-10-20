@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoIntegradorMVC.Migrations
 {
-    public partial class Initial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,8 @@ namespace ProjetoIntegradorMVC.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     EmpresaId = table.Column<int>(type: "int", nullable: true),
-                    TempoEstimado = table.Column<int>(type: "int", nullable: false)
+                    TempoEstimado = table.Column<int>(type: "int", nullable: false),
+                    Local = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -14,7 +14,6 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
 {
     public class Empresa : Usuario
     {
-        private RepositorioEmpresa _repositorioEmpresa;
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string CNPJ { get; private set; }
