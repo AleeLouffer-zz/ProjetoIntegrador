@@ -23,7 +23,6 @@ namespace ProjetoIntegradorMVC.Repositorio
         {
             foreach (var cliente in clientes)
             {
-                //Ver se existe no banco
                 Adicionar(cliente);
             }
             _contexto.SaveChanges();
