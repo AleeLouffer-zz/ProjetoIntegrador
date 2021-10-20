@@ -6,7 +6,7 @@
 
 <header>
     <div class="menu">
-        <img src="/Imagens/Senac_Logo.png" id="logo">
+        <a asp-action="PaginaInicial"><img src="/Imagens/Senac_Logo.png" id="logo"></a>
         <nav>
             <ul class="opcoes">
                 <!-- Ancoras para ir para a pagina de criar conta e entrar -->
@@ -20,7 +20,7 @@
     <!-- Ancoras para ir para a pagina de detalhes do servico clicado -->
     @foreach (var servico in Model)
     {
-        <a asp-action="DetalhesDoServico" asp-route-id="@servico.Id">
+        <a class="servico-botao" asp-action="DetalhesDoServico" asp-route-id="@servico.Id">
             <div class="servico">
                 <h1 class="servico-item">@servico.Nome</h1>
                 <p class="servico-item">Descrição: @servico.Descricao</p>

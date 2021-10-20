@@ -20,6 +20,16 @@
     text-decoration: none;
 }
 
+.servico-botao{
+    transition: 0.5s;
+}
+
 .corte h1{
     text-align: center;
+}
+
+@media screen and (min-width: 500px){
+    .servico-botao:hover{
+        transform: scale(1.1);
+    }
 }

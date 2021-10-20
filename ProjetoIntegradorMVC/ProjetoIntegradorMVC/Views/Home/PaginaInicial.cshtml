@@ -1,12 +1,12 @@
 @model IEnumerable<ProjetoIntegradorMVC.Models.Operacoes.Servico>
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Página inicial";
 }
 
 <header>
     <div class="menu">
-        <img src="/Imagens/Senac_Logo.png" id="logo">
+        <a asp-action="PaginaInicial"><img src="/Imagens/Senac_Logo.png" id="logo"></a>
         <nav>
             <ul class="opcoes">
                 <!-- Ancoras para ir para a pagina de criar conta e entrar -->
