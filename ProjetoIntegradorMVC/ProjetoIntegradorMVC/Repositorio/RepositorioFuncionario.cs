@@ -1,4 +1,6 @@
-﻿using ProjetoIntegradorMVC.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;

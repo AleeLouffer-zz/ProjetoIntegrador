@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PI.Testes.Helpers;
+using ProjetoIntegradorMVC;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;

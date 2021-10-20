@@ -17,7 +17,7 @@ namespace PI.Testes
         private Empresa _empresa;
         private decimal _preco;
         private Local _local;
-        
+      
         public ServicoTeste()
         {
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");

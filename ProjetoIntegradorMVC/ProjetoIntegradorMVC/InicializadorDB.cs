@@ -20,19 +20,26 @@ namespace ProjetoIntegradorMVC
         private readonly IRepositorioServico _repositorioServico;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
         private readonly IRepositorioEmpresa _repositorioEmpresa;
+        private readonly IRepositorioCliente _repositorioCliente;
 
-        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioEmpresa repositorioEmpresa)
+        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioCliente repositorioCliente, IRepositorioEmpresa repositorioEmpresa)
+
         {
             _contexto = contexto;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioServico = repositorioServico;
             _repositorioFuncComServicos = repositorioFuncComServicos;
             _repositorioEmpresa = repositorioEmpresa;
+            _repositorioCliente = repositorioCliente;
         }
 
         public void IniciarDB()
         {
             _contexto.Database.Migrate();
+          
+            List<Funcionario> funcionarios = SetFuncionarios();
+            List<Servico> servicos = SetServicos();
+            List<Cliente> cliente = SetClientes();
 
             Empresa empresa = SetEmpresa();
             List<Funcionario> funcionarios = SetFuncionarios(empresa);
@@ -41,6 +48,7 @@ namespace ProjetoIntegradorMVC
             List<Servico> servicos = SetServicos(empresa);
             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
+            _repositorioCliente.AdicionarClientes(cliente);
 
             foreach(var funcionario in funcionarios)
             {
@@ -74,11 +82,20 @@ namespace ProjetoIntegradorMVC
         {
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
+            var jornada = new JornadaDeTrabalho(diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
                 new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", jornada, empresa),
                 new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", jornada, empresa),
                 new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "86390362099", jornada, empresa)
+            };
+        }
+
+        private static List<Cliente> SetClientes()
+        {
+               return new List<Cliente>() {
+               new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147"),
+               new Cliente("Carlos", "carlos@gmail.com", "carlao", "85526580032"),
+               new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","05806188035" )
             };
         }
     }

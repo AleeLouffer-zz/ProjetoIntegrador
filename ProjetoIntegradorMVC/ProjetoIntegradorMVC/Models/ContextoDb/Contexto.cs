@@ -17,6 +17,7 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<FuncionariosComServicos> FuncionariosComServicos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)

@@ -16,12 +16,6 @@ namespace PI.Testes
         private string _email;
         private string _senha;
         private string _cpf;
-
-        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private RepositorioFuncionario _repositorio;
-        private Contexto _contexto;
-        private Empresa _empresa;
-
         private JornadaDeTrabalho _jornada;
         public FuncionarioTeste()
         {
@@ -33,14 +27,7 @@ namespace PI.Testes
 
             var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            _jornada = new (diasDeTrabalho, horariosDeTrabalho);
-
-            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
-
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionario");
-            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
-
-            _repositorio = new RepositorioFuncionario(_contexto);
+            _jornada = new (diasDeTrabalho, horariosDeTrabalho);          
         }
 
         [Fact]

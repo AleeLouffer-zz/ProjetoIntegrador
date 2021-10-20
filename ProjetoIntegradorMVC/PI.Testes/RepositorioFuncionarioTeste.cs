@@ -1,8 +1,11 @@
-﻿using PI.Testes.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using PI.Testes.Helpers;
+using ProjetoIntegradorMVC;
 using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;

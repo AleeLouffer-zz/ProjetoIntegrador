@@ -2,9 +2,11 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
+    [Index(nameof(CPF), IsUnique = true)]
     public class Funcionario : Usuario
     {
         public string Nome { get; private set; }

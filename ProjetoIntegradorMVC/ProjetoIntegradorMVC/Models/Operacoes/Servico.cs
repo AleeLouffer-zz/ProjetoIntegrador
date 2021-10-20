@@ -1,16 +1,13 @@
-﻿using Caelum.Stella.CSharp.Vault;
-using ProjetoIntegradorMVC.Models.Usuarios;
+﻿using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
     [Table("Servico")]
+    [Index(nameof(Nome), IsUnique = true)]
+    [Index(nameof(Preco), IsUnique = true)]
     public class Servico : ClasseBase
     {
         public string Nome { get; private set; }
@@ -19,7 +16,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public Empresa Empresa { get; private set; }
         public int TempoEstimado { get; private set; }
         public Local Local { get; set; }
-
+        
         private Servico(){ }
 
         public Servico(string nome, string descricao, decimal preco, Empresa empresa, Local local, int tempoEstimado = 0)
