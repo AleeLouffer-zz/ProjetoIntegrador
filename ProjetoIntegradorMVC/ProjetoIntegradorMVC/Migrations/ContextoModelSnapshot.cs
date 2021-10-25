@@ -110,6 +110,12 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("FuncionarioId")
                         .HasColumnType("int");
 
@@ -120,6 +126,10 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("FuncionarioId");
 
@@ -303,6 +313,14 @@ namespace ProjetoIntegradorMVC.Migrations
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Operacoes.Agendamento", b =>
                 {
+                    b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Cliente", null)
+                        .WithMany("Agendamentos")
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Empresa", "Empresa")
+                        .WithMany("Agendamentos")
+                        .HasForeignKey("EmpresaId");
+
                     b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", "Funcionario")
                         .WithMany("Agendamentos")
                         .HasForeignKey("FuncionarioId");
@@ -314,6 +332,8 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.HasOne("ProjetoIntegradorMVC.Models.Operacoes.Servico", "Servico")
                         .WithMany()
                         .HasForeignKey("ServicoId");
+
+                    b.Navigation("Empresa");
 
                     b.Navigation("Funcionario");
 
@@ -399,8 +419,15 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Navigation("HorariosDeTrabalho");
                 });
 
+            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Cliente", b =>
+                {
+                    b.Navigation("Agendamentos");
+                });
+
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Empresa", b =>
                 {
+                    b.Navigation("Agendamentos");
+
                     b.Navigation("Funcionarios");
 
                     b.Navigation("FuncionariosComServicos");

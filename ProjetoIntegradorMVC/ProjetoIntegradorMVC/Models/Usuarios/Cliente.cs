@@ -2,7 +2,7 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
-
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -10,6 +10,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
 
         private Cliente() { }
         public Cliente(string nome, string email, string senha, string cpf)

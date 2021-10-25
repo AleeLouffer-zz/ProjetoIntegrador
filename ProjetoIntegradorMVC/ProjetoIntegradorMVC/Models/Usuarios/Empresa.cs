@@ -21,6 +21,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public List<Funcionario> Funcionarios { get; private set; }
         public List<Servico> Servicos { get; private set; }
         public List<FuncionariosComServicos> FuncionariosComServicos { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
 
         private Empresa() { }
 
