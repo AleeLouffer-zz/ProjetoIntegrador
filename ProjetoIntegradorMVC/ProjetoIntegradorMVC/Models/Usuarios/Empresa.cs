@@ -17,6 +17,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
         public string CNPJ { get; private set; }
+        public List<Agendamento> Agendamento { get; private set; }
         public EnderecoDaEmpresa Endereco { get; private set; }
         public List<Funcionario> Funcionarios { get; private set; }
         public List<Servico> Servicos { get; private set; }
@@ -29,6 +30,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             Funcionarios = new List<Funcionario>();
             Servicos = new List<Servico>();
             FuncionariosComServicos = new List<FuncionariosComServicos>();
+            Agendamento = new List<Agendamento>();
             ValidarInformacoes(razaoSocial, nomeFantasia, email, senha, cnpj);
             RazaoSocial = razaoSocial;
             NomeFantasia = nomeFantasia;

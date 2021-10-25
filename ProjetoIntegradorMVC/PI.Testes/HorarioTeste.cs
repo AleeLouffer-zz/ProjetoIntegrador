@@ -16,6 +16,6 @@ namespace PI.Testes
             var horarioDeTrabalho = new Horario("13:00");
 
             Assert.Equal(horario, horarioDeTrabalho.Hora);
-        }
+        } 
     }
 }

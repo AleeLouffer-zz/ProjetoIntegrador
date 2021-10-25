@@ -10,10 +10,12 @@ namespace ProjetoIntegradorMVC.Models
     {
         public int Id { get; private set; }
         public DateTime Hora { get; private set; }
+        public bool EstaDisponivel { get; set; }
         private Horario() { }
-        public Horario(string hora)
+        public Horario(string hora, bool estaDisponivel = true)
         {
             Hora = ObterComoHoraEMinuto(hora);
+            EstaDisponivel = estaDisponivel;
         }
         private static DateTime ObterComoHoraEMinuto(string hora)
         {
