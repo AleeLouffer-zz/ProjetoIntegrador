@@ -13,8 +13,9 @@ namespace PI.Testes
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
         private readonly JornadaDeTrabalho _jornadaDoFuncionario;
-        private readonly Horario _horario;
+        private readonly DataEHora _horario;
         private readonly Empresa _empresa;
+        private readonly Cliente _cliente;
 
         public AgendamentoTeste()
         {
@@ -24,7 +25,8 @@ namespace PI.Testes
             _jornadaDoFuncionario = new(diasDeTrabalho, horariosDeTrabalho);
             _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _jornadaDoFuncionario, _empresa);
             _servico = new Servico("Corte de cabelo", "descricao", 123m, _empresa, Local.Ambos);
-            _horario = new Horario("13:00");
+            _horario = new DataEHora("12/12/2001 13:00:00");
+            _cliente = new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147");
         }
 
         [Fact]
@@ -32,7 +34,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O funcionário não pode ser nulo";
 
-            void Acao() => new Agendamento(null, _empresa,_servico, _horario);
+            void Acao() => new Agendamento(null, _empresa,_servico, _horario, _cliente);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -43,7 +45,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O serviço não pode ser nulo";
 
-            void Acao() => new Agendamento(_funcionario, _empresa, null, _horario);
+            void Acao() => new Agendamento(_funcionario, _empresa, null, _horario, _cliente);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -54,7 +56,18 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O horário não pode ser nulo";
 
-            void Acao() => new Agendamento(_funcionario, _empresa, _servico, null);
+            void Acao() => new Agendamento(_funcionario, _empresa, _servico, null, _cliente);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Nao_deve_criar_agendamento_com_cliente_nulo()
+        {
+            var mensagemEsperada = "O cliente não pode ser nulo";
+
+            void Acao() => new Agendamento(_funcionario, _empresa, _servico, _horario, null);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
