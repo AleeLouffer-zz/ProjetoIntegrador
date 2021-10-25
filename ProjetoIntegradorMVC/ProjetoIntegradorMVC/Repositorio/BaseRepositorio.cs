@@ -1,9 +1,10 @@
-﻿using ProjetoIntegradorMVC.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models;
 using ProjetoIntegradorMVC.Models.ContextoDb;
-using ProjetoIntegradorMVC.Models.Usuarios;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Repositorio
@@ -23,8 +24,20 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public void Adicionar(T objeto)
         {
-            _contexto.Set<T>().Add(objeto);
-            _contexto.SaveChanges();
+            try
+            {
+                _contexto.Set<T>().Add(objeto);
+                _contexto.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                SqlException innerException = ex.InnerException as SqlException;
+
+                var excecaoRepresentaDuplicidade = innerException.Number == 2627 || innerException.Number == 2601;
+
+                if (excecaoRepresentaDuplicidade) throw new DuplicacaoDeDadosException("Este objeto já existe no banco.");
+                throw;
+            }
         }
     }
 }

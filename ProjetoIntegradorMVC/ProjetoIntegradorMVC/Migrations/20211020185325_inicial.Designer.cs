@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 
 namespace ProjetoIntegradorMVC.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20211020185325_inicial")]
+    partial class inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,8 +110,17 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Local")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TempoEstimado")
                         .HasColumnType("int");
@@ -117,13 +128,6 @@ namespace ProjetoIntegradorMVC.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmpresaId");
-                    
-                    b.HasIndex("Nome")
-                        .IsUnique()
-                        .HasFilter("[Nome] IS NOT NULL");
-
-                    b.HasIndex("Preco")
-                        .IsUnique();
 
                     b.ToTable("Servico");
                 });
@@ -156,7 +160,6 @@ namespace ProjetoIntegradorMVC.Migrations
                 });
 
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
-            
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,34 +188,6 @@ namespace ProjetoIntegradorMVC.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("JornadaDeTrabalhoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-                    
-                    b.HasIndex("CPF")
-                        .IsUnique()
-                        .HasFilter("[CPF] IS NOT NULL");
-                        
                     b.HasIndex("JornadaDeTrabalhoId");
 
                     b.ToTable("Funcionarios");
@@ -256,7 +231,7 @@ namespace ProjetoIntegradorMVC.Migrations
 
                     b.Navigation("Servico");
                 });
-                
+
             modelBuilder.Entity("ProjetoIntegradorMVC.Models.Operacoes.Servico", b =>
                 {
                     b.HasOne("ProjetoIntegradorMVC.Models.Usuarios.Empresa", "Empresa")
@@ -317,9 +292,7 @@ namespace ProjetoIntegradorMVC.Migrations
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                        
-            modelBuilder.Entity("ProjetoIntegradorMVC.Models.Usuarios.Funcionario", b =>
-                {
+
                     b.HasOne("ProjetoIntegradorMVC.Models.JornadaDeTrabalho", "JornadaDeTrabalho")
                         .WithMany()
                         .HasForeignKey("JornadaDeTrabalhoId");

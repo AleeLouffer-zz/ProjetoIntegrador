@@ -5,17 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\JornadaDeTrabalho\DiasDeTrabalho.cs" />
-    <Compile Remove="Models\JornadaDeTrabalho\HorariosDeTrabalho.cs" />
     <Compile Remove="Models\Usuarios\IUsuario.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Models\JornadaDeTrabalho\DiaDeTrabalho" />
-    <None Remove="Models\JornadaDeTrabalho\NewFile1.txt" />
-    <None Remove="Models\JornadaDeTrabalho\NewFile2.txt" />
-    <None Remove="Models\NewFile1.txt" />
+    <None Remove="Models\NewFile.txt" />
     <None Remove="Models\Usuarios\NewFile.txt" />
+    <None Remove="Repositorio\NewFile.txt" />
   </ItemGroup>
 
   <ItemGroup>
