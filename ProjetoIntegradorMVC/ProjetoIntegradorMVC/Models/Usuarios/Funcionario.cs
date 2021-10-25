@@ -1,7 +1,6 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
-using ProjetoIntegradorMVC.Models.Operacoes;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +15,9 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public Empresa Empresa { get; private set; }
         public int EmpresaId { get; private set; }
         public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
-        private RepositorioFuncionario _repositorioFuncionario;
         public List<Horario> HorariosDisponiveis { get; private set; }
         public List<Agendamento> Agendamentos { get; private set; }
+
         private Funcionario() { }
         public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada, Empresa empresa)
         {

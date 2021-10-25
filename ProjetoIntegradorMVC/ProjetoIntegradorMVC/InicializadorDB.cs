@@ -36,17 +36,15 @@ namespace ProjetoIntegradorMVC
         public void IniciarDB()
         {
             _contexto.Database.Migrate();
-          
-            List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos();
-            List<Cliente> cliente = SetClientes();
 
             Empresa empresa = SetEmpresa();
             List<Funcionario> funcionarios = SetFuncionarios(empresa);
-            _repositorioEmpresa.AdicionarEmpresa(empresa);
-
             List<Servico> servicos = SetServicos(empresa);
-            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
+            List<Cliente> cliente = SetClientes();
+
+
+            _repositorioEmpresa.AdicionarEmpresa(empresa);
+             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
 

@@ -14,14 +14,16 @@ namespace PI.Testes
         private readonly Servico _servico;
         private readonly JornadaDeTrabalho _jornadaDoFuncionario;
         private readonly Horario _horario;
+        private readonly Empresa _empresa;
 
         public AgendamentoTeste()
         {
+            _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
             var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
             _jornadaDoFuncionario = new(diasDeTrabalho, horariosDeTrabalho);
-            _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _jornadaDoFuncionario);
-            _servico = new Servico("Corte de cabelo", "descricao", 123m);
+            _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _jornadaDoFuncionario, _empresa);
+            _servico = new Servico("Corte de cabelo", "descricao", 123m, _empresa, Local.Ambos);
             _horario = new Horario("13:00");
         }
 
@@ -30,7 +32,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O funcionário não pode ser nulo";
 
-            void Acao() => new Agendamento(null, _servico, _horario);
+            void Acao() => new Agendamento(null, _empresa,_servico, _horario);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -41,7 +43,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O serviço não pode ser nulo";
 
-            void Acao() => new Agendamento(_funcionario, null, _horario);
+            void Acao() => new Agendamento(_funcionario, _empresa, null, _horario);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -52,7 +54,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O horário não pode ser nulo";
 
-            void Acao() => new Agendamento(_funcionario, _servico, null);
+            void Acao() => new Agendamento(_funcionario, _empresa, _servico, null);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

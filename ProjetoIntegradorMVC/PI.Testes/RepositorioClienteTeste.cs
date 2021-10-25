@@ -49,20 +49,5 @@ namespace PI.Testes
             }
             Assert.Equal(clientesASeremAdicionados, clientesRetornados);
         }
-
-        [Fact]
-        public void Nao_deve_adicionar_cliente_existente()
-        {
-            const string mensagemEsperada = "O cliente já existe.";
-            var cliente = new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "19043042811");
-            var listaClientesExistentes = new List<Cliente> { cliente };
-            _contexto.Clientes.Add(cliente);
-            _contexto.SaveChanges();
-
-            void Acao() => _repositorioCliente.AdicionarClientes(listaClientesExistentes);
-
-            var mensagem = Assert.Throws<DuplicateNameException>(Acao).Message;
-            Assert.Equal(mensagemEsperada, mensagem);
-        }
     }
 }
