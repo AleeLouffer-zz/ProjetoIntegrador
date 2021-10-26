@@ -25,7 +25,6 @@ namespace PI.Testes
         private readonly Contexto _contexto;
         private readonly RepositorioFuncionariosComServicos _repositorio;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private readonly JornadaDeTrabalho _jornada;
         private readonly Empresa _empresa;
         public RepositorioFuncionariosComServicosTeste()
         {
@@ -36,13 +35,9 @@ namespace PI.Testes
 
             _repositorio = new RepositorioFuncionariosComServicos(_contexto);
 
-            var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
-            var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            _jornada = new(diasDeTrabalho, horariosDeTrabalho);
-
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@gmail.com", "12345", "05389493000117", "79004394");
-            _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "85769390026", _jornada, _empresa);
-            _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "25807814045", _jornada, _empresa);
+            _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "85769390026", _empresa);
+            _funcionario2 = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "25807814045", _empresa);
             _servico = new Servico("Corte", "Corte de Cabelo", 50m, _empresa, Local.ADomicilio);
             _servico2 = new Servico("Manicure", "Manicure", 30m, _empresa, Local.ADomicilio);
         }

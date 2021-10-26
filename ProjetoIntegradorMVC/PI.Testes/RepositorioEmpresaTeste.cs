@@ -24,7 +24,6 @@ namespace PI.Testes
         private readonly Empresa _empresa;
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
-        private readonly JornadaDeTrabalho _jornada;
 
         public RepositorioEmpresaTeste()
         {
@@ -34,12 +33,8 @@ namespace PI.Testes
 
             _repositorio = new RepositorioEmpresa(_contexto);
 
-            var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
-            var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            _jornada = new(diasDeTrabalho, horariosDeTrabalho);
-
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
-            _funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada, _empresa);
+            _funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _empresa);
             _servico = new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, _empresa, Local.ADomicilio);
 
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
@@ -51,7 +46,7 @@ namespace PI.Testes
         [Fact]
         public void Deve_vincular_um_funcionario_a_uma_empresa()
         {
-            var funcionarioEsperado = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _jornada, _empresa);
+            var funcionarioEsperado = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", _empresa);
 
             _repositorio.VincularFuncionario(_empresa.CNPJ, funcionarioEsperado);
 
