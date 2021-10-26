@@ -81,12 +81,12 @@ namespace ProjetoIntegradorMVC
             var funcionarios = new List<Funcionario>() {
                 new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", empresa),
                 new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", empresa),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "86390362099", empresa)
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "14227481031", empresa)
             };
 
             foreach (var funcionario in funcionarios)
             {
-                funcionario.AdicionarExpediente(DayOfWeek.Friday, " 08:00", "18:00");
+                funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "18:00");
             };
 
             return funcionarios;
