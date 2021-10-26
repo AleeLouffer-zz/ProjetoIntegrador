@@ -36,17 +36,15 @@ namespace ProjetoIntegradorMVC
         public void IniciarDB()
         {
             _contexto.Database.Migrate();
-          
-            List<Funcionario> funcionarios = SetFuncionarios();
-            List<Servico> servicos = SetServicos();
-            List<Cliente> cliente = SetClientes();
 
             Empresa empresa = SetEmpresa();
             List<Funcionario> funcionarios = SetFuncionarios(empresa);
-            _repositorioEmpresa.AdicionarEmpresa(empresa);
-
             List<Servico> servicos = SetServicos(empresa);
-            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
+            List<Cliente> cliente = SetClientes();
+
+
+            _repositorioEmpresa.AdicionarEmpresa(empresa);
+             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
 
@@ -80,9 +78,9 @@ namespace ProjetoIntegradorMVC
 
         private static List<Funcionario> SetFuncionarios(Empresa empresa)
         {
-            var diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
-            var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
-            var jornada = new JornadaDeTrabalho(diasDeTrabalho, horariosDeTrabalho);
+            var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
+            var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
+            var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
                 new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", jornada, empresa),
                 new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", jornada, empresa),

@@ -6,18 +6,18 @@ using System.Text.RegularExpressions;
 
 namespace ProjetoIntegradorMVC.Models
 {
-    public class HorarioDeTrabalho
+    public class Horario
     {
         public int Id { get; private set; }
-        public DateTime Horario { get; private set; }
-        private HorarioDeTrabalho () { }
-        public HorarioDeTrabalho(string horario)
+        public DateTime Hora { get; private set; }
+        private Horario() { }
+        public Horario(string hora)
         {
-            Horario = ObterComoHoraEMinuto(horario);
+            Hora = ObterComoHoraEMinuto(hora);
         }
-        private static DateTime ObterComoHoraEMinuto(string horario)
+        private static DateTime ObterComoHoraEMinuto(string hora)
         {
-            var converteuCorretamente = DateTime.TryParseExact(horario, "HH:mm",
+            var converteuCorretamente = DateTime.TryParseExact(hora, "HH:mm",
             CultureInfo.InvariantCulture, DateTimeStyles.None, out var horaEMinutoConvertido);
             if (!converteuCorretamente) throw new Exception("Horario inválido");
 

@@ -8,12 +8,12 @@ namespace PI.Testes
 {
     public class JornadaDeTrabalhoTeste
     {
-        private readonly List<DiaDeTrabalho>  _diasDeTrabalho;
-        private readonly List<HorarioDeTrabalho> _horariosDeTrabalho;
+        private readonly List<DiaDaSemana>  _diasDeTrabalho;
+        private readonly List<Horario> _horariosDeTrabalho;
         public JornadaDeTrabalhoTeste()
         {
-            _diasDeTrabalho = new List<DiaDeTrabalho> { new DiaDeTrabalho("Segunda"), new DiaDeTrabalho("Terca"), new DiaDeTrabalho("Quarta"), new DiaDeTrabalho("Quinta"), new DiaDeTrabalho("Sexta") };
-            _horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
+            _diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
+            _horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
         }
 
         [Fact]
