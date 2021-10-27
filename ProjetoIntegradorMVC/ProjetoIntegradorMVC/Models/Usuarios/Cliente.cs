@@ -2,14 +2,17 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
-
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
+    [Index(nameof(CPF), IsUnique = true)]
     public class Cliente : Usuario
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
 
         private Cliente() { }
         public Cliente(string nome, string email, string senha, string cpf)

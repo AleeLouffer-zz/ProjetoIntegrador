@@ -2,6 +2,7 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
@@ -14,8 +15,11 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string CPF { get; private set; }
         public Empresa Empresa { get; private set; }
         public int EmpresaId { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
         public List<ExpedienteDeTrabalho> ExpedientesDeTrabalho { get; private set; } = new();
+
         private Funcionario() { }
+
         public Funcionario (string nome, string email, string senha, string cpf, Empresa empresa)
         {
             ValidarInformacoes(nome, email, senha, cpf);
