@@ -56,9 +56,9 @@ namespace ProjetoIntegradorMVC
             var horariosDeTrabalho = new List<HorarioDeTrabalho> { new HorarioDeTrabalho("08:00"), new HorarioDeTrabalho("12:00"), new HorarioDeTrabalho("13:00"), new HorarioDeTrabalho("17:00") };
             var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
             return new List<Funcionario>() {
-                new Funcionario("Cleide", "cleide@hotmail.com", "123", "2412321311", jornada),
-                new Funcionario("Ravona", "ravona@hotmail.com", "123", "2412321312", jornada),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "2412321313", jornada)
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "37351468052", jornada),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "03507199009", jornada),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "40961131071", jornada)
             };
         }
     }
