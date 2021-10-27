@@ -32,6 +32,8 @@ namespace ProjetoIntegradorMVC
             services.AddTransient<IRepositorioFuncionario, RepositorioFuncionario>();
             services.AddTransient<IRepositorioServico, RepositorioServico>();
             services.AddTransient<IRepositorioFuncionariosComServicos, RepositorioFuncionariosComServicos>();
+            services.AddTransient<IRepositorioEmpresa, RepositorioEmpresa>();
+            services.AddTransient<IRepositorioCliente, RepositorioCliente>();
             services.AddTransient<InicializadorDB>();
         }
 

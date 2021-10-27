@@ -2,37 +2,43 @@
 using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
+    [Index(nameof(CPF), IsUnique = true)]
     public class Funcionario : Usuario
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
-        public JornadaDeTrabalho JornadaDeTrabalho { get; private set; }
-        private RepositorioFuncionario _repositorioFuncionario;
+        public Empresa Empresa { get; private set; }
+        public int EmpresaId { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; }
+        public List<ExpedienteDeTrabalho> ExpedientesDeTrabalho { get; private set; } = new();
+
         private Funcionario() { }
-        public Funcionario (string nome, string email, string senha, string cpf, JornadaDeTrabalho jornada)
+
+        public Funcionario (string nome, string email, string senha, string cpf, Empresa empresa)
         {
             ValidarInformacoes(nome, email, senha, cpf);
             Nome = nome;
             Email = email;
             Senha = senha;
             CPF = cpf;
-            JornadaDeTrabalho = jornada;
+            Empresa = empresa;
+            EmpresaId = empresa.Id;
         }
 
-        private Funcionario AdicionarRepositorio(RepositorioFuncionario repositorioFuncionario)
+        public void AdicionarExpediente(DayOfWeek diaDaSemana, string horaInicial, string horaFinal)
         {
-            _repositorioFuncionario = repositorioFuncionario;
-            return this;
+            ExpedientesDeTrabalho.Add(new ExpedienteDeTrabalho(this, diaDaSemana, horaInicial, horaFinal));
         }
 
-        public bool ValidarFuncionarioExistente(RepositorioFuncionario repositorioFuncionario)
+        public void AdicionarExpedienteComIntervalo(DayOfWeek diaDaSemana, string horaInicial, string horaFinal, string inicioIntervalo, string finalIntervalo)
         {
-            AdicionarRepositorio(repositorioFuncionario);
-            if (_repositorioFuncionario.BuscarFuncionarioPorCpf(CPF) != null) return true;
-            return false;
+            ExpedientesDeTrabalho.Add(new ExpedienteDeTrabalho(this, diaDaSemana, horaInicial, horaFinal, inicioIntervalo, finalIntervalo));
         }
 
         public void ValidarInformacoes(string nome, string email, string senha, string cpf)
