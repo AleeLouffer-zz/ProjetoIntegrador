@@ -4,6 +4,7 @@ using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Xunit;
 
 namespace PI.Testes
@@ -12,7 +13,7 @@ namespace PI.Testes
     {
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
-        private readonly string _horario;
+        private readonly string _horaEData;
         private readonly Empresa _empresa;
         private readonly Cliente _cliente;
 
@@ -21,8 +22,25 @@ namespace PI.Testes
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _empresa);
             _servico = new Servico("Corte de cabelo", "descricao", 123m, _empresa, Local.Ambos);
-            _horario = "12/12/2001 13:00:00";
+            _horaEData = "12/12/2001 13:00:00";
+            
             _cliente = new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147");
+        }
+        [Fact]
+        public void Deve_criar_um_agendamento()
+        {
+            var agendamentoEsperado = new
+            {
+                Funcionario = _funcionario,
+                Empresa = _empresa,
+                Servico = _servico,
+                HoraEData = DateTime.ParseExact(_horaEData, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture),
+                Cliente = _cliente
+            }.ToExpectedObject();
+
+            var agendamento = new Agendamento(_funcionario, _empresa, _servico, _horaEData, _cliente);
+
+            agendamentoEsperado.ShouldMatch(agendamento);
         }
 
         [Fact]
@@ -30,7 +48,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O campo funcionário deve ser preenchido";
 
-            void Acao() => new Agendamento(null, _empresa,_servico, _horario, _cliente);
+            void Acao() => new Agendamento(null, _empresa,_servico, _horaEData, _cliente);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -41,7 +59,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O campo empresa deve ser preenchido";
 
-            void Acao() => new Agendamento(_funcionario, null, _servico, _horario, _cliente);
+            void Acao() => new Agendamento(_funcionario, null, _servico, _horaEData, _cliente);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -52,7 +70,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O campo serviço deve ser preenchido";
 
-            void Acao() => new Agendamento(_funcionario, _empresa, null, _horario, _cliente);
+            void Acao() => new Agendamento(_funcionario, _empresa, null, _horaEData, _cliente);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -74,7 +92,7 @@ namespace PI.Testes
         {
             var mensagemEsperada = "O campo cliente deve ser preenchido";
 
-            void Acao() => new Agendamento(_funcionario, _empresa, _servico, _horario, null);
+            void Acao() => new Agendamento(_funcionario, _empresa, _servico, _horaEData, null);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);

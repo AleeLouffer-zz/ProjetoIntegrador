@@ -36,7 +36,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             if (string.IsNullOrWhiteSpace(horario)) throw new Exception("O campo horário deve ser preenchido");
             if (cliente == null) throw new Exception("O campo cliente deve ser preenchido");
         }
-        private static DateTime ObterComoHoraEData(string dataEHora)
+        public static DateTime ObterComoHoraEData(string dataEHora)
         {
             var converteuCorretamente = DateTime.TryParseExact(dataEHora, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dataEHoraConvertido);
             if (!converteuCorretamente) throw new Exception("Data e hora inválidos");    
