@@ -20,7 +20,6 @@ namespace PI.Testes
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private Funcionario _funcionario;
         private Funcionario _funcionario2;
-        private JornadaDeTrabalho _jornada;
         private Empresa _empresa;
         public RepositorioFuncionarioTeste()
         {
@@ -29,13 +28,9 @@ namespace PI.Testes
             _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionarios");
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
-
-            var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
-            var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
-            _jornada = new(diasDeTrabalho, horariosDeTrabalho);
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
-            _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _jornada, _empresa);
-            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _jornada, _empresa);
+            _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _empresa);
+            _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _empresa);
             _repositorio = new RepositorioFuncionario(_contexto);
         }
 
@@ -56,8 +51,8 @@ namespace PI.Testes
         [Fact]
         public void Deve_adicionar_os_funcionarios()
         {
-            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "06297337160", _jornada, _empresa), 
-                new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _jornada, _empresa) };
+            var funcionariosASeremAdicionados = new List<Funcionario> { new Funcionario("Cleido","cleido@cleido.com", "123",  "06297337160", _empresa), 
+                new Funcionario("Ravon","ravon@ravon.com", "123", "85769390026", _empresa) };
             _repositorio.AdicionarFuncionarios(funcionariosASeremAdicionados);
             var funcionariosRetornados = new List<Funcionario>();
 

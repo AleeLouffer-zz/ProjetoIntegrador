@@ -7,17 +7,18 @@ using ProjetoIntegradorMVC.Repositorio;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PI.Testes
 {
     public class FuncionarioTeste
     {
-        private readonly string _nome;
-        private readonly string _email;
-        private readonly string _senha;
-        private readonly string _cpf;
-        private JornadaDeTrabalho _jornada;
+        private string _nome;
+        private string _email;
+        private string _senha;
+        private string _cpf;
         private Empresa _empresa;
+
         public FuncionarioTeste()
         {
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
@@ -25,9 +26,6 @@ namespace PI.Testes
             _email = "daniel-zanelato@hotmail.com";
             _senha = "alecrimdourado";
             _cpf = "59819300045";
-            var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
-            var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
-            _jornada = new (diasDeTrabalho, horariosDeTrabalho);
         }
 
         [Fact]
@@ -39,10 +37,9 @@ namespace PI.Testes
                 Email = _email,
                 Senha = _senha,
                 CPF = _cpf,
-                JornadaDeTrabalho = _jornada
             }.ToExpectedObject();
 
-            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _jornada, _empresa);
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _empresa);
 
             funcionarioEsperado.ShouldMatch(funcionario);
         }
@@ -55,7 +52,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um nome";
 
-            void Acao() => new Funcionario(nomeInvalido, _email,  _senha, _cpf, _jornada, _empresa);
+            void Acao() => new Funcionario(nomeInvalido, _email, _senha, _cpf, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -69,7 +66,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um email";
 
-            void Acao() => new Funcionario(_nome, emailInvalido, _senha, _cpf, _jornada, _empresa);
+            void Acao() => new Funcionario(_nome, emailInvalido, _senha, _cpf, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -83,7 +80,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter uma senha";
 
-            void Acao() => new Funcionario(_nome, _email, senhaInvalida, _cpf, _jornada, _empresa);
+            void Acao() => new Funcionario(_nome, _email, senhaInvalida, _cpf, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -97,7 +94,7 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionário deve ter um cpf";
 
-            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada, _empresa);
+            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
@@ -110,10 +107,22 @@ namespace PI.Testes
         {
             const string mensagemEsperada = "O funcionario deve ter um CPF valido";
 
-            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _jornada, _empresa);
+            void Acao() => new Funcionario(_nome, _email, _senha, cpfInvalido, _empresa);
 
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
+        }
+
+        [Fact]
+        public void Deve_adicionar_expediente_no_funcionario()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _empresa);
+
+            var expedienteEsperado = new ExpedienteDeTrabalho(funcionario, DayOfWeek.Friday, "08:00", "18:00");
+
+            funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "18:00");
+
+            Assert.Equal(funcionario.ExpedientesDeTrabalho.FirstOrDefault().HoraDaSaida , expedienteEsperado.HoraDaSaida);
         }
     }
 }

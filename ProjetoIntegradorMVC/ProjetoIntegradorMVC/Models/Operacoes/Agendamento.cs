@@ -13,7 +13,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public Funcionario Funcionario { get; private set; }
         public Empresa Empresa {get; private set; }
         public Servico Servico { get; private set; }
-        public DateTime Horario { get; private set; }
+        public DateTime HoraEData { get; private set; }
         public Cliente Cliente { get; private set; }
 
         private Agendamento() { }
@@ -24,7 +24,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Funcionario = funcionario;
             Empresa = empresa;
             Servico = servico;
-            Horario = ObterComoHoraEData(horario);
+            HoraEData = ObterComoHoraEData(horario);
             Cliente = cliente;
         }
 

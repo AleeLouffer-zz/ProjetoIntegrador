@@ -41,10 +41,10 @@ namespace ProjetoIntegradorMVC
             List<Funcionario> funcionarios = SetFuncionarios(empresa);
             List<Servico> servicos = SetServicos(empresa);
             List<Cliente> cliente = SetClientes();
-
-
+            
             _repositorioEmpresa.AdicionarEmpresa(empresa);
-             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
+
+            _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
 
@@ -78,14 +78,18 @@ namespace ProjetoIntegradorMVC
 
         private static List<Funcionario> SetFuncionarios(Empresa empresa)
         {
-            var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
-            var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
-            var  jornada = new  JornadaDeTrabalho (diasDeTrabalho, horariosDeTrabalho);
-            return new List<Funcionario>() {
-                new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", jornada, empresa),
-                new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", jornada, empresa),
-                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "86390362099", jornada, empresa)
+            var funcionarios = new List<Funcionario>() {
+                new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", empresa),
+                new Funcionario("Ravona", "ravona@hotmail.com", "123", "86390362099", empresa),
+                new Funcionario("Peggy" ,"peggy@hotmail.com", "123", "14227481031", empresa)
             };
+
+            foreach (var funcionario in funcionarios)
+            {
+                funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "18:00");
+            };
+
+            return funcionarios;
         }
 
         private static List<Cliente> SetClientes()

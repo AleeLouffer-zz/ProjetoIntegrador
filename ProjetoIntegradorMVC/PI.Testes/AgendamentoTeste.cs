@@ -12,7 +12,6 @@ namespace PI.Testes
     {
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
-        private readonly JornadaDeTrabalho _jornadaDoFuncionario;
         private readonly string _horario;
         private readonly Empresa _empresa;
         private readonly Cliente _cliente;
@@ -20,10 +19,7 @@ namespace PI.Testes
         public AgendamentoTeste()
         {
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
-            var diasDeTrabalho = new List<DiaDaSemana> { new DiaDaSemana("Segunda"), new DiaDaSemana("Terca"), new DiaDaSemana("Quarta"), new DiaDaSemana("Quinta"), new DiaDaSemana("Sexta") };
-            var horariosDeTrabalho = new List<Horario> { new Horario("08:00"), new Horario("12:00"), new Horario("13:00"), new Horario("17:00") };
-            _jornadaDoFuncionario = new(diasDeTrabalho, horariosDeTrabalho);
-            _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _jornadaDoFuncionario, _empresa);
+            _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _empresa);
             _servico = new Servico("Corte de cabelo", "descricao", 123m, _empresa, Local.Ambos);
             _horario = "12/12/2001 13:00:00";
             _cliente = new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147");
