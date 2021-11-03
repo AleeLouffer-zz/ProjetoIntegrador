@@ -21,8 +21,9 @@ namespace ProjetoIntegradorMVC
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
         private readonly IRepositorioEmpresa _repositorioEmpresa;
         private readonly IRepositorioCliente _repositorioCliente;
-
-        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioCliente repositorioCliente, IRepositorioEmpresa repositorioEmpresa)
+        private readonly IRepositorioAgendamento _repositorioAgendamento;
+        
+        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioCliente repositorioCliente, IRepositorioEmpresa repositorioEmpresa, IRepositorioAgendamento repositorioAgendamento)
 
         {
             _contexto = contexto;
@@ -31,6 +32,7 @@ namespace ProjetoIntegradorMVC
             _repositorioFuncComServicos = repositorioFuncComServicos;
             _repositorioEmpresa = repositorioEmpresa;
             _repositorioCliente = repositorioCliente;
+            _repositorioAgendamento = repositorioAgendamento;
         }
 
         public void IniciarDB()
@@ -41,12 +43,13 @@ namespace ProjetoIntegradorMVC
             List<Funcionario> funcionarios = SetFuncionarios(empresa);
             List<Servico> servicos = SetServicos(empresa);
             List<Cliente> cliente = SetClientes();
-            
-            _repositorioEmpresa.AdicionarEmpresa(empresa);
+            List<Agendamento> agendamentos = SetAgendamentos(empresa);
 
+            _repositorioEmpresa.AdicionarEmpresa(empresa);
             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(cliente);
+            _repositorioAgendamento.AdicionarAgendamento(agendamentos);
 
             foreach(var funcionario in funcionarios)
             {
@@ -94,10 +97,21 @@ namespace ProjetoIntegradorMVC
 
         private static List<Cliente> SetClientes()
         {
-               return new List<Cliente>() {
+            return new List<Cliente>() {
                new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147"),
                new Cliente("Carlos", "carlos@gmail.com", "carlao", "85526580032"),
                new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","05806188035" )
+            };
+        }
+        
+        private static List<Agendamento> SetAgendamentos(Empresa empresa)
+        {
+            var funcionario = new Funcionario("Cleide", "cleide@hotmail.com", "123", "06297337160", empresa);
+            var servico = new Servico("Vagabundo", "Corte de Cabelo", 90m, empresa, Local.NaEmpresa);
+            var cliente = new Cliente("Kaique", "kaique@hotmail.com", "0112", "43144393860");
+           
+            return new List<Agendamento>(){
+                new Agendamento(funcionario, empresa, servico, "12/12/2001 14:00:00", cliente)
             };
         }
     }

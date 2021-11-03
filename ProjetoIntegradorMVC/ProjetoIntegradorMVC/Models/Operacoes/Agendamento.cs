@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
-    public class Agendamento
+    public class Agendamento : ClasseBase
     {
-        public int Id { get; private set; }
         public Funcionario Funcionario { get; private set; }
         public Empresa Empresa {get; private set; }
         public Servico Servico { get; private set; }
