@@ -28,7 +28,6 @@ namespace ProjetoIntegradorMVC.Repositorio
             }
             _contexto.SaveChanges();
         }
-
         public override List<Cliente> Buscar()
         {
             return _contexto.Clientes

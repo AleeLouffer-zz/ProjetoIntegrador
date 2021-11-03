@@ -48,7 +48,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public Funcionario BuscarPorID(int id)
         {
-            return Buscar().Where(funcionario => funcionario.Id == id).SingleOrDefault();
+            return Buscar().SingleOrDefault(funcionario => funcionario.Id == id);
         }
     }
 }

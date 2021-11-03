@@ -33,7 +33,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public Servico BuscarPorID(int id)
         {
-            return Buscar().Where(servico => servico.Id == id).SingleOrDefault();
+            return Buscar().SingleOrDefault(servico => servico.Id == id);
         }
     }
 }

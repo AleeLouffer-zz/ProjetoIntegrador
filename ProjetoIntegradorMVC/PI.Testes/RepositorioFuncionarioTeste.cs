@@ -35,6 +35,18 @@ namespace PI.Testes
         }
 
         [Fact]
+        public void Deve_retornar_um_funcionario_pelo_id()
+        {
+            _contexto.Funcionarios.Add(_funcionario);
+            _contexto.SaveChanges();
+            var idEsperado = _funcionario.Id;
+
+            var funcionario = _repositorio.BuscarPorID(idEsperado);
+
+            Assert.Equal(idEsperado, funcionario.Id);
+        }
+
+        [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
         {
             _contexto.Funcionarios.Add(_funcionario);
