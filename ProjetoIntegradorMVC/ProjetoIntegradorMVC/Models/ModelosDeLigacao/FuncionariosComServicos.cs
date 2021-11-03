@@ -13,6 +13,7 @@ namespace ProjetoIntegradorMVC.Models.LigaçãoModels
         public int FuncionarioId { get; private set; }
         public Servico Servico { get; private set; }
         public int ServicoId { get; private set; }
+        public int EmpresaId { get; private set; }
         public Empresa Empresa { get; private set; }
 
         private FuncionariosComServicos() { }
@@ -24,6 +25,7 @@ namespace ProjetoIntegradorMVC.Models.LigaçãoModels
             Servico = servico;
             ServicoId = servico.Id;
             Empresa = empresa;
+            EmpresaId = empresa.Id;
         }
     }
 }

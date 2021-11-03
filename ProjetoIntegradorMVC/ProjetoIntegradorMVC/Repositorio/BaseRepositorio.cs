@@ -20,7 +20,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public T BuscarPorId(int id) => _contexto.Set<T>().Where(t => t.Id == id).SingleOrDefault();
 
-        public List<T> BuscarTodos() => _contexto.Set<T>().ToList();
+        public abstract List<T> Buscar();
 
         public void Adicionar(T objeto)
         {

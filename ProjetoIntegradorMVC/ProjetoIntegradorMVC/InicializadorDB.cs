@@ -35,7 +35,8 @@ namespace ProjetoIntegradorMVC
 
         public void IniciarDB()
         {
-            _contexto.Database.Migrate();
+            _contexto.Database.EnsureDeleted();
+            _contexto.Database.EnsureCreated();
 
             Empresa empresa = SetEmpresa();
             List<Funcionario> funcionarios = SetFuncionarios(empresa);

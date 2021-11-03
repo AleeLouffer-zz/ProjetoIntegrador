@@ -14,6 +14,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
+        public int EmpresaId { get; private set; }
         public Empresa Empresa { get; private set; }
         public int TempoEstimado { get; private set; }
         public Local Local { get; set; }
@@ -29,6 +30,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             Empresa = empresa;
             TempoEstimado = tempoEstimado;
             Local = local;
+            EmpresaId = empresa.Id;
         }
 
         public void ValidarInformacoes(string nome, string descricao, decimal preco, int tempoEstimado)

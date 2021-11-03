@@ -26,12 +26,15 @@
         <div class="funcionarios">
             @foreach (var funcionario in Model.Funcionario)
             {
-                <div class="funcionario">
-                    <h1>@funcionario.Nome</h1>
-                    <p>@funcionario.Empresa.NomeFantasia</p>
-                    <p>Expediente do dia</p>
-                    <button class="agendar">Agendar</button>
-                </div>
+            <div class="funcionario">
+                <h1>@funcionario.Nome</h1>
+                <p>@funcionario.Empresa.NomeFantasia</p>
+                @foreach (var expediente in funcionario.ExpedientesDeTrabalho)
+                {
+                    <p>@expediente.HoraDeInicio.ToShortTimeString() - @expediente.HoraDaSaida.ToShortTimeString()</p>
+                }
+                <button class="agendar">Agendar</button>
+            </div>
             }
         </div>
     </div>

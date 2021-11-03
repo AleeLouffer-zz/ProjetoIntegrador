@@ -34,6 +34,9 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
                        en.Property(p => p.UF).HasColumnName("UF");
                    }
                );
+
+            modelbuilder.Entity<FuncionariosComServicos>().HasOne(funcionariocomservico => funcionariocomservico.Funcionario).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelbuilder.Entity<FuncionariosComServicos>().HasOne(funcionariocomservico => funcionariocomservico.Servico).WithMany().OnDelete(DeleteBehavior.NoAction);
         }
     }
 }   

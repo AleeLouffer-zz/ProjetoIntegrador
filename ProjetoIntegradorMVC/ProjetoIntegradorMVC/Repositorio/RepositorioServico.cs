@@ -1,4 +1,5 @@
 ﻿using Caelum.Stella.CSharp.Vault;
+using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
@@ -20,6 +21,19 @@ namespace ProjetoIntegradorMVC.Repositorio
         {
             foreach (var servico in servicos) Adicionar(servico);
             _contexto.SaveChanges();
+        }
+
+        public override List<Servico> Buscar()
+        {
+            return _contexto.Servicos
+                .Include(servico => servico.Empresa)
+                .AsNoTracking()
+                .ToList();
+        }
+
+        public Servico BuscarPorID(int id)
+        {
+            return Buscar().Where(servico => servico.Id == id).SingleOrDefault();
         }
     }
 }

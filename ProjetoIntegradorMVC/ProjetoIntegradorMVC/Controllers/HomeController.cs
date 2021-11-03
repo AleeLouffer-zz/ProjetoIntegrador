@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradorMVC.DTO;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,17 @@ namespace ProjetoIntegradorMVC.Controllers
         private readonly IRepositorioServico _repositorioServico;
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
+        private readonly Contexto _contexto;
 
-        public HomeController(IRepositorioServico repositorioServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorioServico repositorioServico, 
+            IRepositorioFuncionario repositorioFuncionario, 
+            IRepositorioFuncionariosComServicos repositorioFuncComServicos,
+            Contexto contexto)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioFuncComServicos = repositorioFuncComServicos;
+            _contexto = contexto;
         }
 
         public IActionResult PaginaInicial()
@@ -28,12 +35,13 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult CatalogoDeServicos()
         {
-            return View(_repositorioServico.BuscarTodos());
+            var servicos = _repositorioServico.Buscar();
+            return View(servicos);
         }
 
         public IActionResult DetalhesDoServico(int id)
         {
-            var servicoDTO = _repositorioServico.BuscarPorId(id);
+            var servicoDTO = _repositorioServico.BuscarPorID(id);
             var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 

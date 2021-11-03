@@ -23,7 +23,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             foreach(var id in Ids)
             {
-                var funcionario = BuscarPorId(id);    
+                var funcionario = BuscarPorID(id);    
                 funcionarios.Add(funcionario);    
             }
 
@@ -35,6 +35,20 @@ namespace ProjetoIntegradorMVC.Repositorio
             foreach (var funcionario in funcionarios) Adicionar(funcionario); 
             
             _contexto.SaveChanges();
+        }
+
+        public override List<Funcionario> Buscar()
+        {
+            return _contexto.Funcionarios
+                .Include(funcionario => funcionario.Agendamentos)
+                .Include(funcionario => funcionario.Empresa)
+                .Include(funcionario => funcionario.ExpedientesDeTrabalho)
+                .AsNoTracking().ToList();
+        }
+
+        public Funcionario BuscarPorID(int id)
+        {
+            return Buscar().Where(funcionario => funcionario.Id == id).SingleOrDefault();
         }
     }
 }

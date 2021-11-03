@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,14 @@ namespace ProjetoIntegradorMVC.Repositorio
                 Adicionar(cliente);
             }
             _contexto.SaveChanges();
+        }
+
+        public override List<Cliente> Buscar()
+        {
+            return _contexto.Clientes
+                .Include(cliente => cliente.Agendamentos)
+                .AsNoTracking()
+                .ToList();
         }
     }
 }
