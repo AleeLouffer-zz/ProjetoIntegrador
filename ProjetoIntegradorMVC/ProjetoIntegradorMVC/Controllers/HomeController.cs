@@ -33,7 +33,7 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult CatalogoDeServicos()
         {
-            var servicos = _repositorioServico.Buscar();
+            var servicos = _repositorioServico.ObterTodos();
             return View(servicos);
         }
 

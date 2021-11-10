@@ -38,7 +38,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto.SaveChanges();
         }
 
-        public override List<Empresa> Buscar()
+        public override List<Empresa> ObterTodos()
         {
             return _contexto.Empresas
                 .Include(empresa => empresa.Funcionarios)
