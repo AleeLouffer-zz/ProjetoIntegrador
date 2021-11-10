@@ -23,7 +23,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto.SaveChanges();
         }
 
-        public override List<Servico> Buscar()
+        public override List<Servico> ObterTodos()
         {
             return _contexto.Servicos
                 .Include(servico => servico.Empresa)
@@ -33,7 +33,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public Servico BuscarPorID(int id)
         {
-            return Buscar().SingleOrDefault(servico => servico.Id == id);
+            return ObterTodos().SingleOrDefault(servico => servico.Id == id);
         }
     }
 }

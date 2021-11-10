@@ -54,7 +54,7 @@ namespace PI.Testes
             _contexto.Servicos.Add(new Servico("Manicure", "Manicure", 30m, _empresa, Local.ADomicilio));
             _contexto.SaveChanges();
 
-            var servicos = _repositorio.Buscar();
+            var servicos = _repositorio.ObterTodos();
 
             Assert.Equal(2, servicos.Count);
         }

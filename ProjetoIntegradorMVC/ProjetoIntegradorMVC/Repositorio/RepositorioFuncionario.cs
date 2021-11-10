@@ -37,7 +37,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto.SaveChanges();
         }
 
-        public override List<Funcionario> Buscar()
+        public override List<Funcionario> ObterTodos()
         {
             return _contexto.Funcionarios
                 .Include(funcionario => funcionario.Agendamentos)
@@ -48,7 +48,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
         public Funcionario BuscarPorID(int id)
         {
-            return Buscar().SingleOrDefault(funcionario => funcionario.Id == id);
+            return ObterTodos().SingleOrDefault(funcionario => funcionario.Id == id);
         }
     }
 }

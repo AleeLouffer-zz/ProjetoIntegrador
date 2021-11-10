@@ -28,7 +28,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             }
             _contexto.SaveChanges();
         }
-        public override List<Cliente> Buscar()
+        public override List<Cliente> ObterTodos()
         {
             return _contexto.Clientes
                 .Include(cliente => cliente.Agendamentos)

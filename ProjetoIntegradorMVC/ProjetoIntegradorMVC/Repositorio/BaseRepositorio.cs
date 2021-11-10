@@ -18,7 +18,7 @@ namespace ProjetoIntegradorMVC.Repositorio
             _contexto = contexto;
         }
 
-        public abstract List<T> Buscar();
+        public abstract List<T> ObterTodos();
 
         public void Adicionar(T objeto)
         {
