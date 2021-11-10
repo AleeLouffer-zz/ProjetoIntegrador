@@ -14,7 +14,7 @@ using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using PI.Testes.Helpers;
 using ProjetoIntegradorMVC.Models;
 
-namespace PI.Testes
+namespace PI.Testes.Repositorios
 {
     public class RepositorioEmpresaTeste
     {

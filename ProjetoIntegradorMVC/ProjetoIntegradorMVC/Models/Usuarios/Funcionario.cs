@@ -1,10 +1,8 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
-using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {

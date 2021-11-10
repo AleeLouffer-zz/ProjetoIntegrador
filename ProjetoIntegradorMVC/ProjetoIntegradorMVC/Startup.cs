@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjetoIntegradorMVC.Aplicacoes;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
@@ -35,6 +36,7 @@ namespace ProjetoIntegradorMVC
             services.AddTransient<IRepositorioEmpresa, RepositorioEmpresa>();
             services.AddTransient<IRepositorioCliente, RepositorioCliente>();
             services.AddTransient<InicializadorDB>();
+            services.AddTransient<IDetalhesDoServico, DetalhesDoServico>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

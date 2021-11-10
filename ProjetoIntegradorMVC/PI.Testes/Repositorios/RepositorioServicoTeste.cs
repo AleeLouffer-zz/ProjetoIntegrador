@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PI.Testes
+namespace PI.Testes.Repositorios
 {
     public class RepositorioServicoTeste
     {

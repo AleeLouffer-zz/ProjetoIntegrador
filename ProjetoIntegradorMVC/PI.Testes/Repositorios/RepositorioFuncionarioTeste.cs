@@ -11,7 +11,7 @@ using System.Data;
 using System.Linq;
 using Xunit;
 
-namespace PI.Testes
+namespace PI.Testes.Repositorios
 {
     public class RepositorioFuncionarioTeste
     {

@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ProjetoIntegradorMVC.DTO;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ProjetoIntegradorMVC.Aplicacoes;
 
 namespace ProjetoIntegradorMVC.Controllers
 {
@@ -16,16 +11,19 @@ namespace ProjetoIntegradorMVC.Controllers
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
         private readonly Contexto _contexto;
+        private readonly IDetalhesDoServico _detalhesDoServico;
 
         public HomeController(IRepositorioServico repositorioServico, 
             IRepositorioFuncionario repositorioFuncionario, 
             IRepositorioFuncionariosComServicos repositorioFuncComServicos,
-            Contexto contexto)
+            Contexto contexto,
+            IDetalhesDoServico detalhesDoServico)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioFuncComServicos = repositorioFuncComServicos;
             _contexto = contexto;
+            _detalhesDoServico = detalhesDoServico;
         }
 
         public IActionResult PaginaInicial()
@@ -41,11 +39,7 @@ namespace ProjetoIntegradorMVC.Controllers
 
         public IActionResult DetalhesDoServico(int id)
         {
-            var servicoDTO = _repositorioServico.BuscarPorID(id);
-            var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
-            var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
-
-            var DTO = new ServicoDTO(servicoDTO, funcionarios);
+            var DTO = _detalhesDoServico.BuscarInformacoesDoServicoSelecionado(id);
             return View(DTO);
         }
 

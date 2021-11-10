@@ -13,11 +13,11 @@ namespace ProjetoIntegradorMVC.DTO
         public ServicoDTO(Servico servico, List<Funcionario> funcionario)
         {
             Servico = servico;
-            Funcionario = funcionario;
+            Funcionarios = funcionario;
         }
 
         public Servico Servico { get; set; }
-        public List<Funcionario> Funcionario { get; set; }
+        public List<Funcionario> Funcionarios { get; set; }
 
     }
 }
