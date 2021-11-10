@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ProjetoIntegradorMVC.Models.Usuarios.Empresa>
+
+@{
+    ViewData["Title"] = "Empresas";
+}
+
+<section class="busca">
+    <input type="text" class="busca__input">
+</section>
+<section class="filtros">
+    <div class="selecionar__pesquisa">
+        <button class="filtros__selecionar">Empresa</button>
+        <button class="filtros__selecionar">Serviço</button>
+    </div>
+    <div class="filtros">
+        <button class="filtros__botao">Filtros</button>
+    </div>
+</section>
+<section class="empresas">
+    <div class="empresa">
+        @foreach (var empresa in Model)
+        {
+            <p class="empresa__nome">@empresa.NomeFantasia</p>
+            <p class="empresa__endereco">@empresa.Endereco.Bairro</p>
+            <img src="#" alt="Avaliação da empresa" class="empresa__avaliacao">
+        }
+    </div>
+</section>
