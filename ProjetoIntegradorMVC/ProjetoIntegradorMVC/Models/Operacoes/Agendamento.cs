@@ -34,6 +34,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             if (empresa == null) throw new Exception("O campo empresa deve ser preenchido");
             if (servico == null) throw new Exception("O campo serviço deve ser preenchido");
             if (cliente == null) throw new Exception("O campo cliente deve ser preenchido");
+            if (horario <= DateTime.Now) throw new Exception("O agendamento deve ser feito em uma data e horario valida");
         }
     }
 }

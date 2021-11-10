@@ -85,5 +85,17 @@ namespace PI.Testes
             var mensagem = Assert.Throws<Exception>(Acao).Message;
             Assert.Equal(mensagemEsperada, mensagem);
         }
+
+        [Fact]
+        public void Nao_deve_criar_um_agendamento_com_data_e_horario_invalido()
+        {
+            var horaEData = new DateTime(2021, 11, 10, 14, 00, 01);
+            var mensagemEsperada = "O agendamento deve ser feito em uma data e horario valida";
+
+            void Acao() => new Agendamento(_funcionario, _empresa, _servico, horaEData, _cliente);
+
+            var mensagem = Assert.Throws<Exception>(Acao).Message;
+            Assert.Equal(mensagemEsperada, mensagem);
+        }
     }
 }
