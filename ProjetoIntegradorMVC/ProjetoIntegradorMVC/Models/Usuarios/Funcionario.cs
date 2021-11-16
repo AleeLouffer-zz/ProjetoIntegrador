@@ -49,5 +49,14 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (string.IsNullOrWhiteSpace(cpf)) throw new Exception("O funcionário deve ter um cpf");
             if (!new CPFValidator().IsValid(cpf)) throw new Exception("O funcionario deve ter um CPF valido");
         }
+
+        public bool ProcuraDiaDeTrabalho(DayOfWeek diaDaSemana)
+        {
+            foreach(var expedienteDeTrabalho in ExpedientesDeTrabalho)
+            {
+                return expedienteDeTrabalho.DiaDaSemana == diaDaSemana;
+            }
+            return false;
+        }
     }
 } 

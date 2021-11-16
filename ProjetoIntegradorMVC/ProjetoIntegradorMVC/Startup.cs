@@ -64,7 +64,7 @@ namespace ProjetoIntegradorMVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //serviceProvider.GetService<InicializadorDB>().IniciarDB();
+            serviceProvider.GetService<InicializadorDB>().IniciarDB();
         }
     }
 }
