@@ -20,6 +20,7 @@ namespace PI.Testes
         private readonly Funcionario _funcionario;
         private readonly Servico _servico;
         private readonly Empresa _empresa;
+        private readonly Cliente _cliente;
         private DetalhesDoServico _detalhesDoServico;
         private readonly BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
         private readonly Contexto _contexto;
@@ -44,26 +45,30 @@ namespace PI.Testes
 
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _funcionario = new Funcionario("Cleide", "cleide@cleide.com.br", "123", "85769390026", _empresa);
+            _cliente = new Cliente("Jessica", "jessica@gmail.com", "123", "09746195077");
             _servico = new Servico("Corte", "Corte de Cabelo", 50m, _empresa, Local.ADomicilio);
-
+            
             _repositorioEmpresa.AdicionarEmpresa(_empresa);
             _repositorioFuncionario.Adicionar(_funcionario);
             _repositorioServico.Adicionar(_servico);
             _repositorioFuncionarioComServicos.AdicionarFuncionariosComServicos(new FuncionariosComServicos(_funcionario, _servico, _empresa));
             _repositorioFuncionarioComServicos.VincularFuncionariosComServicosDaEmpresa( new List<Funcionario> { _funcionario } , new List<Servico> { _servico }, _empresa);
+            _funcionario.Agendamentos.Add(new Agendamento(_funcionario, _empresa, _servico, "12/10/2021 14:00:00", _cliente));
+            
             _contexto.SaveChanges();
+            
         }
 
         [Fact]
         public void DeveRetornarUmDTOServicos()
         {
-            var servico = _repositorioServico.Buscar().FirstOrDefault();
+            var servico = _repositorioServico.BuscarServicoPorNomeEPreco("Corte", 50m);
             var idEsperada = servico.Id;
             var DTOEsperado = new ServicoDTO(_servico, new List<Funcionario> { _funcionario });
 
             var DTO = _detalhesDoServico.BuscarInformacoesDoServicoSelecionado(idEsperada);
 
-            Assert.Equal (DTOEsperado.Funcionarios.SingleOrDefault(), DTO.Funcionarios.SingleOrDefault());
+            Assert.Equal (DTOEsperado.Funcionarios.SingleOrDefault().CPF, DTO.Funcionarios.SingleOrDefault().CPF);
         }
     }
 }
