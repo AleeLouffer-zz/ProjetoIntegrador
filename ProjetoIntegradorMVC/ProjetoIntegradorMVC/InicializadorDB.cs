@@ -21,8 +21,9 @@ namespace ProjetoIntegradorMVC
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
         private readonly IRepositorioEmpresa _repositorioEmpresa;
         private readonly IRepositorioCliente _repositorioCliente;
-
-        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioCliente repositorioCliente, IRepositorioEmpresa repositorioEmpresa)
+        private readonly IRepositorioAgendamento _repositorioAgendamento;
+        
+        public InicializadorDB(Contexto contexto, IRepositorioFuncionario repositorioFuncionario, IRepositorioServico repositorioServico, IRepositorioFuncionariosComServicos repositorioFuncComServicos, IRepositorioCliente repositorioCliente, IRepositorioEmpresa repositorioEmpresa, IRepositorioAgendamento repositorioAgendamento)
 
         {
             _contexto = contexto;
@@ -31,22 +32,24 @@ namespace ProjetoIntegradorMVC
             _repositorioFuncComServicos = repositorioFuncComServicos;
             _repositorioEmpresa = repositorioEmpresa;
             _repositorioCliente = repositorioCliente;
+            _repositorioAgendamento = repositorioAgendamento;
         }
 
         public void IniciarDB()
         {
             _contexto.Database.Migrate();
 
-            Empresa empresa = SetEmpresa();
-            List<Funcionario> funcionarios = SetFuncionarios(empresa);
-            List<Servico> servicos = SetServicos(empresa);
-            List<Cliente> cliente = SetClientes();
-            
-            _repositorioEmpresa.AdicionarEmpresa(empresa);
+            Empresa empresa = CriarEmpresa();
+            List<Funcionario> funcionarios = CriarFuncionarios(empresa);
+            List<Servico> servicos = CriarServicos(empresa);
+            List<Cliente> clientes = CriarClientes();
+            List<Agendamento> agendamentos = CriarAgendamentos( empresa, funcionarios[0], clientes[0], servicos[0]);
 
+            _repositorioEmpresa.AdicionarEmpresa(empresa);
             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
-            _repositorioCliente.AdicionarClientes(cliente);
+            _repositorioCliente.AdicionarClientes(clientes);
+            _repositorioAgendamento.AdicionarAgendamento(agendamentos);
 
             foreach(var funcionario in funcionarios)
             {
@@ -62,12 +65,12 @@ namespace ProjetoIntegradorMVC
             _repositorioFuncComServicos.AdicionarFuncionariosComServicos(funcionariosComServicos);
         }
 
-        private static Empresa SetEmpresa()
+        private static Empresa CriarEmpresa()
         {
             return new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
         }
 
-        private static List<Servico> SetServicos(Empresa empresa)
+        private static List<Servico> CriarServicos(Empresa empresa)
         {
             return new List<Servico>() {
                 new Servico("Corte de Cabelo", "Corte Simples Cabelo", 15m, empresa, Local.ADomicilio),
@@ -76,7 +79,7 @@ namespace ProjetoIntegradorMVC
             };
         }
 
-        private static List<Funcionario> SetFuncionarios(Empresa empresa)
+        private static List<Funcionario> CriarFuncionarios(Empresa empresa)
         {
             var funcionarios = new List<Funcionario>() {
                 new Funcionario("Cleide", "cleide@hotmail.com", "123", "11810292018", empresa),
@@ -92,12 +95,19 @@ namespace ProjetoIntegradorMVC
             return funcionarios;
         }
 
-        private static List<Cliente> SetClientes()
+        private static List<Cliente> CriarClientes()
         {
-               return new List<Cliente>() {
+            return new List<Cliente>() {
                new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147"),
                new Cliente("Carlos", "carlos@gmail.com", "carlao", "85526580032"),
                new Cliente("João Pedro", "pedrinho@hotmail.com", "joao123","05806188035" )
+            };
+        }
+        
+        private static List<Agendamento> CriarAgendamentos(Empresa empresa,Funcionario funcionario, Cliente cliente, Servico servico)
+        {
+            return new List<Agendamento>(){
+                new Agendamento(funcionario, empresa, servico, "12/12/2001 14:00:00", cliente)
             };
         }
     }
