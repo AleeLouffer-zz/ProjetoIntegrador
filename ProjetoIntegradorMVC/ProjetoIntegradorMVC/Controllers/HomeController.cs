@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoIntegradorMVC.DTO;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,17 @@ namespace ProjetoIntegradorMVC.Controllers
         private readonly IRepositorioServico _repositorioServico;
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
+        private readonly Contexto _contexto;
 
-        public HomeController(IRepositorioServico repositorioServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorioServico repositorioServico,
+            IRepositorioFuncionario repositorioFuncionario,
+            IRepositorioFuncionariosComServicos repositorioFuncComServicos,
+            Contexto contexto)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioFuncComServicos = repositorioFuncComServicos;
+            _contexto = contexto;
         }
 
         public IActionResult Home()
@@ -39,6 +45,21 @@ namespace ProjetoIntegradorMVC.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Servicos(string busca)
+        {
+            var servicos = _contexto.Servicos.ToList();
+
+            if (!string.IsNullOrEmpty(busca))
+            {
+                servicos = servicos.Where(
+                        s => s.Nome.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
+                        busca.Contains(s.Nome, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
+            }
+
+            return View(servicos);
         }
     }
 }
