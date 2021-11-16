@@ -52,7 +52,10 @@ namespace ProjetoIntegradorMVC.Controllers
 
             if (!string.IsNullOrEmpty(busca))
             {
-                empresas = empresas.Where(e => e.NomeFantasia.Contains(busca, StringComparison.OrdinalIgnoreCase)).ToList();
+                empresas = empresas.Where(e => 
+                    e.NomeFantasia.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
+                    busca.Contains(e.NomeFantasia, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
             }
 
             return View(empresas);

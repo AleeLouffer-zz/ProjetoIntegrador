@@ -5,24 +5,28 @@
 }
 
 <section class="busca">
-    <input type="text" class="busca__input">
+    <div class="busca__com__icone">
+        <input type="text" class="busca__input">
+        <img class="icone__busca" src="~/Icones/search_black_24dp.svg" alt="Icone de busca">
+    </div>
 </section>
 <section class="filtros">
     <div class="selecionar__pesquisa">
-        <button class="filtros__selecionar">Empresa</button>
+        <button class="filtros__selecionar selecionar--empresa">Empresa</button>
         <button class="filtros__selecionar">Serviço</button>
     </div>
-    <div class="filtros">
+    <div class="filtros--fil">
         <button class="filtros__botao">Filtros</button>
+        <img class="filtros--icone" src="~/Icones/filter_alt_black_24dp (1).svg" alt="Icone de filtro">
     </div>
 </section>
 <section class="empresas">
-    <div class="empresa">
-        @foreach (var empresa in Model)
-        {
+    @foreach (var empresa in Model)
+    {
+        <div class="empresa">
             <p class="empresa__nome">@empresa.NomeFantasia</p>
             <p class="empresa__endereco">@empresa.Endereco.Bairro</p>
             <img src="#" alt="Avaliação da empresa" class="empresa__avaliacao">
-        }
-    </div>
+        </div>
+    }
 </section>

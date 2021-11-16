@@ -1,0 +1,56 @@
+.filtros{
+    text-align: center;
+}
+
+.filtros--fil{
+    align-items: center;
+    position: relative;
+    text-align: left;
+    padding: 8px;
+    font-size: 1.0rem;
+    border-radius: 15px;
+    border: 0;
+    background-color: #E7E7E7;
+    width: 20%;
+    max-width: 150px;
+}
+
+.filtros--icone{
+    position: absolute;
+    z-index: 0;
+    right: 5px;
+    top: 5px;
+    transform: scale(0.9);
+}
+
+.filtros__selecionar{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: transparent;
+    width: 50%;
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.selecionar--empresa{
+    color: #4590E4;
+    border-bottom: 2px solid #4590E4;
+}
+
+.filtros__botao{
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    z-index: 1;
+    display: block;
+}
+
+.selecionar__pesquisa{
+    display: inline-flex;
+    width: 90%;
+    margin-bottom: 16px;
+}
