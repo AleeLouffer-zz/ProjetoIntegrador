@@ -49,7 +49,7 @@ namespace ProjetoIntegradorMVC
             _repositorioFuncionario.AdicionarFuncionarios(funcionarios);
             _repositorioServico.AdicionarServicos(servicos);
             _repositorioCliente.AdicionarClientes(clientes);
-            _repositorioAgendamento.AdicionarAgendamento(agendamentos);
+            _repositorioAgendamento.AdicionarAgendamentos(agendamentos);
 
             foreach(var funcionario in funcionarios)
             {
