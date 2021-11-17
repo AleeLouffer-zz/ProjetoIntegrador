@@ -26,9 +26,13 @@ namespace ProjetoIntegradorMVC.Aplicacoes
             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 
             var servicoDTO = new ServicoDTO(servico);
-            var funcionariosDTO = new FuncionarioDTO(funcionarios);
+            var funcionariosDTO = new List<FuncionarioDTO>();
+            foreach (var funcionario in funcionarios)
+            {
+                funcionariosDTO.Add(new FuncionarioDTO(funcionario));
+            }
 
-            return new FuncionarioEServicoDTO(servicoDTO, funcionarios);
+            return new FuncionarioEServicoDTO(funcionariosDTO, servicoDTO);
         }  
     }
 }

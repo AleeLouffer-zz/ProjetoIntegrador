@@ -64,7 +64,7 @@ namespace PI.Testes
         {
             var servico = _repositorioServico.BuscarServicoPorNomeEPreco("Corte", 50m);
             var idEsperada = servico.Id;
-            var DTOEsperado = new ServicoDTO(_servico, new List<Funcionario> { _funcionario });
+            var DTOEsperado = new FuncionarioEServicoDTO(new List<FuncionarioDTO> { new FuncionarioDTO(_funcionario) }, new ServicoDTO(_servico));
 
             var DTO = _detalhesDoServico.BuscarInformacoesDoServicoSelecionado(idEsperada);
 

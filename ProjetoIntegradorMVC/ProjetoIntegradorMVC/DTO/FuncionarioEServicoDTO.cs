@@ -5,12 +5,12 @@ namespace ProjetoIntegradorMVC.DTO
     public class FuncionarioEServicoDTO
     {
         public List<FuncionarioDTO> Funcionarios { get; set; } = new List<FuncionarioDTO>();
-        public List<ServicoDTO> Servicos { get; set; } = new List<ServicoDTO>();
+        public ServicoDTO Servico { get; set; }
 
-        public FuncionarioEServicoDTO(List<FuncionarioDTO> funcionarios, List <ServicoDTO> servicos)
+        public FuncionarioEServicoDTO(List<FuncionarioDTO> funcionarios, ServicoDTO servico)
         {
             Funcionarios = funcionarios;
-            Servicos = servicos;
+            Servico = servico;
         }
     }
 }
