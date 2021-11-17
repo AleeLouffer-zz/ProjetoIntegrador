@@ -45,7 +45,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             foreach(var funcionario in funcionarios)
             {
-                if (funcionario.ProcuraDiaDeTrabalho(diaDaSemanaCorrespondente))
+                if (funcionario.ExpedientesDeTrabalho.Exists(exp => exp.DiaDaSemana == diaDaSemanaCorrespondente))
                 {
                     funcionariosQueTrabalhamNoDia.Add(funcionario);
                 }
