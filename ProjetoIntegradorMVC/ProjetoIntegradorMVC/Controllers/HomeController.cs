@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoIntegradorMVC.DTO;
 using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace ProjetoIntegradorMVC.Controllers
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
 
-        public HomeController(IRepositorioServico repositorioServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorioServico repositorioServico,
+            IRepositorioFuncionario repositorioFuncionario,
+            IRepositorioFuncionariosComServicos repositorioFuncComServicos)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;

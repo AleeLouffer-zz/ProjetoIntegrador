@@ -4,7 +4,7 @@ using System;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
-    public interface IRepositorioEmpresa
+    public interface IRepositorioEmpresa : IBaseRepositorio<Empresa>
     {
        Empresa BuscarEmpresaPorCNPJ(string cnpj);
        void AdicionarEmpresa(Empresa empresa);

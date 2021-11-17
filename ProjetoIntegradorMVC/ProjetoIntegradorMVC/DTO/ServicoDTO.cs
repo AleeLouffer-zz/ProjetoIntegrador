@@ -9,15 +9,18 @@ namespace ProjetoIntegradorMVC.DTO
 {
     public class ServicoDTO
     {
+        public string NomeDoServico { get; set; }
+        public decimal PrecoDoServico { get; set; }
+        public string DescricaoDoServico { get; set; }
+        public string NomeEmpresaDoServico { get; set; }
+
         private ServicoDTO() { }
-        public ServicoDTO(Servico servico, List<Funcionario> funcionario)
+        public ServicoDTO(Servico servico)
         {
-            Servico = servico;
-            Funcionario = funcionario;
+            NomeDoServico = servico.Nome;
+            PrecoDoServico = servico.Preco;
+            DescricaoDoServico = servico.Descricao;
+            NomeEmpresaDoServico = servico.Empresa.NomeFantasia;
         }
-
-        public Servico Servico { get; set; }
-        public List<Funcionario> Funcionario { get; set; }
-
     }
 }

@@ -3,6 +3,7 @@ using Caelum.Stella.CSharp.Validation;
 using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Servicos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
-    public class Empresa : Usuario
+    public class Empresa : Usuario, IBuscavel
     {
         public string RazaoSocial { get; private set; }
         public string NomeFantasia { get; private set; }
@@ -45,6 +46,11 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (string.IsNullOrWhiteSpace(email)) throw new Exception("A empresa deve ter um email");
             if (string.IsNullOrWhiteSpace(senha)) throw new Exception("A empresa deve ter uma senha");
             if (string.IsNullOrWhiteSpace(cnpj) || !new CNPJValidator().IsValid(cnpj)) throw new Exception("A empresa deve ter um CNPJ valido");
+        }
+
+        public string ObterNome()
+        {
+            return NomeFantasia;
         }
     }
 }

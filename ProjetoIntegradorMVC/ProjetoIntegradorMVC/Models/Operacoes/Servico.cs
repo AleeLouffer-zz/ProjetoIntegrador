@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using ProjetoIntegradorMVC.Repositorio;
+using ProjetoIntegradorMVC.Servicos;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +10,7 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
     [Table("Servico")]
     [Index(nameof(Nome), IsUnique = true)]
     [Index(nameof(Preco), IsUnique = true)]
-    public class Servico : ClasseBase
+    public class Servico : ClasseBase, IBuscavel
     {
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
@@ -37,6 +38,11 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
             if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("O serviço deve ter uma descrição");
             if (preco <= 0) throw new Exception("O serviço deve ter um preço");
             if (tempoEstimado < 0) throw new Exception("O tempo estimado é menor que 0 minutos");
+        }
+
+        public string ObterNome()
+        {
+            return Nome;
         }
     }
 }
