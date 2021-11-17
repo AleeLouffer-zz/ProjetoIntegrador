@@ -10,6 +10,6 @@ namespace ProjetoIntegradorMVC.Repositorio
     public interface IRepositorioAgendamento : IBaseRepositorio<Agendamento>
     {
         public Agendamento BuscarAgendamentoPorClienteEServicoEDataEHora(Cliente cliente, Servico servico, DateTime HoraEData);
-        void AdicionarAgendamento(List<Agendamento> agendamentos);
+        void AdicionarAgendamentos(List<Agendamento> agendamentos);
     }
 }
