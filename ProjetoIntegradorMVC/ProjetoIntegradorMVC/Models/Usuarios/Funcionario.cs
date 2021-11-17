@@ -54,7 +54,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         {
             foreach(var expedienteDeTrabalho in ExpedientesDeTrabalho)
             {
-                return expedienteDeTrabalho.DiaDaSemana == diaDaSemana;
+                if(expedienteDeTrabalho.DiaDaSemana == diaDaSemana) return true;
             }
             return false;
         }
