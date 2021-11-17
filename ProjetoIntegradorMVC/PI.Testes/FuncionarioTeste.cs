@@ -8,6 +8,7 @@ using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models;
 using System.Collections.Generic;
 using System.Linq;
+using ProjetoIntegradorMVC.Models.Operacoes;
 
 namespace PI.Testes
 {
@@ -123,6 +124,19 @@ namespace PI.Testes
             funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "18:00");
 
             Assert.Equal(funcionario.ExpedientesDeTrabalho.FirstOrDefault().HoraDaSaida , expedienteEsperado.HoraDaSaida);
+        }
+
+        [Fact]  
+        public void Deve_gerar_os_horarios_disponiveis_do_dia()
+        {
+            var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _empresa);
+            funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "10:00");
+            var horariosEsperados = new List<Horario>() { new Horario(DateTime.Parse("08:00")), new Horario(DateTime.Parse("09:00")), new Horario(DateTime.Parse("10:00")) };
+            var agendamentosDoDia = new List<Agendamento>();
+            
+            var horariosResultantes = funcionario.GerarHorariosDisponiveisNoDia(agendamentosDoDia, new DateTime(2021, 11, 17));
+
+            Assert.Equal(horariosResultantes[0].Hora, horariosEsperados[0].Hora);
         }
     }
 }
