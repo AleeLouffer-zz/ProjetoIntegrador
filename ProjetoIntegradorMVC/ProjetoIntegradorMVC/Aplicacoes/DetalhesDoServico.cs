@@ -1,5 +1,6 @@
 using ProjetoIntegradorMVC.DTO;
 using ProjetoIntegradorMVC.Repositorio;
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Aplicacoes
 {
@@ -18,13 +19,16 @@ namespace ProjetoIntegradorMVC.Aplicacoes
             _repositorioFuncionario = repositorioFuncionario;
         }
 
-        public ServicoDTO BuscarInformacoesDoServicoSelecionado(int id)
+        public FuncionarioEServicoDTO BuscarInformacoesDoServicoSelecionado(int id)
         {
-            var servicoDTO = _repositorioServico.BuscarPorID(id);
+            var servico = _repositorioServico.BuscarPorID(id);
             var idsFuncionario = _repositorioFuncionarioComServico.BuscarIdsDosFuncionariosPeloIdDoServico(id);
             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 
-            return new ServicoDTO(servicoDTO, funcionarios);
+            var servicoDTO = new ServicoDTO(servico);
+            var funcionariosDTO = new FuncionarioDTO(funcionarios);
+
+            return new FuncionarioEServicoDTO(servicoDTO, funcionarios);
         }  
     }
 }

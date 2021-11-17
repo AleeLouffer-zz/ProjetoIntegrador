@@ -1,23 +1,27 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.DTO
 {
     public class ServicoDTO
     {
-        private ServicoDTO() { }
-        public ServicoDTO(Servico servico, List<Funcionario> funcionario)
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public decimal Preco { get; set; }
+        public int EmpresaId { get; set; }
+        public Empresa Empresa { get; set; }
+        public int TempoEstimado { get; set; }
+        public Local Local { get; set; }
+        public ServicoDTO(Servico servico)
         {
-            Servico = servico;
-            Funcionarios = funcionario;
+            Nome = servico.Nome;
+            Descricao = servico.Descricao; 
+            Preco = servico.Preco;
+            EmpresaId = servico.EmpresaId;
+            Empresa = servico.Empresa;
+            TempoEstimado = servico.TempoEstimado; 
+            Local = servico.Local;
         }
-
-        public Servico Servico { get; set; }
-        public List<Funcionario> Funcionarios { get; set; }
-
     }
 }
