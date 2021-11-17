@@ -51,7 +51,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (!new CPFValidator().IsValid(cpf)) throw new Exception("O funcionario deve ter um CPF valido");
         }
 
-        public List<Horario> GerarHorariosDisponiveisNoDia(List<Agendamento> agendamentosDoDia, DateTime dia)
+        public void GerarHorariosDisponiveisNoDia(List<Agendamento> agendamentosDoDia, DateTime dia)
         {
             var expedienteDoDia = ObtemExpedientedoDia(dia);
             var horariosDisponiveis = new List<Horario>();
@@ -65,7 +65,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
                     }
                 }
             }
-            return horariosDisponiveis;
+            HorariosDisponiveisDoDia =  horariosDisponiveis;
         }
         
         public bool TemAgendamentoNoDia(List<Agendamento> agendamentosDoDia)

@@ -138,9 +138,9 @@ namespace PI.Testes
             var horariosEsperados = new List<Horario>() { new Horario(DateTime.Parse("08:00")), new Horario(DateTime.Parse("09:00")), new Horario(DateTime.Parse("10:00")) };
             var agendamentosDoDia = new List<Agendamento>() ;
             
-            var horariosResultantes = funcionario.GerarHorariosDisponiveisNoDia(null, new DateTime(2021, 11, 17));
+            funcionario.GerarHorariosDisponiveisNoDia(null, new DateTime(2021, 11, 17));
 
-            Assert.Equal(horariosResultantes[0].Hora, horariosEsperados[0].Hora);
+            Assert.Equal(funcionario.HorariosDisponiveisDoDia[0].Hora, horariosEsperados[0].Hora);
         }
 
         [Fact]
@@ -151,9 +151,9 @@ namespace PI.Testes
             var horariosEsperados = new List<Horario>() { new Horario(DateTime.Parse("08:00")), new Horario(DateTime.Parse("10:00")) };
             var agendamentosDoDia = new List<Agendamento>() {new Agendamento (funcionario, _empresa, _servico, "17/11/2021 09:00:00", _cliente) };
 
-            var horariosResultantes = funcionario.GerarHorariosDisponiveisNoDia(agendamentosDoDia, new DateTime(2021, 11, 17));
+            funcionario.GerarHorariosDisponiveisNoDia(agendamentosDoDia, new DateTime(2021, 11, 17));
 
-            Assert.Equal(horariosEsperados.Count, horariosResultantes.Count);
+            Assert.Equal(horariosEsperados.Count, funcionario.HorariosDisponiveisDoDia.Count);
         }
     }
 }
