@@ -35,6 +35,7 @@ namespace ProjetoIntegradorMVC.Models.ContextoDb
                        en.Property(p => p.UF).HasColumnName("UF");
                    }
                );
+            
         }
     }
 }   

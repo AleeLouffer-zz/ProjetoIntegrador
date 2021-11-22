@@ -4,6 +4,7 @@ using Caelum.Stella.CSharp.Validation;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ProjetoIntegradorMVC.Models.Usuarios
 {
@@ -16,6 +17,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public int EmpresaId { get; private set; }
         public List<Agendamento> Agendamentos { get; private set; }
         public List<ExpedienteDeTrabalho> ExpedientesDeTrabalho { get; private set; } = new();
+        public List<Horario> HorariosDisponiveisDoDia { get; private set; } = new();
 
         private Funcionario() { }
 
@@ -47,6 +49,37 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
             if (string.IsNullOrWhiteSpace(senha)) throw new Exception("O funcionário deve ter uma senha");
             if (string.IsNullOrWhiteSpace(cpf)) throw new Exception("O funcionário deve ter um cpf");
             if (!new CPFValidator().IsValid(cpf)) throw new Exception("O funcionario deve ter um CPF valido");
+        }
+
+        public void GerarHorariosDisponiveisNoDia(List<Agendamento> agendamentosDoDia, DateTime dia)
+        {
+            var expedienteDoDia = ObtemExpedientedoDia(dia);
+            var horariosDisponiveis = new List<Horario>();
+            if (expedienteDoDia != null)
+            {
+                for (var hora = expedienteDoDia.HoraDeInicio; hora <= expedienteDoDia.HoraDaSaida; hora = hora.AddHours(1))
+                {
+                    if (TemAgendamentoNoDia(agendamentosDoDia) || !agendamentosDoDia.Exists(agendamento => agendamento.HoraEData.Hour == hora.Hour))
+                    {
+                        horariosDisponiveis.Add(new Horario(hora));
+                    }
+                }
+            }
+            HorariosDisponiveisDoDia =  horariosDisponiveis;
+        }
+        
+        public bool TemAgendamentoNoDia(List<Agendamento> agendamentosDoDia)
+        {
+            return agendamentosDoDia == null || !agendamentosDoDia.Any();
+        }
+        
+        public ExpedienteDeTrabalho ObtemExpedientedoDia(DateTime dia)
+        {
+            foreach (var expedienteDeTrabalho in ExpedientesDeTrabalho)
+            {
+                return expedienteDeTrabalho;
+            }
+            return null;
         }
     }
 } 
