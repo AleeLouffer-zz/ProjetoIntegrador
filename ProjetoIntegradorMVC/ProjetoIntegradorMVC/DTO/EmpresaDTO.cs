@@ -1,4 +1,7 @@
-﻿using ProjetoIntegradorMVC.Models.Usuarios;
+﻿using ProjetoIntegradorMVC.Models;
+using ProjetoIntegradorMVC.Models.LigaçãoModels;
+using ProjetoIntegradorMVC.Models.Operacoes;
+using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +11,12 @@ namespace ProjetoIntegradorMVC.DTO
 {
     public class EmpresaDTO
     {
-        public string NomeDaEmpresa { get; set; }
-        public string RuaDaEmpresa { get; set; }
-        public string BairroDaEmpresa { get; set; }
-
-        public EmpresaDTO(Empresa empresa)
-        {
-            NomeDaEmpresa = empresa.NomeFantasia;
-            RuaDaEmpresa = empresa.Endereco.Localidade;
-            BairroDaEmpresa = empresa.Endereco.Bairro;
-        }
+        public string RazaoSocial { get; set; }
+        public string Nome { get; set; }
+        public string CNPJ { get; set; }
+        public EnderecoDaEmpresa Endereco { get; set; }
+        public List<Funcionario> Funcionarios { get; set; }
+        public List<Servico> Servicos { get; set; }
+        public List<FuncionariosComServicos> FuncionariosComServicos { get; set; }
     }
 }

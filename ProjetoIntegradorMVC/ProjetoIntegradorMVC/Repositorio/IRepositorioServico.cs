@@ -7,5 +7,6 @@ namespace ProjetoIntegradorMVC.Repositorio
     public interface IRepositorioServico : IBaseRepositorio<Servico>
     {
         void AdicionarServicos(List<Servico> servicos);
+        List<Servico> FiltrarPorTexto(string busca);
     }
 }

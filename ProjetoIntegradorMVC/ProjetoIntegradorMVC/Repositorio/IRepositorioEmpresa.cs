@@ -1,6 +1,7 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {
@@ -10,5 +11,6 @@ namespace ProjetoIntegradorMVC.Repositorio
        void AdicionarEmpresa(Empresa empresa);
        void VincularServico(string cnpj, Servico servico);
        void VincularFuncionario(string cnpj, Funcionario funcionario);
+       List<Empresa> FiltrarPorTexto(string busca);
     }
 }

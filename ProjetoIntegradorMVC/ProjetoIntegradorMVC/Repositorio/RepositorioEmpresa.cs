@@ -36,5 +36,15 @@ namespace ProjetoIntegradorMVC.Repositorio
             empresa.Funcionarios.Add(funcionario);
             _contexto.SaveChanges();
         }
+
+        public List<Empresa> FiltrarPorTexto(string busca)
+        {
+            var empresas = this.BuscarTodos();
+
+            return empresas = empresas.Where(empresa =>
+                empresa.NomeFantasia.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
+                busca.Contains(empresa.NomeFantasia, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+        }
     }
 }

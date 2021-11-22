@@ -21,5 +21,15 @@ namespace ProjetoIntegradorMVC.Repositorio
             foreach (var servico in servicos) Adicionar(servico);
             _contexto.SaveChanges();
         }
+
+        public List<Servico> FiltrarPorTexto(string busca)
+        {
+            var servicos = BuscarTodos();
+
+            return servicos = servicos.Where(servico =>
+                servico.Nome.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
+                busca.Contains(servico.Nome, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+        }
     }
 }
