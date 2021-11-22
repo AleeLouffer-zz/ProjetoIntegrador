@@ -5,6 +5,6 @@ namespace ProjetoIntegradorMVC.Aplicacoes
 {
     public interface IDetalhesDoServico
     {
-        FuncionarioEServicoDTO BuscarInformacoesDoServicoSelecionado(int id);
+        ServicoDTO BuscarInformacoesDoServicoSelecionado(int id);
     }
 }

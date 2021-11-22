@@ -19,20 +19,35 @@ namespace ProjetoIntegradorMVC.Aplicacoes
             _repositorioFuncionario = repositorioFuncionario;
         }
 
-        public FuncionarioEServicoDTO BuscarInformacoesDoServicoSelecionado(int id)
+        public ServicoDTO BuscarInformacoesDoServicoSelecionado(int id)
         {
             var servico = _repositorioServico.BuscarPorID(id);
             var idsFuncionario = _repositorioFuncionarioComServico.BuscarIdsDosFuncionariosPeloIdDoServico(id);
             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
 
-            var servicoDTO = new ServicoDTO(servico);
-            var funcionariosDTO = new List<FuncionarioDTO>();
+            var servicoDTO = new ServicoDTO {
+                Nome = servico.Nome,
+                Descricao = servico.Descricao,
+                Preco = servico.Preco,
+                EmpresaId = servico.EmpresaId,
+                Empresa = servico.Empresa,
+                TempoEstimado = servico.TempoEstimado,
+                Local = servico.Local
+            };
+
             foreach (var funcionario in funcionarios)
             {
-                funcionariosDTO.Add(new FuncionarioDTO(funcionario));
+                servicoDTO.Funcionarios.Add(new FuncionarioDTO {
+                    Nome = funcionario.Nome,
+                    CPF = funcionario.CPF,
+                    Empresa = funcionario.Empresa,
+                    EmpresaId = funcionario.EmpresaId,
+                    Agendamentos = funcionario.Agendamentos,
+                    ExpedientesDeTrabalho = funcionario.ExpedientesDeTrabalho
+                });
             }
 
-            return new FuncionarioEServicoDTO(funcionariosDTO, servicoDTO);
+            return servicoDTO;
         }  
     }
 }

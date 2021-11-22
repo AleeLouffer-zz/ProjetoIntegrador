@@ -1,4 +1,4 @@
-﻿@model ProjetoIntegradorMVC.DTO.FuncionarioEServicoDTO
+﻿@model ProjetoIntegradorMVC.DTO.ServicoDTO
 
 @{
     ViewData["Title"] = "Detalhes do serviço";
@@ -19,9 +19,9 @@
 <div class="detalhesservico">
     <div class="nomeServico">
         <div class="detalheservico">
-            <h1>@Model.Servico.Nome</h1>
-            <p>@Model.Servico.Descricao</p>
-            <p class="precoservico">@Model.Servico.Preco</p>
+            <h1>@Model.Nome</h1>
+            <p>@Model.Descricao</p>
+            <p class="precoservico">@Model.Preco</p>
         </div>
         <div class="funcionarios">
             @foreach (var funcionario in Model.Funcionarios)

@@ -13,15 +13,6 @@ namespace ProjetoIntegradorMVC.DTO
         public Empresa Empresa { get; set; }
         public int TempoEstimado { get; set; }
         public Local Local { get; set; }
-        public ServicoDTO(Servico servico)
-        {
-            Nome = servico.Nome;
-            Descricao = servico.Descricao; 
-            Preco = servico.Preco;
-            EmpresaId = servico.EmpresaId;
-            Empresa = servico.Empresa;
-            TempoEstimado = servico.TempoEstimado; 
-            Local = servico.Local;
-        }
+        public List<FuncionarioDTO> Funcionarios { get; set; } = new List<FuncionarioDTO>();
     }
 }
