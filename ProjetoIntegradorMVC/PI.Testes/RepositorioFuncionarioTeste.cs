@@ -24,22 +24,23 @@ namespace PI.Testes
         public RepositorioFuncionarioTeste()
         {
             _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
-
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteFuncionarios");
+            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteRepositorioFuncionarios");
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _funcionario = new("Cleide", "cleide@cleide.com", "123", "59819300045", _empresa);
+            _funcionario.AdicionarExpediente(DayOfWeek.Monday, "08:00", "17:00");
             _funcionario2 = new("Ravona", "ravona@ravona.com", "ravona@ravona.com", "17159590007", _empresa);
+
             _repositorio = new RepositorioFuncionario(_contexto);
+            _repositorio.Adicionar(_funcionario);
+            _repositorio.Adicionar(_funcionario2);
+            _contexto.SaveChanges();
         }
 
         [Fact]
         public void Deve_retornar_funcionarios_pelas_ids()
         {
-            _contexto.Funcionarios.Add(_funcionario);
-            _contexto.Funcionarios.Add(_funcionario2);
-            _contexto.SaveChanges();
             var ids = new List<int>() { 1, 2 };
 
             var funcionarios = _repositorio.BuscarFuncionariosPorIds(ids);
@@ -62,6 +63,17 @@ namespace PI.Testes
             }
 
             Assert.Equal(funcionariosASeremAdicionados, funcionariosRetornados);
+        }
+        
+        [Fact]
+        public void Deve_retornar_funcionarios_que_trabalham_no_dia()
+        {
+            var dia = new DateTime(2021, 11, 1);
+            var funcionariosQueTrabalhamNoDia = new List<Funcionario>() { _funcionario };
+            
+            var funcionariosRetornados = _repositorio.BuscarFuncionariosPorDia(dia);
+            
+            Assert.Equal(funcionariosQueTrabalhamNoDia, funcionariosRetornados);
         }
     }
 }

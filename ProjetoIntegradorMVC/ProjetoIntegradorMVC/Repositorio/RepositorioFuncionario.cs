@@ -36,5 +36,21 @@ namespace ProjetoIntegradorMVC.Repositorio
             
             _contexto.SaveChanges();
         }
+
+        public List<Funcionario> BuscarFuncionariosPorDia(DateTime dia)
+        {
+            var diaDaSemanaCorrespondente = dia.DayOfWeek;
+            var funcionariosQueTrabalhamNoDia = new List<Funcionario>();
+            var funcionarios = BuscarTodos();
+
+            foreach(var funcionario in funcionarios)
+            {
+                if (funcionario.ExpedientesDeTrabalho.Exists(exp => exp.DiaDaSemana == diaDaSemanaCorrespondente))
+                {
+                    funcionariosQueTrabalhamNoDia.Add(funcionario);
+                }
+            }
+            return funcionariosQueTrabalhamNoDia;
+        }
     }
 }
