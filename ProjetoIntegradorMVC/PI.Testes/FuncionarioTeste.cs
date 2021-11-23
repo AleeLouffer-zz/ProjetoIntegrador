@@ -149,7 +149,7 @@ namespace PI.Testes
             var funcionario = new Funcionario(_nome, _email, _senha, _cpf, _empresa);
             funcionario.AdicionarExpediente(DayOfWeek.Friday, "08:00", "10:00");
             var horariosEsperados = new List<Horario>() { new Horario(DateTime.Parse("08:00")), new Horario(DateTime.Parse("10:00")) };
-            var agendamentosDoDia = new List<Agendamento>() {new Agendamento (funcionario, _empresa, _servico, "17/11/2021 09:00:00", _cliente) };
+            var agendamentosDoDia = new List<Agendamento>() {new Agendamento (funcionario, _empresa, _servico, new DateTime(2022,11,17,09,00,00), _cliente) };
 
             funcionario.GerarHorariosDisponiveisNoDia(agendamentosDoDia, new DateTime(2021, 11, 17));
 

@@ -37,7 +37,8 @@ namespace ProjetoIntegradorMVC
 
         public void IniciarDB()
         {
-            _contexto.Database.Migrate();
+            _contexto.Database.EnsureDeleted();
+            _contexto.Database.EnsureCreated();
 
             Empresa empresa = CriarEmpresa();
             List<Funcionario> funcionarios = CriarFuncionarios(empresa);
@@ -107,7 +108,7 @@ namespace ProjetoIntegradorMVC
         private static List<Agendamento> CriarAgendamentos(Empresa empresa,Funcionario funcionario, Cliente cliente, Servico servico)
         {
             return new List<Agendamento>(){
-                new Agendamento(funcionario, empresa, servico, "12/12/2001 14:00:00", cliente)
+                new Agendamento(funcionario, empresa, servico, new DateTime(2001,12,12,14,00,00), cliente)
             };
         }
     }

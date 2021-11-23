@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.LigaçãoModels;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;

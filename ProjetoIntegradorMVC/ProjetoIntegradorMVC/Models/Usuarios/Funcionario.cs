@@ -1,5 +1,4 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
-using ProjetoIntegradorMVC.Repositorio;
 using Caelum.Stella.CSharp.Validation;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string CPF { get; private set; }
         public Empresa Empresa { get; private set; }
         public int EmpresaId { get; private set; }
-        public List<Agendamento> Agendamentos { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; } = new();
         public List<ExpedienteDeTrabalho> ExpedientesDeTrabalho { get; private set; } = new();
         public List<Horario> HorariosDisponiveisDoDia { get; private set; } = new();
 

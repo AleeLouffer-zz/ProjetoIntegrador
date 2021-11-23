@@ -21,8 +21,8 @@ namespace PI.Testes
         private readonly RepositorioEmpresa _repositorioEmpresa;
         private readonly RepositorioServico _repositorioServico;
         private readonly RepositorioFuncionario _repositorioFuncionario;
-        private readonly string _horaEDia;
-        private readonly string _horaEDia2;
+        private readonly DateTime _horaEDia;
+        private readonly DateTime _horaEDia2;
         private readonly Empresa _empresa;
         private readonly Empresa _empresa2;
         private readonly Servico _servico;
@@ -48,8 +48,8 @@ namespace PI.Testes
             _repositorioCliente = new RepositorioCliente(_contexto);
             _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
 
-            _horaEDia = "12/12/2001 14:00:00";
-            _horaEDia2 = "13/12/2001 13:00:00";
+            _horaEDia = new DateTime(2022,12,12,14,00,00);
+            _horaEDia2 = new DateTime(2022,12,13,13,00,00);
             
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _empresa2 = new Empresa("Inteligencia LTDA", "Inteligencia2", "inteligencia@inteligencia.com.br", "12345", "07593162000120", "79004394");
@@ -91,10 +91,10 @@ namespace PI.Testes
         [Fact]
         public void Deve_obter_agendamentos_do_dia_do_funcionario()
         {
-            var agendamento = new Agendamento(_funcionario, _empresa, _servico, "12/12/2001 15:00:00", _cliente);
+            var agendamento = new Agendamento(_funcionario, _empresa, _servico, new DateTime(2022,12,12,15,00,00), _cliente);
             _repositorioAgendamento.Adicionar(agendamento);
 
-            var agentamentosFuncionarios = _repositorioAgendamento.ObterAgendamentoPorDiaDeUmFuncionario(_funcionario, new DateTime(2001, 12, 12));
+            var agentamentosFuncionarios = _repositorioAgendamento.ObterAgendamentoPorDiaDeUmFuncionario(_funcionario, new DateTime(2022, 12, 12));
 
             Assert.Equal(agendamento, agentamentosFuncionarios[0]);
         }

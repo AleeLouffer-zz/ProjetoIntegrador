@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjetoIntegradorMVC.DTO;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ProjetoIntegradorMVC.Aplicacoes;
 
 namespace ProjetoIntegradorMVC.Controllers
 {
@@ -13,27 +10,37 @@ namespace ProjetoIntegradorMVC.Controllers
         private readonly IRepositorioServico _repositorioServico;
         private readonly IRepositorioFuncionario _repositorioFuncionario;
         private readonly IRepositorioFuncionariosComServicos _repositorioFuncComServicos;
+        private readonly Contexto _contexto;
+        private readonly IDetalhesDoServico _detalhesDoServico;
 
-        public HomeController(IRepositorioServico repositorioServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioFuncionariosComServicos repositorioFuncComServicos)
+        public HomeController(IRepositorioServico repositorioServico, 
+            IRepositorioFuncionario repositorioFuncionario, 
+            IRepositorioFuncionariosComServicos repositorioFuncComServicos,
+            Contexto contexto,
+            IDetalhesDoServico detalhesDoServico)
         {
             _repositorioServico = repositorioServico;
             _repositorioFuncionario = repositorioFuncionario;
             _repositorioFuncComServicos = repositorioFuncComServicos;
+            _contexto = contexto;
+            _detalhesDoServico = detalhesDoServico;
         }
 
-        public IActionResult Home()
+        public IActionResult PaginaInicial()
         {
-            return View(_repositorioServico.BuscarTodos());
+            return View();
         }
 
-        public IActionResult Servico(int id)
+        public IActionResult CatalogoDeServicos()
         {
-             var servicoDTO = _repositorioServico.BuscarPorId(id);
-             var idsFuncionario = _repositorioFuncComServicos.BuscarIdsDosFuncionariosPeloIdDoServico(id);
-             var funcionarios = _repositorioFuncionario.BuscarFuncionariosPorIds(idsFuncionario);
+            var servicos = _repositorioServico.ObterTodos();
+            return View(servicos);
+        }
 
-             var DTO = new ServicoDTO(servicoDTO, funcionarios);
-             return View(DTO);
+        public IActionResult DetalhesDoServico(int id)
+        {
+            var DTO = _detalhesDoServico.BuscarInformacoesDoServicoSelecionado(id);
+            return View(DTO);
         }
 
         public IActionResult Index()

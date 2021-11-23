@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
@@ -27,6 +28,17 @@ namespace ProjetoIntegradorMVC.Repositorio
         public List<Agendamento> ObterAgendamentoPorDiaDeUmFuncionario(Funcionario funcionario, DateTime data)
         {
             return _contexto.Set<Agendamento>().Where(agendamento => agendamento.HoraEData.Date == data && agendamento.Funcionario.CPF == funcionario.CPF).ToList();
+        }
+
+        public override List<Agendamento> ObterTodos()
+        {
+            return _contexto.Agendamentos
+                .Include(agendamento => agendamento.Cliente)
+                .Include(agendamento => agendamento.Empresa)
+                .Include(agendamento => agendamento.Funcionario)
+                .Include(agendamento => agendamento.Servico)
+                .AsNoTracking()
+                .ToList();
         }
     }
 }

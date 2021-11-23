@@ -23,7 +23,7 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             foreach(var id in Ids)
             {
-                var funcionario = BuscarPorId(id);    
+                var funcionario = BuscarPorID(id);    
                 funcionarios.Add(funcionario);    
             }
 
@@ -41,7 +41,7 @@ namespace ProjetoIntegradorMVC.Repositorio
         {
             var diaDaSemanaCorrespondente = dia.DayOfWeek;
             var funcionariosQueTrabalhamNoDia = new List<Funcionario>();
-            var funcionarios = BuscarTodos();
+            var funcionarios = ObterTodos();
 
             foreach(var funcionario in funcionarios)
             {
@@ -51,6 +51,20 @@ namespace ProjetoIntegradorMVC.Repositorio
                 }
             }
             return funcionariosQueTrabalhamNoDia;
+        }
+
+        public override List<Funcionario> ObterTodos()
+        {
+            return _contexto.Funcionarios
+                .Include(funcionario => funcionario.Agendamentos)
+                .Include(funcionario => funcionario.Empresa)
+                .Include(funcionario => funcionario.ExpedientesDeTrabalho)
+                .AsNoTracking().ToList();
+        }
+
+        public Funcionario BuscarPorID(int id)
+        {
+            return ObterTodos().SingleOrDefault(funcionario => funcionario.Id == id);
         }
     }
 }

@@ -1,0 +1,42 @@
+﻿@model ProjetoIntegradorMVC.DTO.ServicoDTO
+
+@{
+    ViewData["Title"] = "Detalhes do serviço";
+}
+
+<header>
+    <div class="menu">
+        <a asp-action="PaginaInicial"><img src="/Imagens/Senac_Logo.png" id="logo"></a>
+        <nav>
+            <ul class="opcoes">
+                <!-- Ancoras para ir para a pagina de criar conta e entrar -->
+                <li><a href="criar.html" class="criarConta">Criar Conta</a></li>
+                <li><a href="entrar.html" class="entrar">Entrar</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="detalhesservico">
+    <div class="nomeServico">
+        <div class="detalheservico">
+            <h1>@Model.Nome</h1>
+            <p>@Model.Descricao</p>
+            <p class="precoservico">@Model.Preco</p>
+        </div>
+        <div class="funcionarios">
+            @foreach (var funcionario in Model.Funcionarios)
+            {
+            <div class="funcionario">
+                <h1>@funcionario.Nome</h1>
+                <p>@funcionario.Empresa.NomeFantasia</p>
+                @foreach (var expediente in funcionario.ExpedientesDeTrabalho)
+                {
+                    <p>@expediente.HoraDeInicio.ToShortTimeString() - @expediente.HoraDaSaida.ToShortTimeString()</p>
+                }
+                <button class="agendar">Agendar</button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<footer>&copyCopyright - NomeDoProjeto</footer>

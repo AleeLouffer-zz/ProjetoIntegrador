@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjetoIntegradorMVC.Aplicacoes;
 using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Repositorio;
 using System;
@@ -36,6 +37,7 @@ namespace ProjetoIntegradorMVC
             services.AddTransient<IRepositorioCliente, RepositorioCliente>();
             services.AddTransient<IRepositorioAgendamento, RepositorioAgendamento>();
             services.AddTransient<InicializadorDB>();
+            services.AddTransient<IDetalhesDoServico, DetalhesDoServico>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +64,7 @@ namespace ProjetoIntegradorMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=PaginaInicial}/{id?}");
             });
 
             serviceProvider.GetService<InicializadorDB>().IniciarDB();

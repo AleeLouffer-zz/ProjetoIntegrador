@@ -1,4 +1,5 @@
-﻿using ProjetoIntegradorMVC.Models.ContextoDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradorMVC.Models.ContextoDb;
 using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
@@ -35,6 +36,15 @@ namespace ProjetoIntegradorMVC.Repositorio
 
             empresa.Funcionarios.Add(funcionario);
             _contexto.SaveChanges();
+        }
+
+        public override List<Empresa> ObterTodos()
+        {
+            return _contexto.Empresas
+                .Include(empresa => empresa.Funcionarios)
+                .Include(empresa => empresa.FuncionariosComServicos)
+                .Include(empresa => empresa.Servicos)
+                .AsNoTracking().ToList();
         }
     }
 }

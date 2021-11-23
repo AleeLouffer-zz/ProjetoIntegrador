@@ -18,9 +18,9 @@ namespace ProjetoIntegradorMVC.Models.Usuarios
         public string NomeFantasia { get; private set; }
         public string CNPJ { get; private set; }
         public EnderecoDaEmpresa Endereco { get; private set; }
-        public List<Funcionario> Funcionarios { get; private set; }
-        public List<Servico> Servicos { get; private set; }
-        public List<FuncionariosComServicos> FuncionariosComServicos { get; private set; }
+        public List<Funcionario> Funcionarios { get; private set; } = new();
+        public List<Servico> Servicos { get; private set; } = new();
+        public List<FuncionariosComServicos> FuncionariosComServicos { get; private set; } = new ();
 
         private Empresa() { }
 

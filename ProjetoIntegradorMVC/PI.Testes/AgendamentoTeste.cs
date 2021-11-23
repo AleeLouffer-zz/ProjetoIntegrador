@@ -22,7 +22,7 @@ namespace PI.Testes
             _empresa = new Empresa("Inteligencia LTDA", "Inteligencia", "inteligencia@inteligencia.com.br", "12345", "05389493000117", "79004394");
             _funcionario = new Funcionario("Daniel", "daniel-zanelato@gmail.com", "123", "59819300045", _empresa);
             _servico = new Servico("Corte de cabelo", "descricao", 123m, _empresa, Local.Ambos);
-            _horaEData = new DateTime(2021, 11, 9, 14, 00, 01);
+            _horaEData = new DateTime(2022, 11, 24, 14, 00, 01);
             
             _cliente = new Cliente("Jessica", "jessica@hotmail.com", "jessicalindona", "06064104147");
         }
