@@ -53,7 +53,7 @@ namespace PI.Testes
             _repositorioServico.Adicionar(_servico);
             _repositorioFuncionarioComServicos.AdicionarFuncionariosComServicos(new FuncionariosComServicos(_funcionario, _servico, _empresa));
             _repositorioFuncionarioComServicos.VincularFuncionariosComServicosDaEmpresa( new List<Funcionario> { _funcionario } , new List<Servico> { _servico }, _empresa);
-            _funcionario.Agendamentos.Add(new Agendamento(_funcionario, _empresa, _servico, "12/10/2021 14:00:00", _cliente));
+            _funcionario.Agendamentos.Add(new Agendamento(_funcionario, _empresa, _servico, new DateTime(2021,12,10,14,00,00), _cliente));
             
             _contexto.SaveChanges();
             
@@ -64,11 +64,29 @@ namespace PI.Testes
         {
             var servico = _repositorioServico.BuscarServicoPorNomeEPreco("Corte", 50m);
             var idEsperada = servico.Id;
-            var DTOEsperado = new FuncionarioEServicoDTO(new List<FuncionarioDTO> { new FuncionarioDTO(_funcionario) }, new ServicoDTO(_servico));
+            var servicoDTO = new ServicoDTO
+            {
+                Nome = servico.Nome,
+                Descricao = servico.Descricao,
+                Preco = servico.Preco,
+                EmpresaId = servico.EmpresaId,
+                Empresa = servico.Empresa,
+                TempoEstimado = servico.TempoEstimado,
+                Local = servico.Local
+            };
+            servicoDTO.Funcionarios.Add(new FuncionarioDTO
+            {
+                Nome = _funcionario.Nome,
+                CPF = _funcionario.CPF,
+                Empresa = _funcionario.Empresa,
+                EmpresaId = _funcionario.EmpresaId,
+                Agendamentos = _funcionario.Agendamentos,
+                ExpedientesDeTrabalho = _funcionario.ExpedientesDeTrabalho
+            });
 
             var DTO = _detalhesDoServico.BuscarInformacoesDoServicoSelecionado(idEsperada);
 
-            Assert.Equal (DTOEsperado.Funcionarios.SingleOrDefault().CPF, DTO.Funcionarios.SingleOrDefault().CPF);
+            Assert.Equal (servicoDTO.Funcionarios.SingleOrDefault().CPF, DTO.Funcionarios.SingleOrDefault().CPF);
         }
     }
 }

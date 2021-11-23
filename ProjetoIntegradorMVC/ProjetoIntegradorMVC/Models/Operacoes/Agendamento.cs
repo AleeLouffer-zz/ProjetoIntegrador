@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoIntegradorMVC.Models.Operacoes
 {
-    public class Agendamento
+    public class Agendamento : ClasseBase
     {
-        public int Id { get; private set; }
         public Funcionario Funcionario { get; private set; }
         public Empresa Empresa {get; private set; }
         public Servico Servico { get; private set; }
@@ -18,29 +17,23 @@ namespace ProjetoIntegradorMVC.Models.Operacoes
 
         private Agendamento() { }
 
-        public Agendamento(Funcionario funcionario, Empresa empresa, Servico servico, string horario, Cliente cliente)
+        public Agendamento(Funcionario funcionario, Empresa empresa, Servico servico, DateTime horario, Cliente cliente)
         {
             ValidarDadosDeCriacao(funcionario, empresa, servico, horario, cliente);
             Funcionario = funcionario;
             Empresa = empresa;
             Servico = servico;
-            HoraEData = ObterComoHoraEData(horario);
+            HoraEData = horario;
             Cliente = cliente;
         }
 
-        private void ValidarDadosDeCriacao(Funcionario funcionario, Empresa empresa, Servico servico, string horario, Cliente cliente)
+        private void ValidarDadosDeCriacao(Funcionario funcionario, Empresa empresa, Servico servico, DateTime horario, Cliente cliente)
         {
             if (funcionario == null) throw new Exception("O campo funcionário deve ser preenchido");
             if (empresa == null) throw new Exception("O campo empresa deve ser preenchido");
             if (servico == null) throw new Exception("O campo serviço deve ser preenchido");
-            if (string.IsNullOrWhiteSpace(horario)) throw new Exception("O campo horário deve ser preenchido");
             if (cliente == null) throw new Exception("O campo cliente deve ser preenchido");
-        }
-        private static DateTime ObterComoHoraEData(string dataEHora)
-        {
-            var converteuCorretamente = DateTime.TryParseExact(dataEHora, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dataEHoraConvertido);
-            if (!converteuCorretamente) throw new Exception("Data e hora inválidos");    
-            return dataEHoraConvertido;
+            if (horario <= DateTime.Now) throw new Exception("O agendamento deve ser feito em uma data e horario valida");
         }
     }
 }

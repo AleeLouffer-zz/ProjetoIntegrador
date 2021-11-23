@@ -47,7 +47,7 @@ namespace ProjetoIntegradorMVC.Models
             CultureInfo.InvariantCulture, DateTimeStyles.None, out var horaEMinutoConvertido);
             if (!converteuCorretamente) throw new Exception("Horario inválido");
 
-            return horaEMinutoConvertido;//
+            return horaEMinutoConvertido;
         }
     }
 }

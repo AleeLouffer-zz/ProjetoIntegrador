@@ -23,10 +23,6 @@ namespace PI.Testes
         private readonly string _cnpj;
         private readonly string _cep;
 
-        private BancoDeDadosEmMemoriaAjudante _bancoDeDadosEmMemoriaAjudante;
-        private RepositorioEmpresa _repositorio;
-        private Contexto _contexto;
-
         public EmpresaTeste()
         {
             _razaoSocial = "Inteligencia LTDA";
@@ -35,13 +31,6 @@ namespace PI.Testes
             _senha = "12345";
             _cnpj = "05389493000117";
             _cep = "79004394";
-
-            _bancoDeDadosEmMemoriaAjudante = new BancoDeDadosEmMemoriaAjudante();
-
-            _contexto = _bancoDeDadosEmMemoriaAjudante.CriarContexto("DBTesteEmpresa");
-            _bancoDeDadosEmMemoriaAjudante.ReiniciaOBanco(_contexto);
-
-            _repositorio = new RepositorioEmpresa(_contexto);
         }
 
         [Fact]
