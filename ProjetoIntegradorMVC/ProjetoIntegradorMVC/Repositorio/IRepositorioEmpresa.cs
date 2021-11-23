@@ -1,6 +1,7 @@
 ﻿using ProjetoIntegradorMVC.Models.Operacoes;
 using ProjetoIntegradorMVC.Models.Usuarios;
 using System;
+using System.Collections.Generic;
 
 namespace ProjetoIntegradorMVC.Repositorio
 {

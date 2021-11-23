@@ -1,0 +1,29 @@
+.empresas{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.empresa {
+    background-color: #4590E4;
+    border-radius: 15px;
+    padding: 8px;
+    margin: 16px auto;
+    box-shadow: 0px 5px 5px gray;
+    font-family: 'Roboto', sans-serif;
+    max-width: 720px;
+    width: 90%;
+}   
+
+.empresa__nome, .empresa__endereco{
+    color: white;
+}
+
+@media screen and (min-width: 720px){
+    .empresa{
+        width: 30%;
+        margin: 16px 1%;
+    }
+    .empresas{
+        display: flex;
+    }
+}
